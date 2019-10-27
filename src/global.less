@@ -1,0 +1,25 @@
+html,
+body,
+#root {
+  height: 100%;
+  font-size: 10px;
+
+  :global {
+    .ant-menu-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .ant-menu-inline-collapsed {
+      .ant-menu-item {
+        span {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+body {
+  margin: 0;
+}

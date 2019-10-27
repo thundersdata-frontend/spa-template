@@ -1,0 +1,35 @@
+.layout {
+  height: 100%;
+
+  .logo {
+    height: 64px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header {
+    background: #fff;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .content {
+    background: #fff;
+    margin: 15px;
+    padding-top: 0;
+    height: 100%;
+    overflow-y: auto;
+
+    :global {
+      .ant-tabs {
+        width: 100%;
+      }
+
+      .ant-tabs-bar {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
