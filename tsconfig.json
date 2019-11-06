@@ -33,6 +33,7 @@
       "@/components": ["src/components"]
     }
   },
+  "include": ["./src/services/api.d.ts", "./src/**/*", "./typings.d.ts"],
   "exclude": [
     "node_modules",
     "**/*.(spec|test).ts?(x)",
