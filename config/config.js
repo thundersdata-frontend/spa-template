@@ -29,7 +29,7 @@ export default {
         headScripts: [{ charset: 'utf-8', src: '<%= PUBLIC_PATH %>theme-setting.js' }],
         title: '', // 项目自行补充
         library: 'react',
-        dll: true,
+        dll: false,
         pwa: false,
         hardSource: false,
         fastClick: true,

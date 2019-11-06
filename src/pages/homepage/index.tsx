@@ -54,7 +54,7 @@ export default class Homepage extends React.Component<HomepageProps, HomepageSta
   public render() {
     const { activeKey } = this.state;
     return (
-      <div style={{ padding: 20 }}>
+      <>
         <TDCard title="我们的card组件">
           <div className={styles['bg-color']}>项目中的背景色块: @card-head-background</div>
           <div className={styles['less-fade']}>项目中使用less fade方法</div>
@@ -115,7 +115,7 @@ export default class Homepage extends React.Component<HomepageProps, HomepageSta
             />
           </div>
         </Card>
-      </div>
+      </>
     );
   }
 }

@@ -15,9 +15,7 @@ const BasicLayout: React.FC<PageBasicPropsModel> = props => {
           <Header className={styles.header}>
             <div>头像</div>
           </Header>
-          <Layout>
-            <Content className={styles.content}>{props.children}</Content>
-          </Layout>
+          <Content className={styles.content}>{props.children}</Content>
         </Layout>
       </Layout>
     </ConfigProvider>
