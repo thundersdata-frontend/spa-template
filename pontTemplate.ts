@@ -4,7 +4,7 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
  * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-11-06 18:50:22
+ * @LastEditTime: 2019-11-06 18:53:17
  */
 import { CodeGenerator, Interface } from 'pont-engine';
 
@@ -28,7 +28,7 @@ export default class MyGenerator extends CodeGenerator {
       export const init: Response;
 
       export function fetch(${requestParams}): Promise<Response>;
-        `;
+    `;
   }
 
   /** 生成的接口请求部分 */
@@ -92,6 +92,6 @@ export default class MyGenerator extends CodeGenerator {
           };
         }
       }
-        `;
+    `;
   }
 }
