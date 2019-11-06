@@ -4,15 +4,15 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-30 18:36:20
  * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-11-06 11:39:53
+ * @LastEditTime: 2019-11-06 18:47:13
  */
 import pontConfig from './pont-config.json';
 
-export default function() {
+export default function () {
   const result = {};
   pontConfig.origins.forEach(origin => {
     const { name, originUrl } = origin;
-    result[name] = originUrl.replace('/v2/api-docs', '');
+    result[name] = originUrl.replace(/\/v[0-9]{1,}\/api-docs/, '');
   });
   return result;
 }

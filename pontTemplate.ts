@@ -4,7 +4,7 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
  * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-11-06 16:36:27
+ * @LastEditTime: 2019-11-06 18:50:22
  */
 import { CodeGenerator, Interface } from 'pont-engine';
 
@@ -73,25 +73,25 @@ export default class MyGenerator extends CodeGenerator {
       /**
       * @description ${inter.description}
       */
-    ${defsStr}
-    import serverConfig from '../../../../../server.config';
-    import { request } from '@td-design/utils';
-    
-    const backEndUrl = serverConfig()['${this.dataSource.name}'];
+      ${defsStr}
+      import serverConfig from '../../../../../server.config';
+      import { request } from '@td-design/utils';
+      
+      const backEndUrl = serverConfig()['${this.dataSource.name}'];
 
-    export async function fetch(params = {}) {
-      try {
-        const result = await ${requestStr};
-        if (!result.success) throw result;
-        return result;
-      } catch(error) {
-        return {
-          success: false,
-          data: ${initValue},
-          message: error.message || '请求失败，请重试',
-        };
+      export async function fetch(params = {}) {
+        try {
+          const result = await ${requestStr};
+          if (!result.success) throw result;
+          return result;
+        } catch(error) {
+          return {
+            success: false,
+            data: ${initValue},
+            message: error.message || '请求失败，请重试',
+          };
+        }
       }
-    }
-   `;
+        `;
   }
 }
