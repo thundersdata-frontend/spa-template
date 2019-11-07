@@ -30,6 +30,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@/stores": ["src/stores"],
+      "@/services": ["src/services"],
       "@/components": ["src/components"]
     }
   },
