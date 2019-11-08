@@ -13,6 +13,7 @@ export default {
   history: 'hash',
   outputPath: './build',
   plugins: [
+    'umi-plugin-polyfill',
     [
       'umi-plugin-react',
       {
