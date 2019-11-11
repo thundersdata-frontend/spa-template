@@ -4,11 +4,33 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
  * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-11-06 18:53:17
+ * @LastEditTime: 2019-11-11 15:04:41
  */
 import { CodeGenerator, Interface } from 'pont-engine';
 
 export default class MyGenerator extends CodeGenerator {
+  /** 获取总的类型定义代码 */
+  getDeclaration() {
+    return `
+      type ObjectMap<Key extends string | number | symbol = any, Value = any> = {
+        [key in Key]: Value;
+      }
+
+      interface AjaxResponse<T> {
+        code: number;
+        data: T;
+        message: string;
+        success: boolean;
+      }
+
+      ${this.getCommonDeclaration()}
+
+      ${this.getBaseClassesInDeclaration()}
+
+      ${this.getModsDeclaration()}
+    `;
+  }
+
   /** 生成的api.d.ts文件中的对应每个接口的内容 */
   getInterfaceContentInDeclaration(inter: Interface) {
     const paramsCode = inter.getParamsCode();
@@ -27,7 +49,7 @@ export default class MyGenerator extends CodeGenerator {
 
       export const init: Response;
 
-      export function fetch(${requestParams}): Promise<Response>;
+      export function fetch(${requestParams}): Promise<AjaxResponse<Response>>;
     `;
   }
 
