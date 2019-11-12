@@ -2,7 +2,7 @@ import React from 'react';
 import { PageBasicPropsModel } from '@/interfaces/common';
 import { ConfigProvider, Layout } from 'antd';
 import zh_CN from 'antd/lib/locale/zh_CN';
-import Aside from './components/Aside';
+import Aside from './Aside';
 import styles from './index.module.less';
 
 const { Header, Content } = Layout;

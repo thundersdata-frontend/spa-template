@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-27 16:26:45
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-10-27 19:22:05
+ * @LastEditTime: 2019-11-12 16:47:57
  */
 export default {
   '/resource': {
@@ -33,7 +33,7 @@ export default {
           {
             id: 2011,
             resourceKey: 'APPROVAL_PROCESS',
-            apiUrl: '/approval/process',
+            apiUrl: '/approval/process/list',
             icon: '',
             description: '流程管理',
             type: 0,
@@ -44,7 +44,7 @@ export default {
           {
             id: 2012,
             resourceKey: 'APPROVAL_SEAL',
-            apiUrl: '/approval/seal',
+            apiUrl: '/approval/seal/list',
             icon: '',
             description: '用章管理',
             type: 0,

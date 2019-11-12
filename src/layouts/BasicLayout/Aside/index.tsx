@@ -23,15 +23,22 @@ export default function Aside(props: PageBasicPropsModel) {
   const { menus } = baseStore;
   const menuList = menus.concat(((window as unknown) as CustomWindow).gMenus);
 
-  // 根据location的地址，自动选中和打开对应的菜单
+  /**
+   * 根据location的地址，自动选中和打开对应的菜单
+   * 为了实现进入二级页面之后菜单依然显示选中状态，我们约定：
+   *  一级菜单路由只能配置成: /xxx/xxx
+   *  二级菜单路由列表配置成：/xxx/xxx/list
+   *  二级菜单编辑、详情配置成：/xxx/xxx/edit、/xxx/xxx/detail
+   */
   useEffect(() => {
     const { pathname } = props.location;
-    setSelectedKeys([pathname]);
-    setOpenedKeys(['/' + pathname.split('/')[1]]);
-  }, [props.location]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
+    const paths = pathname.split('/');
+    setOpenedKeys(['/' + paths[1]]);
+    if (paths.length >= 4 && paths.pop() !== 'list') {
+      setSelectedKeys([paths.concat(['list']).join('/')]);
+    } else {
+      setSelectedKeys([pathname]);
+    }
   }, [props.location]);
 
   const handleCollapse = () => {
@@ -74,7 +81,7 @@ export default function Aside(props: PageBasicPropsModel) {
               >
                 {item.children.map(ele => (
                   <MenuItem key={ele.link}>
-                    {ele.link ? <LinkItem {...ele} /> : <NormalItem {...ele} />}
+                    <LinkItem {...ele} />
                   </MenuItem>
                 ))}
               </SubMenu>
@@ -82,7 +89,7 @@ export default function Aside(props: PageBasicPropsModel) {
           }
           return (
             <MenuItem key={item.link}>
-              {item.link ? <LinkItem {...item} /> : <NormalItem {...item} />}
+              <LinkItem {...item} />
             </MenuItem>
           );
         })}
@@ -93,15 +100,8 @@ export default function Aside(props: PageBasicPropsModel) {
 const LinkItem = (menuItem: MenuItemConfig) => (
   <>
     <Icon type="pie-chart" />
-    <Link to={menuItem.link || ''}>
+    <Link style={{ color: 'inherit' }} to={menuItem.link!}>
       <span className={styles.title}>{menuItem.name}</span>
     </Link>
-  </>
-);
-
-const NormalItem = (menuItem: MenuItemConfig) => (
-  <>
-    <Icon type="pie-chart" />
-    <span className={styles.title}>{menuItem.name}</span>
   </>
 );
