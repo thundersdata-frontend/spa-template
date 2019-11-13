@@ -8,7 +8,7 @@
  */
 import pontConfig from './pont-config.json';
 
-export default function () {
+export default function() {
   const result = {};
   pontConfig.origins.forEach(origin => {
     const { name, originUrl } = origin;

@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   url: '',
   client_id: '',
   client_secret: '',
