@@ -4,7 +4,7 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-18 15:57:48
+ * @LastEditTime: 2019-11-18 16:16:36
  */
 import { CodeGenerator, Interface } from 'pont-engine';
 
@@ -103,7 +103,7 @@ export default class MyGenerator extends CodeGenerator {
 
       const backEndUrl = serverConfig()['${this.dataSource.name}'];
 
-      export async function fetch(params = {}, needLogin: boolean) {
+      export async function fetch(params = {}, needLogin?: boolean) {
         try {
           const result = await ${requestStr};
           if (!result.success) throw result;
