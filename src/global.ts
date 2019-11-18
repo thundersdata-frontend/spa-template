@@ -4,10 +4,11 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:43
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-10-25 13:44:53
+ * @LastEditTime: 2019-11-18 16:01:18
  */
 import * as Sentry from '@sentry/browser';
 import sentryConfig from '../sentry.config';
+import '@/services';
 
 Sentry.init({
   dsn: sentryConfig.dsn,

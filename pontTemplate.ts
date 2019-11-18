@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
- * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-11-11 15:04:41
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2019-11-18 15:57:48
  */
 import { CodeGenerator, Interface } from 'pont-engine';
 
@@ -36,7 +36,9 @@ export default class MyGenerator extends CodeGenerator {
     const paramsCode = inter.getParamsCode();
     const bodyParamsCode = inter.getBodyParamsCode();
     const hasGetParams = !!inter.parameters.filter(param => param.in !== 'body').length;
-    let requestParams = bodyParamsCode ? `params: Params, bodyParams: ${bodyParamsCode}` : `params: Params`;
+    let requestParams = bodyParamsCode
+      ? `params: Params, bodyParams: ${bodyParamsCode}`
+      : `params: Params`;
 
     if (!hasGetParams) {
       requestParams = bodyParamsCode ? `bodyParams: ${bodyParamsCode}` : '';
@@ -49,7 +51,7 @@ export default class MyGenerator extends CodeGenerator {
 
       export const init: Response;
 
-      export function fetch(${requestParams}): Promise<AjaxResponse<Response>>;
+      export function fetch(${requestParams}, needLogin): Promise<AjaxResponse<Response>>;
     `;
   }
 
@@ -65,28 +67,28 @@ export default class MyGenerator extends CodeGenerator {
 
     switch (fetchMethod) {
       case 'GET':
-        requestStr = `request.get(backEndUrl + "${inter.path}", params)`;
+        requestStr = `request.get(backEndUrl + "${inter.path}", params, needLogin)`;
         break;
       case 'PUT':
-        requestStr = `request.put(backEndUrl + "${inter.path}", params)`;
+        requestStr = `request.put(backEndUrl + "${inter.path}", params, needLogin)`;
         break;
       case 'DELETE':
-        requestStr = `request.delete(backEndUrl + "${inter.path}", params)`;
+        requestStr = `request.delete(backEndUrl + "${inter.path}", params, needLogin)`;
         break;
       case 'POST':
-        requestStr = `request.postForm(backEndUrl + "${inter.path}", params)`;
+        requestStr = `request.postForm(backEndUrl + "${inter.path}", params, needLogin)`;
         break;
       case 'POST:JSON':
-        requestStr = `request.postJSON(backEndUrl + "${inter.path}", params)`;
+        requestStr = `request.postJSON(backEndUrl + "${inter.path}", params, needLogin)`;
         break;
-    };
+    }
 
     let initValue = inter.response.initialValue;
     if (inter.responseType === 'number') {
       initValue = '0';
     }
 
-    let defsStr = "";
+    let defsStr = '';
     if (inter.response.isDefsType) {
       defsStr = "import * as defs from '../../baseClass';";
     }
@@ -98,10 +100,10 @@ export default class MyGenerator extends CodeGenerator {
       ${defsStr}
       import serverConfig from '../../../../../server.config';
       import { request } from '@td-design/utils';
-      
+
       const backEndUrl = serverConfig()['${this.dataSource.name}'];
 
-      export async function fetch(params = {}) {
+      export async function fetch(params = {}, needLogin: boolean) {
         try {
           const result = await ${requestStr};
           if (!result.success) throw result;
