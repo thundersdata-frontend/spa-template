@@ -10,6 +10,7 @@ import * as Sentry from '@sentry/browser';
 import sentryConfig from '../sentry.config';
 import '@/services';
 import { CustomWindow } from './interfaces/common';
+import lscache from 'lscache';
 
 ((window as unknown) as CustomWindow).requestConfig = {
   withCredentials: false,
