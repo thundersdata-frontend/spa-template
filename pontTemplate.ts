@@ -4,7 +4,7 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-18 16:16:36
+ * @LastEditTime: 2019-11-18 19:05:27
  */
 import { CodeGenerator, Interface } from 'pont-engine';
 
@@ -51,7 +51,7 @@ export default class MyGenerator extends CodeGenerator {
 
       export const init: Response;
 
-      export function fetch(${requestParams}, needLogin): Promise<AjaxResponse<Response>>;
+      export function fetch(${requestParams}, needLogin?: boolean): Promise<AjaxResponse<Response>>;
     `;
   }
 
