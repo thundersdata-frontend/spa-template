@@ -4,7 +4,7 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-18 20:18:07
+ * @LastEditTime: 2019-11-23 11:28:59
  */
 import { CodeGenerator, Interface } from 'pont-engine';
 
@@ -37,24 +37,13 @@ export default class MyGenerator extends CodeGenerator {
     const bodyParamsCode = inter.getBodyParamsCode();
     const hasGetParams = !!inter.parameters.filter(param => param.in !== 'body').length;
     let requestParams = bodyParamsCode
-      ? `params: Params, bodyParams: ${bodyParamsCode}`
+      ? `bodyParams: ${bodyParamsCode}, params: Params`
       : `params: Params`;
 
     if (!hasGetParams) {
       requestParams = bodyParamsCode ? `bodyParams: ${bodyParamsCode}` : '';
     }
 
-    if (requestParams) {
-      return `
-        export ${paramsCode}
-
-        export type Response = ${inter.responseType}
-
-        export const init: Response;
-
-        export function fetch(${requestParams}, needLogin?: boolean): Promise<AjaxResponse<Response>>;
-      `;
-    }
     return `
       export ${paramsCode}
 
@@ -62,7 +51,7 @@ export default class MyGenerator extends CodeGenerator {
 
       export const init: Response;
 
-      export function fetch(needLogin?: boolean): Promise<AjaxResponse<Response>>;
+      export function fetch(${requestParams}): Promise<AjaxResponse<Response>>;
     `;
   }
 
@@ -70,27 +59,35 @@ export default class MyGenerator extends CodeGenerator {
   getInterfaceContent(inter: Interface) {
     // type为body的参数
     const bodyParamsCode = inter.getBodyParamsCode();
+    // 判断是否有params参数
+    const hasGetParams = !!inter.parameters.filter(param => param.in !== 'body').length;
+    let requestParams = bodyParamsCode ? `bodyParams={}, params={}` : `params={}`;
+    if (!hasGetParams) {
+      requestParams = bodyParamsCode ? `bodyParams={}` : 'params={}';
+    }
     // 为避免method匹配不上，全部转化为大写
     const method = inter.method.toUpperCase();
     const fetchMethod = bodyParamsCode ? method + ':JSON' : method;
+
+    const paramsStr = !hasGetParams ? 'bodyParams, {}' : 'bodyParams, params';
 
     let requestStr = '';
 
     switch (fetchMethod) {
       case 'GET':
-        requestStr = `request.get(backEndUrl + "${inter.path}", params, needLogin)`;
+        requestStr = `request.get(backEndUrl + "${inter.path}", params)`;
         break;
       case 'PUT':
-        requestStr = `request.put(backEndUrl + "${inter.path}", params, needLogin)`;
+        requestStr = `request.put(backEndUrl + "${inter.path}", params)`;
         break;
       case 'DELETE':
-        requestStr = `request.delete(backEndUrl + "${inter.path}", params, needLogin)`;
+        requestStr = `request.delete(backEndUrl + "${inter.path}", params)`;
         break;
       case 'POST':
-        requestStr = `request.postForm(backEndUrl + "${inter.path}", params, needLogin)`;
+        requestStr = `request.postForm(backEndUrl + "${inter.path}", params, {})`;
         break;
       case 'POST:JSON':
-        requestStr = `request.postJSON(backEndUrl + "${inter.path}", params, needLogin)`;
+        requestStr = `request.postJSON(backEndUrl + "${inter.path}", ${paramsStr})`;
         break;
     }
 
@@ -114,7 +111,7 @@ export default class MyGenerator extends CodeGenerator {
 
       const backEndUrl = serverConfig()['${this.dataSource.name}'];
 
-      export async function fetch(params = {}, needLogin?: boolean) {
+      export async function fetch(${requestParams}) {
         try {
           const result = await ${requestStr};
           if (!result.success) throw result;
