@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-10-27 19:36:00
+ * @LastEditTime: 2019-11-25 17:45:50
  */
 import utils from '@td-design/utils';
 import request from '@td-design/utils/lib/request';
@@ -37,6 +37,7 @@ let serverRoutes: Route[] = [];
 
 /**
  * 运行时修改路由配置。和render配合使用，请求服务端根据相应动态更新路由。
+ * 执行时机在第一次render之前，然后就再也不执行了
  * @param routes
  */
 export function patchRoutes(oldRoutes: Route[]) {
@@ -78,8 +79,8 @@ export async function render(oldRender: Function) {
     serverRoutes = convertResourceToRoute(routes);
     const menus = convertResourceToMenu(routes);
     ((window as unknown) as CustomWindow).gMenus = menus;
+    oldRender();
   }
-  oldRender();
 }
 
 /**
