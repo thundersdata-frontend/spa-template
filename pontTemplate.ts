@@ -4,11 +4,28 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-23 11:28:59
+ * @LastEditTime: 2019-11-25 16:26:50
  */
-import { CodeGenerator, Interface } from 'pont-engine';
+import { CodeGenerator, Interface, Property } from 'pont-engine';
 
 export default class MyGenerator extends CodeGenerator {
+  enum: Array<string | number> = [];
+  setEnum(enums: Array<string | number> = []) {
+    this.enum = enums.map(value => {
+      if (typeof value === 'string') {
+        if (!value.startsWith("'")) {
+          value = "'" + value;
+        }
+
+        if (!value.endsWith("'")) {
+          value = value + "'";
+        }
+      }
+
+      return value;
+    });
+  }
+
   /** 获取总的类型定义代码 */
   getDeclaration() {
     return `
@@ -29,6 +46,87 @@ export default class MyGenerator extends CodeGenerator {
 
       ${this.getModsDeclaration()}
     `;
+  }
+
+  /** 获取所有基类文件代码 */
+  getBaseClassesIndex() {
+    const clsCodes = this.dataSource.baseClasses.map(
+      base => `
+      class ${base.name} {
+        ${base.properties
+          .map(prop => {
+            return this.toPropertyCodeWithInitValue(prop, base.name);
+          })
+          .filter(id => id)
+          .join('\n')}
+      }
+    `,
+    );
+
+    if (this.dataSource.name) {
+      return `
+      ${clsCodes.join('\n')}
+      export const ${this.dataSource.name} = {
+        ${this.dataSource.baseClasses.map(bs => bs.name).join(',\n')}
+      }
+    `;
+    }
+
+    return clsCodes.map(cls => `export ${cls}`).join('\n');
+  }
+
+  toPropertyCodeWithInitValue(prop: Property, baseName = '') {
+    this.setEnum(prop.dataType.enum);
+    let typeWithValue = `= ${this.getInitialValue(prop)}`;
+
+    if (prop.dataType.typeName === baseName) {
+      typeWithValue = `= {}`;
+    }
+
+    let name = prop.name;
+    if (!name.match(/^[a-zA-Z_$][a-zA-Z0-9_$]*$/)) {
+      name = `'${name}'`;
+    }
+
+    return `
+    /** ${prop.description || prop.name} */
+    ${name} ${typeWithValue}
+    `;
+  }
+
+  getInitialValue(prop: Property) {
+    const { typeName, isDefsType } = prop.dataType;
+    if (isDefsType) {
+      return `new ${typeName}()`;
+    }
+
+    if (typeName === 'Array') {
+      return '[]';
+    }
+
+    if (typeName === 'string') {
+      return "''";
+    }
+
+    if (typeName === 'boolean') {
+      return 'false';
+    }
+
+    if (typeName === 'number') {
+      return '0';
+    }
+
+    if (this.enum && this.enum.length) {
+      const str = this.enum[0];
+
+      if (typeof str === 'string') {
+        return `${str}`;
+      }
+
+      return str + '';
+    }
+
+    return 'undefined';
   }
 
   /** 生成的api.d.ts文件中的对应每个接口的内容 */
@@ -91,10 +189,7 @@ export default class MyGenerator extends CodeGenerator {
         break;
     }
 
-    let initValue = inter.response.initialValue;
-    if (inter.responseType === 'number') {
-      initValue = '0';
-    }
+    const initValue = inter.response.initialValue;
 
     let defsStr = '';
     if (inter.response.isDefsType) {
@@ -111,13 +206,15 @@ export default class MyGenerator extends CodeGenerator {
 
       const backEndUrl = serverConfig()['${this.dataSource.name}'];
 
+      export const init = ${initValue};
+
       export async function fetch(${requestParams}) {
         try {
           const result = await ${requestStr};
           if (!result.success) throw result;
           return result;
         } catch(error) {
-          return {
+          throw {
             success: false,
             data: ${initValue},
             message: error.message || '请求失败，请重试',

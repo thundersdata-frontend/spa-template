@@ -11,3 +11,62 @@
 4. 当重新打开项目时，会自动调用一次sync，获取和服务端的差异
 5. 目前API已经配置为全局变量，当需要调用接口时，我们不需要再进行import操作，只需要API.[nameSpace].[mod].[方法的文件名].fetch()，nameSpace即在pont-config.json文件中配置的origins的name，mod即是module，例如：API.authorization.role.resourceSave.fetch()
 6. 更多细节：'https://github.com/alibaba/pont'
+
+### pont最佳实践
+基于我们自定义的pontTemplate，pont已经帮我们生成了我们需要的TypeScript类型声明文件，以及对应的调用后端接口的胶水代码，同时也为我们生成好了初始值。那么我们使用pont的最佳实践应该是什么样的呢？我在这里大致总结一下：
+1. 不要自己定义初始值，直接使用pont生成的init值作为useState或者store里面的初始值。例如：
+```typescript
+const [detail, setDetail] = useState<defs.gazelle.CompanyFinancialIndicatorDTO>(API.gazelle.companyFinancialIndicator.getById.init);
+```
+2. 用`trycatch`代码块包裹你的业务处理逻辑。
+
+我们自定义生成的请求方法的格式如下：
+```typescript
+export async function fetch(params = {}) {
+  try {
+    const result = await request.get(
+      backEndUrl + '/companyFinancialIndicator/getById',
+      params,
+    );
+    if (!result.success) throw result;
+    return result;
+  } catch (error) {
+    throw {
+      success: false,
+      data: new defs.gazelle.CompanyFinancialIndicatorDTO(),
+      message: error.message || '请求失败，请重试',
+    };
+  }
+}
+```
+你会发现这个方法并不会对异常进行处理，而是选择throw出去给调用这个函数的地方。另外，如果你在调用后端接口之前还有一些特殊的业务逻辑需要处理，比如对日期进行格式化，对数据进行加工，那么你需要用`trycatch`对你的业务逻辑代码进行异常处理，防止报错导致页面崩溃。
+```typescript
+try {
+  const result = await API.gazelle.companyFinancialIndicator.getById.fetch({
+    yearType: year,
+  });
+  if (!result.success) throw new Error(result.message);
+  setDetail(result.data);
+} catch (error) {
+  message.error(error.message);
+}
+```
+3. 如果前端需要的数据格式和后端返回的格式有区别（最常见的就是日期和文件），那么你需要自己构造一个类型来对这些特殊属性进行处理。这个时候最好是使用typescript提供的`Utility Types(工具类型)`来尽可能复用已有的类型。例如：
+```typescript
+export type PolicyDetailDTO = Pick<
+  defs.gazelle.PolicyDTO,
+  | 'policyId'
+  | 'policyType'
+  | 'title'
+  | 'indexCode'
+  | 'issueNumber'
+  | 'issueOrg'
+  | 'subjectType'
+  | 'subjectWord'
+  | 'tenantCode'
+> & {
+  issueDate: moment.Moment;
+  finalDate: moment.Moment;
+  attachment?: UploadFile[];
+};
+```
