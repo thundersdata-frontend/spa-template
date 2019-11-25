@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-25 17:47:07
+ * @LastEditTime: 2019-11-25 17:51:30
  */
 import utils from '@td-design/utils';
 import request from '@td-design/utils/lib/request';
@@ -81,6 +81,9 @@ export async function render(oldRender: Function) {
     serverRoutes = convertResourceToRoute(routes);
     const menus = convertResourceToMenu(routes);
     ((window as unknown) as CustomWindow).gMenus = menus;
+    oldRender();
+  } else {
+    ((window as unknown) as CustomWindow).gMenus = [];
     oldRender();
   }
 }
