@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-25 17:45:50
+ * @LastEditTime: 2019-11-25 17:47:07
  */
 import utils from '@td-design/utils';
 import request from '@td-design/utils/lib/request';
@@ -60,6 +60,8 @@ export function patchRoutes(oldRoutes: Route[]) {
  * @param oldRender
  */
 export async function render(oldRender: Function) {
+  ((window as unknown) as CustomWindow).gMenus = [];
+  oldRender();
   const result = await request.get<PrivilegeResource[]>('/resource');
   const { code, success, data = [] } = result;
   if (code === 20000 && success) {
