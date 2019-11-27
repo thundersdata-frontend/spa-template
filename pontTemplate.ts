@@ -4,9 +4,9 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
  * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-11-27 17:05:12
+ * @LastEditTime: 2019-11-27 17:07:16
  */
-import { CodeGenerator, Interface, Property, StandardDataType } from 'pont-engine';
+import { CodeGenerator, Interface, Property } from 'pont-engine';
 
 export default class MyGenerator extends CodeGenerator {
   enum: Array<string | number> = [];
