@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-25 16:26:50
+ * @LastEditors: 黄姗姗
+ * @LastEditTime: 2019-11-27 17:07:16
  */
 import { CodeGenerator, Interface, Property } from 'pont-engine';
 
@@ -77,7 +77,8 @@ export default class MyGenerator extends CodeGenerator {
 
   toPropertyCodeWithInitValue(prop: Property, baseName = '') {
     this.setEnum(prop.dataType.enum);
-    let typeWithValue = `= ${this.getInitialValue(prop)}`;
+    const { typeName, isDefsType } = prop.dataType;
+    let typeWithValue = `= ${this.getInitialValue(typeName, isDefsType, false)}`;
 
     if (prop.dataType.typeName === baseName) {
       typeWithValue = `= {}`;
@@ -94,10 +95,25 @@ export default class MyGenerator extends CodeGenerator {
     `;
   }
 
-  getInitialValue(prop: Property) {
-    const { typeName, isDefsType } = prop.dataType;
+  getDefName(originName: string, typeName: string, isDefsType: boolean) {
+    let name = typeName;
+
     if (isDefsType) {
-      return `new ${typeName}()`;
+      name = originName ? `defs.${originName}.${typeName}` : `defs.${typeName}`;
+    }
+
+    return name;
+  }
+
+  getInitialValue(typeName: string, isDefsType: boolean, usingDef: boolean = true) {
+    if (isDefsType) {
+      const originName = this.dataSource.name;
+
+      if (!usingDef) {
+        return `new ${typeName}()`;
+      }
+
+      return `new ${this.getDefName(originName, typeName, isDefsType)}()`;
     }
 
     if (typeName === 'Array') {
@@ -189,7 +205,8 @@ export default class MyGenerator extends CodeGenerator {
         break;
     }
 
-    const initValue = inter.response.initialValue;
+    const { typeName, isDefsType } = inter.response;
+    const initValue = this.getInitialValue(typeName, isDefsType);
 
     let defsStr = '';
     if (inter.response.isDefsType) {
