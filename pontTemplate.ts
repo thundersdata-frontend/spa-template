@@ -231,11 +231,13 @@ export default class MyGenerator extends CodeGenerator {
           if (!result.success) throw result;
           return result;
         } catch(error) {
-          throw {
-            success: false,
-            data: ${initValue},
-            message: error.message || '请求失败，请重试',
-          };
+          if (error.message) {
+            throw {
+              data: ${initValue},
+              message: error.message,
+            };
+          }
+          throw {};
         }
       }
     `;
