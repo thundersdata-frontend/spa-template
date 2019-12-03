@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
- * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-11-27 17:07:16
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2019-12-03 09:50:48
  */
 import { CodeGenerator, Interface, Property } from 'pont-engine';
 
@@ -105,7 +105,7 @@ export default class MyGenerator extends CodeGenerator {
     return name;
   }
 
-  getInitialValue(typeName: string, isDefsType: boolean, usingDef: boolean = true) {
+  initClassValue(isDefsType: boolean, usingDef: boolean, typeName: string) {
     if (isDefsType) {
       const originName = this.dataSource.name;
 
@@ -115,23 +115,9 @@ export default class MyGenerator extends CodeGenerator {
 
       return `new ${this.getDefName(originName, typeName, isDefsType)}()`;
     }
+  }
 
-    if (typeName === 'Array') {
-      return '[]';
-    }
-
-    if (typeName === 'string') {
-      return "''";
-    }
-
-    if (typeName === 'boolean') {
-      return 'false';
-    }
-
-    if (typeName === 'number') {
-      return '0';
-    }
-
+  initEnumValue() {
     if (this.enum && this.enum.length) {
       const str = this.enum[0];
 
@@ -141,8 +127,29 @@ export default class MyGenerator extends CodeGenerator {
 
       return str + '';
     }
+  }
 
-    return 'undefined';
+  initNormalTypeValue(typeName: string) {
+    switch (typeName) {
+      case 'Array':
+        return '[]';
+
+      case 'boolean':
+        return 'false';
+
+      case 'string':
+        return "''";
+
+      case 'number':
+      default:
+        return 'undefined';
+    }
+  }
+
+  getInitialValue(typeName: string, isDefsType: boolean, usingDef = true) {
+    this.initClassValue(isDefsType, usingDef, typeName);
+    this.initEnumValue();
+    this.initNormalTypeValue(typeName);
   }
 
   /** 生成的api.d.ts文件中的对应每个接口的内容 */
@@ -169,6 +176,36 @@ export default class MyGenerator extends CodeGenerator {
     `;
   }
 
+  getFetchMethod(method: string, bodyParamsCode: string) {
+    // 为避免method匹配不上，全部转化为大写
+    const upperMethod = method.toUpperCase();
+    return bodyParamsCode ? upperMethod + ':JSON' : upperMethod;
+  }
+
+  getRequest(bodyParamsCode: string, method: string, paramsStr: string, path: string) {
+    const fetchMethod = this.getFetchMethod(method, bodyParamsCode);
+
+    let requestStr = '';
+    switch (fetchMethod) {
+      case 'GET':
+        requestStr = `request.get(backEndUrl + "${path}", params)`;
+        break;
+      case 'PUT':
+        requestStr = `request.put(backEndUrl + "${path}", params)`;
+        break;
+      case 'DELETE':
+        requestStr = `request.delete(backEndUrl + "${path}", params)`;
+        break;
+      case 'POST':
+        requestStr = `request.postForm(backEndUrl + "${path}", params, {})`;
+        break;
+      case 'POST:JSON':
+        requestStr = `request.postJSON(backEndUrl + "${path}", ${paramsStr})`;
+        break;
+    }
+    return requestStr;
+  }
+
   /** 生成的接口请求部分 */
   getInterfaceContent(inter: Interface) {
     // type为body的参数
@@ -179,31 +216,8 @@ export default class MyGenerator extends CodeGenerator {
     if (!hasGetParams) {
       requestParams = bodyParamsCode ? `bodyParams={}` : 'params={}';
     }
-    // 为避免method匹配不上，全部转化为大写
-    const method = inter.method.toUpperCase();
-    const fetchMethod = bodyParamsCode ? method + ':JSON' : method;
-
     const paramsStr = !hasGetParams ? 'bodyParams, {}' : 'bodyParams, params';
-
-    let requestStr = '';
-
-    switch (fetchMethod) {
-      case 'GET':
-        requestStr = `request.get(backEndUrl + "${inter.path}", params)`;
-        break;
-      case 'PUT':
-        requestStr = `request.put(backEndUrl + "${inter.path}", params)`;
-        break;
-      case 'DELETE':
-        requestStr = `request.delete(backEndUrl + "${inter.path}", params)`;
-        break;
-      case 'POST':
-        requestStr = `request.postForm(backEndUrl + "${inter.path}", params, {})`;
-        break;
-      case 'POST:JSON':
-        requestStr = `request.postJSON(backEndUrl + "${inter.path}", ${paramsStr})`;
-        break;
-    }
+    const requestStr = this.getRequest(bodyParamsCode, inter.method, paramsStr, inter.path);
 
     const { typeName, isDefsType } = inter.response;
     const initValue = this.getInitialValue(typeName, isDefsType);
