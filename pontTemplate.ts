@@ -4,7 +4,7 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-12-03 09:50:48
+ * @LastEditTime: 2019-12-04 15:17:23
  */
 import { CodeGenerator, Interface, Property } from 'pont-engine';
 
@@ -106,27 +106,19 @@ export default class MyGenerator extends CodeGenerator {
   }
 
   initClassValue(isDefsType: boolean, usingDef: boolean, typeName: string) {
-    if (isDefsType) {
-      const originName = this.dataSource.name;
-
-      if (!usingDef) {
-        return `new ${typeName}()`;
-      }
-
-      return `new ${this.getDefName(originName, typeName, isDefsType)}()`;
+    const originName = this.dataSource.name;
+    if (!usingDef) {
+      return `new ${typeName}()`;
     }
+    return `new ${this.getDefName(originName, typeName, isDefsType)}()`;
   }
 
   initEnumValue() {
-    if (this.enum && this.enum.length) {
-      const str = this.enum[0];
-
-      if (typeof str === 'string') {
-        return `${str}`;
-      }
-
-      return str + '';
+    const str = this.enum[0];
+    if (typeof str === 'string') {
+      return `${str}`;
     }
+    return str + '';
   }
 
   initNormalTypeValue(typeName: string) {
@@ -147,9 +139,13 @@ export default class MyGenerator extends CodeGenerator {
   }
 
   getInitialValue(typeName: string, isDefsType: boolean, usingDef = true) {
-    this.initClassValue(isDefsType, usingDef, typeName);
-    this.initEnumValue();
-    this.initNormalTypeValue(typeName);
+    if (isDefsType) {
+      return this.initClassValue(isDefsType, usingDef, typeName);
+    } else if (this.enum && this.enum.length) {
+      return this.initEnumValue();
+    } else {
+      return this.initNormalTypeValue(typeName);
+    }
   }
 
   /** 生成的api.d.ts文件中的对应每个接口的内容 */
