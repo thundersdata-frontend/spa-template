@@ -4,13 +4,14 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:43
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-23 11:28:37
+ * @LastEditTime: 2019-12-06 10:31:56
  */
 import * as Sentry from '@sentry/browser';
 import sentryConfig from '../sentry.config';
 import '@/services';
 import { CustomWindow } from './interfaces/common';
 import lscache from 'lscache';
+import 'normalize.css';
 
 ((window as unknown) as CustomWindow).requestConfig = {
   withCredentials: false,
