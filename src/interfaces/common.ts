@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-10-23 21:12:06
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-18 17:53:11
+ * @LastEditors: 黄姗姗
+ * @LastEditTime: 2019-12-09 16:29:04
  */
 
 export interface CustomWindow extends Window {
@@ -59,4 +59,5 @@ export interface PrivilegeResource {
   privilegeList: string[];
   resourceBusinessValue: string;
   children: PrivilegeResource[];
+  isVisible: boolean;
 }
