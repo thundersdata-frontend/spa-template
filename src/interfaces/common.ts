@@ -19,7 +19,7 @@ export interface CustomWindow extends Window {
     client_secret: string;
     password_min: number;
     password_max: number;
-    company: number,
+    company: number;
   };
 }
 
