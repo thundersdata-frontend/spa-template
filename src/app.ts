@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
- * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-25 17:51:30
+ * @LastEditors: 黄姗姗
+ * @LastEditTime: 2019-12-12 15:46:29
  */
 import utils from '@td-design/utils';
 import request from '@td-design/utils/lib/request';
@@ -44,8 +44,14 @@ export function patchRoutes(oldRoutes: Route[]) {
   oldRoutes.forEach(route => {
     if (route.path === '/') {
       serverRoutes.forEach(sr => {
+        const len = sr.path.split('/').length;
         if (route.routes) {
-          route.routes.splice(1, 0, sr);
+          const res = route.routes?.filter(i => i.path?.split('/').length > len).length;
+          if (res < 0) {
+            route.routes.splice(1, 0, sr);
+          } else {
+            route.routes.splice(res + 1, 0, sr);
+          }
         }
       });
     }
@@ -60,8 +66,6 @@ export function patchRoutes(oldRoutes: Route[]) {
  * @param oldRender
  */
 export async function render(oldRender: Function) {
-  ((window as unknown) as CustomWindow).gMenus = [];
-  oldRender();
   const result = await request.get<PrivilegeResource[]>('/resource');
   const { code, success, data = [] } = result;
   if (code === 20000 && success) {
@@ -76,10 +80,9 @@ export async function render(oldRender: Function) {
     flatRoutes.forEach(route => {
       privileges.push(...route.privilegeList);
     });
-
     // 将menus保存为应用的菜单、将privileges保存为应用的细粒度权限
     serverRoutes = convertResourceToRoute(routes);
-    const menus = convertResourceToMenu(routes);
+    const menus = convertResourceToMenu(routes.filter(route => route.isVisible));
     ((window as unknown) as CustomWindow).gMenus = menus;
     oldRender();
   } else {
@@ -99,7 +102,7 @@ function convertResourceToMenu(list: PrivilegeResource[]): MenuItemConfig[] {
         link: item.apiUrl,
         name: item.description,
         icon: item.icon,
-        children: convertResourceToMenu(item.children),
+        children: convertResourceToMenu(item.children!.filter(route => route.isVisible)),
       };
     }
     return {
