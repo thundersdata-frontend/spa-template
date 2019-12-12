@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-23 21:12:06
  * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-12-09 16:29:04
+ * @LastEditTime: 2019-12-12 15:55:27
  */
 
 export interface CustomWindow extends Window {
@@ -19,6 +19,7 @@ export interface CustomWindow extends Window {
     client_secret: string;
     password_min: number;
     password_max: number;
+    company: number,
   };
 }
 
