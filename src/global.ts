@@ -4,16 +4,16 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:43
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-12-14 20:19:18
+ * @LastEditTime: 2019-12-14 20:22:20
  */
-import 'core-js';
+import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import * as Sentry from '@sentry/browser';
 import sentryConfig from '../sentry.config';
-import '@/services';
 import { CustomWindow } from './interfaces/common';
 import lscache from 'lscache';
 import 'normalize.css';
+// import '@/services';
 
 ((window as unknown) as CustomWindow).requestConfig = {
   withCredentials: false,
