@@ -3,9 +3,11 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:43
- * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-12-12 17:46:50
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2019-12-14 20:19:18
  */
+import 'core-js';
+import 'regenerator-runtime/runtime';
 import * as Sentry from '@sentry/browser';
 import sentryConfig from '../sentry.config';
 import '@/services';
