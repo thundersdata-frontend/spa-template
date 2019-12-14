@@ -3,7 +3,6 @@ import Link from 'umi/link';
 import { Layout, Menu, Icon } from 'antd';
 import { PageBasicPropsModel } from '@/interfaces/common';
 import stores from '@/stores';
-import { BaseStore } from '@/interfaces/base.store';
 import { isEmpty } from 'lodash';
 import { MenuItemConfig, CustomWindow } from '@/interfaces/common';
 import styles from './index.module.less';
@@ -19,7 +18,7 @@ export default function Aside(props: PageBasicPropsModel) {
   const openedKeysRef = useRef([]);
 
   // 读取store里面的menu
-  const baseStore = stores.useStore('baseStore') as BaseStore;
+  const baseStore = stores.useStore('baseStore');
   const { menus } = baseStore;
   const menuList = menus.concat(((window as unknown) as CustomWindow).gMenus);
 

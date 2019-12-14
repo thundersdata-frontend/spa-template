@@ -65,6 +65,7 @@
     "@babel/preset-typescript": "^7.7.4",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
+    "@ice/store-logger": "^0.1.0",
     "@td-design/webpack-theme-replacer": "1.0.0",
     "@types/classnames": "^2.2.9",
     "@types/enzyme": "^3.9.4",
