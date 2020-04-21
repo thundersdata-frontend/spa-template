@@ -1,7 +1,5 @@
+const fabric = require('@umijs/fabric');
+
 module.exports = {
-  "semi": true,
-  "singleQuote": true,
-  "trailingComma": "all",
-  "printWidth": 100,
-  "tabWidth": 2
+  ...fabric.prettier,
 };

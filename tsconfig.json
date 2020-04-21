@@ -29,9 +29,8 @@
     "skipLibCheck": true,
     "paths": {
       "@/*": ["src/*"],
-      "@/stores": ["src/stores"],
-      "@/services": ["src/services"],
-      "@/components": ["src/components"]
+      "@service/*": ["src/services/*"],
+      "@components/*": ["src/components/*"]
     }
   },
   "include": ["./src/services/api.d.ts", "./src/**/*", "./typings.d.ts"],

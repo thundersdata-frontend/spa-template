@@ -9,9 +9,9 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import * as Sentry from '@sentry/browser';
+import lscache from 'lscache';
 import sentryConfig from '../sentry.config';
 import { CustomWindow } from './interfaces/common';
-import lscache from 'lscache';
 import 'normalize.css';
 // import '@/services';
 

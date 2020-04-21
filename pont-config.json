@@ -1,7 +1,7 @@
 {
   "outDir": "./src/services",
   "templatePath": "./pontTemplate",
-  "usingMultipleOrigins": "true",
+  "usingMultipleOrigins": true,
   "origins": [
     {
       "name": "",

@@ -1,25 +1,44 @@
-import React from 'react';
-import { PageBasicPropsModel } from '@/interfaces/common';
-import { ConfigProvider, Layout } from 'antd';
-import zh_CN from 'antd/lib/locale/zh_CN';
-import Aside from './Aside';
-import styles from './index.module.less';
+import React, { useState } from 'react';
+import ProLayout, { Settings, SettingDrawer } from '@ant-design/pro-layout';
+import { IRouteComponentProps, Link } from 'umi';
+import defaultSettings from './defaultSettings';
 
-const { Header, Content } = Layout;
-const BasicLayout: React.FC<PageBasicPropsModel> = props => {
+export default function BasicLayout(props: IRouteComponentProps) {
+  const [collapsed, handleMenuCollapse] = useState<boolean>(false);
+  const [settings, setSettings] = useState<Partial<Settings>>({
+    ...defaultSettings,
+    fixSiderbar: true,
+  });
+
   return (
-    <ConfigProvider locale={zh_CN}>
-      <Layout className={styles.layout}>
-        <Aside {...props} />
-        <Layout>
-          <Header className={styles.header}>
-            <div>头像</div>
-          </Header>
-          <Content className={styles.content}>{props.children}</Content>
-        </Layout>
-      </Layout>
-    </ConfigProvider>
+    <>
+      <ProLayout
+        menuHeaderRender={(logoDom, titleDom) => (
+          <Link to="/">
+            {logoDom}
+            {titleDom}
+          </Link>
+        )}
+        onCollapse={handleMenuCollapse}
+        menuItemRender={(menuItemProps, defaultDom) =>
+          menuItemProps.isUrl ? (
+            defaultDom
+          ) : (
+            <Link className="qixian-menuItem" to={menuItemProps.path || '/'}>
+              {defaultDom}
+            </Link>
+          )
+        }
+        collapsed={collapsed}
+        onMenuHeaderClick={() => props.history.push('/')}
+        {...settings}
+      >
+        {props.children}
+      </ProLayout>
+      <SettingDrawer
+        settings={settings}
+        onSettingChange={(config) => setSettings(config)}
+      />
+    </>
   );
-};
-
-export default BasicLayout;
+}
