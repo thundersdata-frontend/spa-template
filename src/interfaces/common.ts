@@ -7,8 +7,10 @@
  * @LastEditTime: 2019-12-12 15:55:27
  */
 
+import { MenuDataItem } from '@ant-design/pro-layout';
+
 export interface CustomWindow extends Window {
-  gMenus: MenuItemConfig[];
+  gMenus: MenuDataItem[];
   requestConfig: {
     withCredentials: boolean;
     getToken: () => Promise<string>;
@@ -40,13 +42,6 @@ export interface PageBasicPropsModel {
   history: History;
   location: CustomLocation;
   match: PageMatchModel;
-}
-
-export interface MenuItemConfig {
-  name: string;
-  link?: string;
-  icon?: string;
-  children?: MenuItemConfig[];
 }
 
 export interface PrivilegeResource {

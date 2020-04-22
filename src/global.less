@@ -19,18 +19,17 @@ body {
 #root {
   height: 100vh;
 
-  :global {
-    .ant-menu-item {
-      display: flex;
-      align-items: center;
-    }
+  .ant-menu-item {
+    display: flex;
+    align-items: center;
+  }
 
-    .ant-menu-inline-collapsed {
-      .ant-menu-item {
-        span {
-          opacity: 0;
-        }
-      }
+  .ant-menu-inline-collapsed {
+    .ant-menu-submenu .ant-menu-submenu-title .iconfont+span,
+    .ant-menu-item span:last-child {
+      display: inline-block;
+      max-width: 0;
+      opacity: 0;
     }
   }
 }

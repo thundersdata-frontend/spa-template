@@ -6,5 +6,9 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     '@typescript-eslint/no-explicit-any': 0,
     'import/no-unresolved': 0,
+    'import/no-dynamic-require': 0,
+    'global-require': 0,
+    'no-shadow': 0,
+    'no-param-reassign': 0
   }
 };

@@ -13,4 +13,5 @@ export default defineConfig({
   antd: {
     dark: false,
   },
+  links: [{ rel: 'stylesheet', href: '//at.alicdn.com/t/font_1509107_vaarx0n4zz.css' }]
 });
