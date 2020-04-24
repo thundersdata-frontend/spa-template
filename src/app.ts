@@ -10,7 +10,7 @@ import isEmpty from 'lodash/isEmpty';
 import orderBy from 'lodash/orderBy';
 import { request } from 'umi';
 import { MenuDataItem } from '@ant-design/pro-layout';
-import { PrivilegeResource, CustomWindow } from './interfaces/common';
+import { PrivilegeResource } from './interfaces/common';
 
 interface Route {
   path: string;
@@ -19,6 +19,38 @@ interface Route {
 }
 
 let serverRoutes: Route[] = [];
+let menus: MenuDataItem[] = [];
+const privileges: string[] = [];
+
+/**
+ * 改写整个应用render到dom树里。
+ * 可能场景：
+ *  1. 在渲染应用之前做权限校验，不通过则跳转到登录页（单点登录场景会很有用）
+ *  2. 和pathRoutes配合，在render时请求后端接口，拿到动态路由
+ * @param oldRender
+ */
+export async function render(oldRender: Function) {
+  const result = await request('/resource');
+  const { code, success, data = [] } = result;
+  if (code === 20000 && success) {
+    const routes: PrivilegeResource[] = deepOrder({
+      data,
+      childKey: 'children',
+      orderKey: 'orderValue',
+      type: 'asc',
+    });
+    const flatRoutes = deepFlatten(routes);
+    flatRoutes.forEach((route) => {
+      privileges.push(...route.privilegeList);
+    });
+    // 将menus保存为应用的菜单、将privileges保存为应用的细粒度权限
+    serverRoutes = convertResourceToRoute(routes);
+    menus = convertResourceToMenu(routes);
+    oldRender();
+  } else {
+    oldRender();
+  }
+}
 
 /**
  * 运行时修改路由配置。和render配合使用，请求服务端根据相应动态更新路由。
@@ -45,37 +77,14 @@ export function patchRoutes(oldRoutes: { routes: Route[] }) {
   });
 }
 
-/**
- * 改写整个应用render到dom树里。
- * 可能场景：
- *  1. 在渲染应用之前做权限校验，不通过则跳转到登录页（单点登录场景会很有用）
- *  2. 和pathRoutes配合，在render时请求后端接口，拿到动态路由
- * @param oldRender
- */
-export async function render(oldRender: Function) {
-  const result = await request('/resource');
-  const { code, success, data = [] } = result;
-  if (code === 20000 && success) {
-    const routes: PrivilegeResource[] = deepOrder({
-      data,
-      childKey: 'children',
-      orderKey: 'orderValue',
-      type: 'asc',
-    });
-    const privileges: string[] = [];
-    const flatRoutes = deepFlatten(routes);
-    flatRoutes.forEach((route) => {
-      privileges.push(...route.privilegeList);
-    });
-    // 将menus保存为应用的菜单、将privileges保存为应用的细粒度权限
-    serverRoutes = convertResourceToRoute(routes);
-    const menus = convertResourceToMenu(routes);
-    ((window as unknown) as CustomWindow).gMenus = menus;
-    oldRender();
-  } else {
-    ((window as unknown) as CustomWindow).gMenus = [];
-    oldRender();
-  }
+/** 初始化数据 */
+export async function getInitialState() {
+  return new Promise(resolve => {
+    resolve({
+      menus,
+      privileges,
+    })
+  })
 }
 
 /**

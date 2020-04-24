@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import ProLayout, { Settings, SettingDrawer } from '@ant-design/pro-layout';
-import { IRouteComponentProps, Link } from 'umi';
-import { CustomWindow } from '@/interfaces/common';
+import ProLayout, { Settings, SettingDrawer, MenuDataItem } from '@ant-design/pro-layout';
+import { IRouteComponentProps, Link, useModel } from 'umi';
 import Iconfont from '@/components/Iconfont';
-import { HeaderViewProps } from '@ant-design/pro-layout/lib/Header';
 import CustomHeaderRight from './components/CustomHeaderRight';
 import defaultSettings from './defaultSettings';
 
 export default function BasicLayout(props: IRouteComponentProps) {
   const [collapsed, handleMenuCollapse] = useState<boolean>(false);
   const [settings, setSettings] = useState<Partial<Settings>>(defaultSettings);
+  const { initialState } = useModel('@@initialState');
 
+  const { menus = []} = initialState as { menus: MenuDataItem[] };
   return (
     <>
       <ProLayout
@@ -50,11 +50,11 @@ export default function BasicLayout(props: IRouteComponentProps) {
             </span>
           );
         }}
-        rightContentRender={(props: HeaderViewProps) => (
-          <CustomHeaderRight {...props} />
+        rightContentRender={(/** props: HeaderViewProps */) => (
+          <CustomHeaderRight />
         )}
         onMenuHeaderClick={() => props.history.push('/')}
-        menuDataRender={() => ((window as unknown) as CustomWindow).gMenus}
+        menuDataRender={() => menus}
         {...settings}
       >
         {props.children}
