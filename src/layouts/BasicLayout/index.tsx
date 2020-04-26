@@ -4,6 +4,7 @@ import { IRouteComponentProps, Link, useModel } from 'umi';
 import Iconfont from '@/components/Iconfont';
 import CustomHeaderRight from './components/CustomHeaderRight';
 import defaultSettings from './defaultSettings';
+import Logo from './components/Logo';
 
 export default function BasicLayout(props: IRouteComponentProps) {
   const [collapsed, handleMenuCollapse] = useState<boolean>(false);
@@ -14,6 +15,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
   return (
     <>
       <ProLayout
+        logo={<Logo />}
         collapsed={collapsed}
         onCollapse={handleMenuCollapse}
         menuHeaderRender={(logoDom, titleDom) => (

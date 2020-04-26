@@ -1,3 +1,11 @@
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 陈杰
+ * @Date: 2020-04-22 16:22:12
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2020-04-26 16:49:00
+ */
 import { Settings } from '@ant-design/pro-layout';
 
 const defaultSettings: Partial<Settings> = {
@@ -12,7 +20,7 @@ const defaultSettings: Partial<Settings> = {
     locale: true,
     defaultOpenAll: false,
   },
-  title: 'Ant Design Pro'
+  title: '中台模板'
 };
 
 export default defaultSettings;
