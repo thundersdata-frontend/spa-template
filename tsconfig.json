@@ -32,5 +32,6 @@
       "@components/*": ["src/components/*"],
       "@@/*": ["src/.umi/*"]
     }
-  }
+  },
+  "include": ["./src/services/api.d.ts", "./src/**/*", "./typings.d.ts"],
 }
