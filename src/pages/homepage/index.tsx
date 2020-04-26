@@ -1,12 +1,11 @@
 import React, { useCallback } from 'react';
-import { Link, Access, useAccess, useRequest } from 'umi';
+import { Link, Access, useAccess, useRequest, useModel } from 'umi';
 import { Button } from 'antd';
-import store from '@/store';
 
 export default function Homepage() {
   const access = useAccess();
 
-  const [{ value }, { setValue, setEnums }] = store.useModel('home');
+  const { value ,setValue, setEnums } = useModel('home');
 
   /** 获取所有字典 */
   useRequest(() => API.recruitment.dict.getAllDict.fetch(), {
