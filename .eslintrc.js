@@ -9,6 +9,8 @@ module.exports = {
     'import/no-dynamic-require': 0,
     'global-require': 0,
     'no-shadow': 0,
-    'no-param-reassign': 0
+    'no-param-reassign': 0,
+    'symbol-description': 0,
+    'no-unused-expressions': 0
   }
 };

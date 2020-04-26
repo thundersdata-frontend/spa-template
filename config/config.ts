@@ -1,4 +1,5 @@
 import { defineConfig } from 'umi';
+import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 import routeConfig from './routeConfig';
 
 export default defineConfig({
@@ -7,11 +8,15 @@ export default defineConfig({
     loading: '@/components/Loading.tsx',
   },
   hash: true,
-  ignoreMomentLocale: true,
   outputPath: 'build',
   routes: routeConfig,
-  antd: {
-    dark: false,
+  polyfill: {
+    imports: [
+      'core-js/stable',
+    ]
   },
-  links: [{ rel: 'stylesheet', href: '//at.alicdn.com/t/font_1509107_vaarx0n4zz.css' }]
+  links: [{ rel: 'stylesheet', href: '//at.alicdn.com/t/font_1509107_vaarx0n4zz.css' }],
+  chainWebpack(config) {
+    config.plugin('dayjs').use(AntdDayjsWebpackPlugin);
+  },
 });
