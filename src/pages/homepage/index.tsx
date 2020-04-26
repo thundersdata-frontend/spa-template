@@ -64,7 +64,8 @@ export default function Homepage() {
       </div>
       <div>你能看到我，因为我对权限没有要求</div>
       <div style={{ fontSize: '20px', fontWeight: 600, marginTop: '100px' }}>以下为pont+useRequest使用示例</div>
-      <div style={{ color: 'red' }}>如果要测试接口请求，请在global.ts中将services引入进来</div>
+      <div style={{ color: 'red' }}>如果要测试接口请求，请在global.ts中将services引入进来，并在pont-config.json中配置originUrl</div>
+      <div>originUrl地址为http://recruitment.test.thundersdata.com/v2/api-docs</div>
       <Button onClick={() => run1()}>手动执行get请求</Button>
       <Button onClick={() => setValue('aaaa')}>把value由undefined设置为a</Button>
       <Button onClick={() => setValue('bbbbb')}>value由aaa变成bbb</Button>
