@@ -7,10 +7,16 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     'import/no-unresolved': 0,
     'import/no-dynamic-require': 0,
+    'import/order': 0,
     'global-require': 0,
     'no-shadow': 0,
     'no-param-reassign': 0,
     'symbol-description': 0,
-    'no-unused-expressions': 0
+    'no-unused-expressions': 0,
+    'class-methods-use-this': 0,
+    'no-undef': 0,
+    'no-console': 0,
+    'dot-notation': 0,
+    'prefer-template': 0
   }
 };

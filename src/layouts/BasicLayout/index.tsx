@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import ProLayout, { Settings, SettingDrawer, MenuDataItem } from '@ant-design/pro-layout';
 import { IRouteComponentProps, Link, useModel } from 'umi';
 import Iconfont from '@/components/Iconfont';
+import store from '@/store';
 import CustomHeaderRight from './components/CustomHeaderRight';
 import defaultSettings from './defaultSettings';
+
+const { Provider: StoreProvider } = store;
 
 export default function BasicLayout(props: IRouteComponentProps) {
   const [collapsed, handleMenuCollapse] = useState<boolean>(false);
@@ -12,7 +15,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
 
   const { menus = []} = initialState as { menus: MenuDataItem[] };
   return (
-    <>
+    <StoreProvider>
       <ProLayout
         collapsed={collapsed}
         onCollapse={handleMenuCollapse}
@@ -60,6 +63,6 @@ export default function BasicLayout(props: IRouteComponentProps) {
         {props.children}
       </ProLayout>
       <SettingDrawer settings={settings} onSettingChange={setSettings} />
-    </>
+    </StoreProvider>
   );
 }

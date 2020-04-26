@@ -7,9 +7,9 @@
  * @LastEditTime: 2019-12-12 15:46:29
  */
 import isEmpty from 'lodash/isEmpty';
-import orderBy from 'lodash/orderBy';
 import { request } from 'umi';
 import { MenuDataItem } from '@ant-design/pro-layout';
+import arrayUtils from '@/utils/array';
 import { PrivilegeResource } from './interfaces/common';
 
 interface Route {
@@ -33,13 +33,13 @@ export async function render(oldRender: Function) {
   const result = await request('/resource');
   const { code, success, data = [] } = result;
   if (code === 20000 && success) {
-    const routes: PrivilegeResource[] = deepOrder({
+    const routes: PrivilegeResource[] = arrayUtils.deepOrder({
       data,
       childKey: 'children',
       orderKey: 'orderValue',
       type: 'asc',
     });
-    const flatRoutes = deepFlatten(routes);
+    const flatRoutes = arrayUtils.deepFlatten(routes);
     flatRoutes.forEach((route) => {
       privileges.push(...route.privilegeList);
     });
@@ -128,49 +128,4 @@ function convertResourceToRoute(list: PrivilegeResource[]): Route[] {
       component: require(`./pages${item.apiUrl}`).default,
     };
   });
-}
-
-function deepFlatten<T>(list: T[], key = 'children') {
-  const result: T[] = [];
-  const flatten = (arry: T[]) =>
-    arry.forEach((item: T) => {
-      const newItem = { ...item };
-      delete newItem[key];
-      result.push(newItem);
-      if (item[key] && Array.isArray(item[key])) {
-        flatten(item[key]);
-      }
-    }, []);
-  flatten(list);
-  return result;
-}
-
-/**
- * 根据某个字段 递归排序
- */
-function deepOrder<T>(props: DeepOrderProps<T>) {
-  const { data = [], childKey, orderKey, type = 'asc' } = props;
-  const loopOrder = (params: DeepOrderProps<T>) => {
-    const { data = [], childKey, orderKey, type = 'asc' } = params;
-    return orderBy(data, orderKey, type).map((item: T) => {
-      const children: T[] = item[childKey] || [];
-      if (children && children.length > 0) {
-        item[childKey] = loopOrder({
-          data: children,
-          childKey,
-          orderKey,
-          type,
-        });
-      }
-      return item;
-    });
-  };
-  return loopOrder({ data, childKey, orderKey, type });
-}
-
-export interface DeepOrderProps<T> {
-  data: T[];
-  childKey: string;
-  orderKey: string;
-  type: 'desc' | 'asc';
 }
