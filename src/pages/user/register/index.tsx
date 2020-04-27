@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'umi';
+import RegisterForm from '@/components/RegisterForm';
 
 export default function Register() {
   return (
-    <div>
-      <div>register page</div>
-      <div><Link to="/">Go to homepage</Link></div>
-      <div><Link to="/user/login">Go to login page</Link></div>
+    <div style={{ width: '75%', backgroundColor: 'white', padding: 40 }}>
+      <RegisterForm />
     </div>
   )
 }

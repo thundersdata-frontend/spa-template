@@ -122,7 +122,7 @@ const LoginItem: React.FC<LoginItemProps> = (props) => {
           <Row gutter={8}>
             <Col span={16}>
               <FormItem name={name} {...options}>
-                <Input {...customProps} {...inputProps} />
+                <Input {...customProps} {...inputProps} autoComplete="off" />
               </FormItem>
             </Col>
             <Col span={8}>
@@ -145,7 +145,7 @@ const LoginItem: React.FC<LoginItemProps> = (props) => {
   }
   return (
     <FormItem name={name} {...options}>
-      <Input {...customProps} {...otherProps} />
+      <Input {...customProps} {...otherProps} autoComplete="off" />
     </FormItem>
   );
 };

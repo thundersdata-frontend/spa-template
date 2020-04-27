@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
- * @LastEditors: 黄姗姗
- * @LastEditTime: 2019-12-12 15:46:29
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2020-04-27 13:51:17
  */
 import isEmpty from 'lodash/isEmpty';
 import { request } from 'umi';
@@ -126,6 +126,7 @@ function convertResourceToRoute(list: PrivilegeResource[]): Route[] {
     return {
       path: item.apiUrl,
       component: require(`./pages${item.apiUrl}`).default,
+      title: item.description
     };
   });
 }

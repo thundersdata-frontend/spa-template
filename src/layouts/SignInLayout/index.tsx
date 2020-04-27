@@ -26,12 +26,11 @@ export default function SignInLayout(props: IRouteComponentProps) {
         }}
       >
         <div style={{ flex: 1 }}>
-          <img src={require('../../assets/login_left.png')} alt="" style={{ width: '100%', paddingTop: 50 }} />
+          <img src={require('../../assets/login_left.png')} alt="" style={{ width: '100%' }} />
         </div>
         <div
           style={{
             flex: 1,
-            paddingLeft: 40,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'

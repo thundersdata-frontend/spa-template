@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, Checkbox } from 'antd';
-import { useRequest } from 'umi';
+import { useRequest, Link } from 'umi';
 import LoginForm from '@/components/LoginForm';
 import { StateType, fakeAccountLogin, LoginParamsType } from '@/components/LoginForm/service';
 
@@ -35,7 +35,7 @@ export default function Login() {
   const { status, type: loginType } = data || { status: 'ok', type: 'account' };
 
   return (
-    <div style={{ width: '100%', backgroundColor: 'white', padding: 40 }}>
+    <div style={{ width: '75%', backgroundColor: 'white', padding: 40 }}>
       <LoginForm activeKey={type} onTabChange={setType} onSubmit={handleSubmit}>
         <Tab key="account" tab="账户密码登录">
           {status === 'error' && loginType === 'account' && !loading && (
@@ -63,7 +63,7 @@ export default function Login() {
             ]}
           />
         </Tab>
-        <Tab key="mobile" tab="手机号登录">
+        <Tab key="mobile" tab="手机号码登录">
           {status === 'error' && loginType === 'mobile' && !loading && (
             <LoginMessage content="验证码错误" />
           )}
@@ -112,6 +112,11 @@ export default function Login() {
         </div>
         <Submit loading={loading}>登录</Submit>
       </LoginForm>
+      <div>
+        <Link to="/user/register">
+          还没有账户？去注册&gt;&gt;
+        </Link>
+      </div>
     </div>
   );
 }

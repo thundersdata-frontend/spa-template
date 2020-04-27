@@ -19,6 +19,11 @@ export default defineConfig({
               },
               priority: 10,
             },
+            default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true
+            }
           },
         },
       }
