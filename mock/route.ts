@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-27 16:26:45
  * @LastEditors: 陈杰
- * @LastEditTime: 2019-11-12 16:47:57
+ * @LastEditTime: 2020-04-27 16:59:41
  */
 export default {
   '/resource': {
@@ -16,6 +16,16 @@ export default {
         apiUrl: '/homepage',
         icon: 'icon-screen',
         description: '首页',
+        type: 0,
+        orderValue: 1,
+        privilegeList: [],
+      },
+      {
+        id: 2004,
+        resourceKey: 'MODAL',
+        apiUrl: '/modal',
+        icon: 'icon-screen',
+        description: '弹窗页面',
         type: 0,
         orderValue: 1,
         privilegeList: [],

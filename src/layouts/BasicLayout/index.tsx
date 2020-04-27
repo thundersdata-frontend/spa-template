@@ -5,6 +5,8 @@ import Iconfont from '@/components/Iconfont';
 import CustomHeaderRight from './components/CustomHeaderRight';
 import defaultSettings from './defaultSettings';
 import Logo from './components/Logo';
+import { ConfigProvider, Empty } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
 
 export default function BasicLayout(props: IRouteComponentProps) {
   const [collapsed, handleMenuCollapse] = useState<boolean>(false);
@@ -13,7 +15,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
 
   const { menus = []} = initialState as { menus: MenuDataItem[] };
   return (
-    <>
+    <ConfigProvider locale={zhCN} renderEmpty={() => <Empty image={require('../../assets/pic_empty@2x.png')} description="暂无数据" />}>
       <ProLayout
         logo={<Logo />}
         collapsed={collapsed}
@@ -62,6 +64,6 @@ export default function BasicLayout(props: IRouteComponentProps) {
         {props.children}
       </ProLayout>
       <SettingDrawer settings={settings} onSettingChange={setSettings} />
-    </>
+    </ConfigProvider>
   );
 }

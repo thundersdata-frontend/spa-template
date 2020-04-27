@@ -1,34 +1,51 @@
 import React, { useCallback } from 'react';
 import { Link, Access, useAccess, useRequest, useModel } from 'umi';
-import { Button } from 'antd';
+import {
+  Button,
+  DatePicker,
+  Pagination,
+  TimePicker,
+  Transfer,
+  Calendar,
+  Table,
+} from 'antd';
+import moment from 'moment';
+
+const { RangePicker } = DatePicker;
 
 export default function Homepage() {
   const access = useAccess();
 
-  const { value ,setValue, setEnums } = useModel('home');
+  const { value, setValue, setEnums } = useModel('home');
 
   /** 获取所有字典 */
   useRequest(() => API.recruitment.dict.getAllDict.fetch(), {
-    onSuccess: data => {
+    onSuccess: (data) => {
       setEnums(data);
     },
-    onError: error => {
+    onError: (error) => {
       console.log(error.message);
-    }
+    },
   });
 
-  const { run: run1 } = useRequest(() => API.recruitment.interview.queryApplyingInterviewList.fetch({
-    page: 1
-  }), {
-    manual: true,
-    onError: error => {
-      console.log(error.message)
-    }
-  })
+  const { run: run1 } = useRequest(
+    () =>
+      API.recruitment.interview.queryApplyingInterviewList.fetch({
+        page: 1,
+      }),
+    {
+      manual: true,
+      onError: (error) => {
+        console.log(error.message);
+      },
+    },
+  );
 
   const fetchValue = useCallback(async () => {
     if (value) {
-      const result = await API.recruitment.jobCategory.addJobCategory.fetch({ dictValue: value })
+      const result = await API.recruitment.jobCategory.addJobCategory.fetch({
+        dictValue: value,
+      });
       return result;
     }
     return API.recruitment.jobCategory.addJobCategory.init;
@@ -36,7 +53,7 @@ export default function Homepage() {
 
   useRequest(fetchValue, {
     refreshDeps: [fetchValue],
-  })
+  });
 
   return (
     <div>
@@ -63,11 +80,51 @@ export default function Homepage() {
         </Access>
       </div>
       <div>你能看到我，因为我对权限没有要求</div>
-      <div style={{ fontSize: '20px', fontWeight: 600, marginTop: '100px' }}>以下为pont+useRequest使用示例</div>
-      <div style={{ color: 'red' }}>如果要测试接口请求，请在global.ts中将services引入进来，并在pont-config.json中配置originUrl</div>
-      <div>originUrl地址为http://recruitment.test.thundersdata.com/v2/api-docs</div>
+      <div>
+        <DatePicker value={moment()} />
+        <TimePicker />
+        <RangePicker style={{ width: 200 }} />
+      </div>
+      <Pagination defaultCurrent={1} total={50} showSizeChanger />
+      <Transfer
+        dataSource={[]}
+        showSearch
+        targetKeys={[]}
+        render={(item) => item.title!}
+      />
+      <Calendar fullscreen={false} />
+      <Table
+        dataSource={[]}
+        columns={[
+          {
+            title: 'Name',
+            dataIndex: 'name',
+            filters: [
+              {
+                text: 'filter1',
+                value: 'filter1',
+              },
+            ],
+          },
+          {
+            title: 'Age',
+            dataIndex: 'age',
+          },
+        ]}
+      />
+      <div style={{ fontSize: '20px', fontWeight: 600, marginTop: '100px' }}>
+        以下为pont+useRequest使用示例
+      </div>
+      <div style={{ color: 'red' }}>
+        如果要测试接口请求，请在global.ts中将services引入进来，并在pont-config.json中配置originUrl
+      </div>
+      <div>
+        originUrl地址为http://recruitment.test.thundersdata.com/v2/api-docs
+      </div>
       <Button onClick={() => run1()}>手动执行get请求</Button>
-      <Button onClick={() => setValue('aaaa')}>把value由undefined设置为a</Button>
+      <Button onClick={() => setValue('aaaa')}>
+        把value由undefined设置为a
+      </Button>
       <Button onClick={() => setValue('bbbbb')}>value由aaa变成bbb</Button>
       <div>value值：{value}</div>
     </div>
