@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-27 16:26:45
  * @LastEditors: 陈杰
- * @LastEditTime: 2020-04-27 16:59:41
+ * @LastEditTime: 2020-04-27 21:50:06
  */
 export default {
   '/resource': {
@@ -29,6 +29,30 @@ export default {
         type: 0,
         orderValue: 1,
         privilegeList: [],
+        children: [
+          {
+            id: 2011,
+            resourceKey: 'FORM_MODAL',
+            apiUrl: '/modal/form',
+            icon: 'icon-details',
+            description: '表单弹窗',
+            type: 0,
+            orderValue: 1,
+            children: [],
+            privilegeList: [],
+          },
+          {
+            id: 2012,
+            resourceKey: 'DETAIL_MODAL',
+            apiUrl: '/modal/detail',
+            icon: 'icon-list',
+            description: '详情弹窗',
+            type: 0,
+            orderValue: 2,
+            children: [],
+            privilegeList: [],
+          },
+        ],
       },
       {
         id: 2005,
