@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-27 16:26:45
  * @LastEditors: 陈杰
- * @LastEditTime: 2020-04-27 21:50:06
+ * @LastEditTime: 2020-04-27 22:20:56
  */
 export default {
   '/resource': {
@@ -21,7 +21,7 @@ export default {
         privilegeList: [],
       },
       {
-        id: 2004,
+        id: 2005,
         resourceKey: 'MODAL',
         apiUrl: '/modal',
         icon: 'icon-screen',
@@ -55,7 +55,7 @@ export default {
         ],
       },
       {
-        id: 2005,
+        id: 2006,
         resourceKey: 'ORG',
         apiUrl: '/contacts',
         icon: 'icon-screen',
@@ -66,7 +66,41 @@ export default {
         privilegeList: ['test', 'test2'],
       },
       {
-        id: 2006,
+        id: 2007,
+        resourceKey: 'FORM',
+        apiUrl: '/form',
+        icon: 'icon-screen',
+        description: '表单',
+        type: 0,
+        orderValue: 2,
+        privilegeList: [],
+        children: [
+          {
+            id: 2011,
+            resourceKey: 'SHORT_FORM',
+            apiUrl: '/form/short',
+            icon: 'icon-details',
+            description: '短表单',
+            type: 0,
+            orderValue: 1,
+            children: [],
+            privilegeList: [],
+          },
+          {
+            id: 2012,
+            resourceKey: 'LONG_FORM',
+            apiUrl: '/form/long',
+            icon: 'icon-details',
+            description: '长表单',
+            type: 0,
+            orderValue: 1,
+            children: [],
+            privilegeList: [],
+          }
+        ],
+      },
+      {
+        id: 2008,
         resourceKey: 'APPROVE',
         apiUrl: '/approval',
         icon: 'icon-chart',
