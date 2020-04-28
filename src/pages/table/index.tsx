@@ -161,7 +161,7 @@ export default () => (
       size: 'default'
     }}
     dateFormatter="string"
-    headerTitle="Github Issue列表"
+    headerTitle="Github Issue列表" // -> 自定义
     tableAlertRender={false}
     toolBarRender={(_, { selectedRowKeys }) => [
       <Button key="3" type="primary">
