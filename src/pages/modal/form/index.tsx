@@ -36,6 +36,7 @@ export default () => {
         centered
         visible={oneToggle.state}
         destroyOnClose
+        forceRender // -> 如果modal里面装form，这个配置必须，否则会报错
         maskClosable={false}
         title="单列表单弹窗"
         onOk={() => oneForm.submit()}
@@ -48,6 +49,7 @@ export default () => {
         centered
         visible={twoToggle.state}
         destroyOnClose
+        forceRender
         maskClosable={false}
         title="两列表单弹窗"
         onOk={() => twoForm.submit()}
