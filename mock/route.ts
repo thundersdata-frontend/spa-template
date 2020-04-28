@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-27 16:26:45
  * @LastEditors: 陈杰
- * @LastEditTime: 2020-04-27 22:20:56
+ * @LastEditTime: 2020-04-28 14:17:12
  */
 export default {
   '/resource': {
@@ -131,6 +131,16 @@ export default {
             privilegeList: ['hahaha'],
           },
         ],
+        privilegeList: [],
+      },
+      {
+        id: 2009,
+        resourceKey: 'DETAIL',
+        apiUrl: '/detail',
+        icon: 'icon-screen',
+        description: '详情',
+        type: 0,
+        orderValue: 1,
         privilegeList: [],
       },
     ],
