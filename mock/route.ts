@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-27 16:26:45
  * @LastEditors: 陈杰
- * @LastEditTime: 2020-04-28 14:17:12
+ * @LastEditTime: 2020-04-28 14:31:53
  */
 export default {
   '/resource': {
@@ -27,7 +27,7 @@ export default {
         icon: 'icon-screen',
         description: '弹窗页面',
         type: 0,
-        orderValue: 1,
+        orderValue: 2,
         privilegeList: [],
         children: [
           {
@@ -61,7 +61,7 @@ export default {
         icon: 'icon-screen',
         description: '组织机构管理',
         type: 0,
-        orderValue: 2,
+        orderValue: 3,
         children: [],
         privilegeList: ['test', 'test2'],
       },
@@ -72,7 +72,7 @@ export default {
         icon: 'icon-screen',
         description: '表单',
         type: 0,
-        orderValue: 2,
+        orderValue: 4,
         privilegeList: [],
         children: [
           {
@@ -106,7 +106,7 @@ export default {
         icon: 'icon-chart',
         description: '审批管理',
         type: 0,
-        orderValue: 3,
+        orderValue: 5,
         children: [
           {
             id: 2011,
@@ -140,7 +140,17 @@ export default {
         icon: 'icon-screen',
         description: '详情',
         type: 0,
-        orderValue: 1,
+        orderValue: 6,
+        privilegeList: [],
+      },
+      {
+        id: 2010,
+        resourceKey: 'TABLE',
+        apiUrl: '/table',
+        icon: 'icon-screen',
+        description: '表格',
+        type: 0,
+        orderValue: 7,
         privilegeList: [],
       },
     ],
