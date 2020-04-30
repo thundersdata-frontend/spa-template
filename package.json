@@ -49,7 +49,7 @@
     "@ant-design/pro-table": "^2.2.6",
     "@umijs/hooks": "^1.9.2",
     "@umijs/preset-react": "1.x",
-    "antd": "^4.1.4",
+    "antd": "^4.2.0",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.25",
     "lodash": "^4.17.15",

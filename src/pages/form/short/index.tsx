@@ -134,7 +134,7 @@ export default () => {
         <Button type="primary" htmlType="submit" loading={submitBtn.state}>
           提交
         </Button>
-        <Button style={{ marginLeft: 8 }}>取消</Button>
+        <Button style={{ marginLeft: 10 }}>取消</Button>
       </Form.Item>
     </Form>
     </Card>

@@ -14,7 +14,7 @@ export default function () {
       <div style={{ width: 782, textAlign: 'center' }}>
         <img
           alt=""
-          src={require('../assets/pic_404@2x.png')}
+          src={require('../assets/pic_404.png')}
           style={{ width: '100%' }}
         />
         <div style={{ lineHeight: 3 }}>对不起，您访问的页面不存在</div>

@@ -91,6 +91,7 @@ export default function Homepage() {
         showSearch
         targetKeys={[]}
         render={(item) => item.title!}
+        listStyle={{ height: 250 }}
       />
       <Calendar fullscreen={false} />
       <Table

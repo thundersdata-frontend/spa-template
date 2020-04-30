@@ -46,7 +46,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
       locale={zhCN}
       renderEmpty={() => (
         <Empty
-          image={require('../../assets/pic_empty@2x.png')}
+          image={require('../../assets/pic_empty.png')}
           description="暂无数据"
         />
       )}
