@@ -3,6 +3,7 @@ import ProLayout, {
   Settings,
   MenuDataItem,
   getMenuData,
+  SettingDrawer,
 } from '@ant-design/pro-layout';
 import { IRouteComponentProps, Link, useModel } from 'umi';
 import Iconfont from '@/components/Iconfont';
@@ -14,7 +15,7 @@ import zhCN from 'antd/es/locale/zh_CN';
 
 export default function BasicLayout(props: IRouteComponentProps) {
   const [collapsed, handleMenuCollapse] = useState<boolean>(false);
-  const [settings] = useState<Partial<Settings>>(defaultSettings);
+  const [settings, setSettings] = useState<Partial<Settings>>(defaultSettings);
   const { initialState } = useModel('@@initialState');
 
   const { menus = [] } = initialState as { menus: MenuDataItem[] };
@@ -111,7 +112,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
         )}
         {props.children}
       </ProLayout>
-      {/* <SettingDrawer settings={settings} onSettingChange={setSettings} /> */}
+      <SettingDrawer settings={settings} onSettingChange={setSettings} />
     </ConfigProvider>
   );
 }

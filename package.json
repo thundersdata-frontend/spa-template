@@ -14,7 +14,7 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "start": "umi dev",
+    "start": "cross-env UMI_UI=1 umi dev",
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "cross-env UMI_ENV=prod umi build",
     "test": "jest --passWithNoTests",
@@ -57,7 +57,8 @@
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "umi": "^3.1.1"
+    "umi": "^3.1.1",
+    "umi-plugin-antd-theme": "^2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
@@ -72,6 +73,7 @@
     "@typescript-eslint/eslint-plugin": "^2.11.0",
     "@typescript-eslint/parser": "^2.11.0",
     "@umijs/fabric": "^2.0.8",
+    "@umijs/preset-ui": "^2.1.13",
     "antd-dayjs-webpack-plugin": "^1.0.0",
     "babel-eslint": "^10.1.0",
     "commitizen": "^4.0.4",
@@ -79,20 +81,12 @@
     "conventional-changelog-custom-config": "^0.3.1",
     "cross-env": "^7.0.2",
     "cz-customizable": "^6.2.0",
-    "eslint": "^6.7.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-flowtype": "^4.5.2",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jsx-a11y": "^6.2.2",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^3.0.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.1.6",
     "pont-engine": "1.0.3",
-    "prettier": "^2.0.4",
-    "standard-version": "^7.1.0",
-    "typescript": "^3.8.3"
+    "standard-version": "^8.0.0",
+    "typescript": "^3.8.3",
+    "umi-plugin-page-creator": "^0.0.1"
   },
   "engines": {
     "node": ">=8.0.0"
