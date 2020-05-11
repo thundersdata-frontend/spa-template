@@ -12,6 +12,7 @@ export default defineConfig({
   polyfill: {
     imports: ['core-js/stable'],
   },
+  esbuild: {},
   metas: [
     { name: 'msapplication-TileColor', content: '#da532c' },
     { name: 'theme-color', content: '#ffffff' },
