@@ -19,6 +19,7 @@
         "@primary-color": "#FA541C"
       }
     },
+
     {
       "key": "sunset",
       "fileName": "sunset.css",
@@ -110,5 +111,11 @@
         "@primary-color": "#722ED1"
       }
     }
-  ]
+  ],
+  "min": true,
+  "isModule": true,
+  "ignoreAntd": false,
+  "ignoreProLayout": false,
+  "cache": true,
+  "extraLibraries": []
 }
