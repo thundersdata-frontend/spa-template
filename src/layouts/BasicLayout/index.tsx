@@ -12,6 +12,7 @@ import defaultSettings from './defaultSettings';
 import Logo from './components/Logo';
 import { ConfigProvider, Empty, Breadcrumb } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
+import { validateMessages } from './validateMessages';
 
 export default function BasicLayout(props: IRouteComponentProps) {
   const [collapsed, handleMenuCollapse] = useState<boolean>(false);
@@ -51,6 +52,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
           description="暂无数据"
         />
       )}
+      form={{ validateMessages }}
     >
       <ProLayout
         logo={<Logo />}
