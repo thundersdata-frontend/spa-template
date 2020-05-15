@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 import { Store } from 'antd/es/form/interface';
-import { useToggle, useRequest } from '@umijs/hooks';
+import { useToggle } from '@umijs/hooks';
 import { useImmer } from 'use-immer';
+import { useRequest } from 'umi';
 
 import OneColumnDetail from './components/OneColumnDetail';
 import TwoColumnDetail from './components/TwoColumnDetail';
@@ -16,10 +17,12 @@ export default () => {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve({
-          code: '123',
-          name: 'chenjie',
-          simpleName: 'test',
-          area: 'all',
+          data: {
+            code: '123',
+            name: 'chenjie',
+            simpleName: 'test',
+            area: 'all',
+          }
         });
       }, 2000);
     });

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 import { Store } from 'antd/es/form/interface';
-import { useToggle, useRequest } from '@umijs/hooks';
+import { useToggle } from '@umijs/hooks';
 import { useImmer } from 'use-immer';
+import { useRequest } from 'umi';
 
 import OneColumnForm from './components/OneColumnForm';
 import TwoColumnForm from './components/TwoColumnForm';
@@ -16,10 +17,12 @@ export default () => {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve({
-          code: '123',
-          name: 'chenjie',
-          simpleName: 'test',
-          area: 'all',
+          data: {
+            code: '123',
+            name: 'chenjie',
+            simpleName: 'test',
+            area: 'all',
+          }
         });
       }, 2000);
     });
@@ -28,7 +31,6 @@ export default () => {
   const { run, loading } = useRequest(getDetail, {
     manual: true,
     onSuccess: data => {
-      console.log(data);
       updateDetail(draft => Object.assign(draft, data));
     },
   });

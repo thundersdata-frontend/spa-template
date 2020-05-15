@@ -20,7 +20,6 @@ export default ({
 
   useEffect(() => {
     if (formData && !isEmpty(formData)) {
-      console.log(formData);
       form.setFieldsValue(formData);
     }
   }, [formData]);
