@@ -45,12 +45,12 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.0.6",
-    "@ant-design/pro-layout": "^5.0.9",
+    "@ant-design/pro-layout": "^5.0.12",
     "@ant-design/pro-table": "^2.2.6",
     "@umijs/hooks": "^1.9.2",
     "@umijs/plugin-esbuild": "^1.0.0-beta.2",
-    "@umijs/preset-react": "1.x",
-    "antd": "^4.2.0",
+    "@umijs/preset-react": "^1.4.22",
+    "antd": "^4.2.2",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.25",
     "immer": "^6.0.5",
@@ -60,7 +60,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "umi": "^3.1.1",
-    "umi-plugin-antd-theme": "^2.1.2",
     "use-immer": "^0.4.0"
   },
   "devDependencies": {
@@ -71,10 +70,10 @@
     "@types/classnames": "^2.2.10",
     "@types/lodash": "^4.14.150",
     "@types/lscache": "^1.3.0",
-    "@types/react": "^16.9.12",
-    "@types/react-dom": "^16.9.6",
-    "@typescript-eslint/eslint-plugin": "^2.11.0",
-    "@typescript-eslint/parser": "^2.11.0",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
     "@umijs/fabric": "^2.0.8",
     "@umijs/preset-ui": "^2.1.13",
     "antd-dayjs-webpack-plugin": "^1.0.0",
@@ -89,7 +88,7 @@
     "pont-engine": "1.0.3",
     "standard-version": "^8.0.0",
     "typescript": "^3.8.3",
-    "umi-plugin-page-creator": "^0.0.1"
+    "umi-plugin-page-creator": "^1.0.3"
   },
   "engines": {
     "node": ">=8.0.0"

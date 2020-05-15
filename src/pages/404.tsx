@@ -11,7 +11,7 @@ export default function() {
         alignItems: 'center',
       }}
     >
-      <div style={{ width: 782, textAlign: 'center' }}>
+      <div style={{ width: 600, textAlign: 'center' }}>
         <img
           alt=""
           src={require('../assets/pic_404.png')}

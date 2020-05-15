@@ -9,9 +9,6 @@ export default defineConfig({
   hash: true,
   outputPath: 'build',
   routes: routeConfig,
-  polyfill: {
-    imports: ['core-js/stable'],
-  },
   esbuild: {},
   metas: [
     { name: 'msapplication-TileColor', content: '#da532c' },

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Tag } from 'antd';
-import ProTable, { ProColumns, TableDropdown } from '@ant-design/pro-table';
+import ProTable, { ProColumns, TableDropdown, ActionType } from '@ant-design/pro-table';
 import { request } from 'umi';
 
 interface GithubIssueItem {
@@ -125,59 +125,63 @@ const columns: ProColumns<GithubIssueItem>[] = [
     ],
   },
 ];
-export default () => (
-  <ProTable<GithubIssueItem>
-    columns={columns}
-    bordered
-    request={async (params = {}) => {
-      const data = await request<GithubIssueItem[]>(
-        'https://api.github.com/repos/ant-design/ant-design-pro/issues',
-        {
-          params: {
-            ...params,
-            page: params.current,
-            per_page: params.pageSize,
+export default () => {
+  const actionRef = useRef<ActionType>();
+  return (
+    <ProTable<GithubIssueItem>
+      columns={columns}
+      bordered
+      actionRef={actionRef}
+      request={async (params = {}) => {
+        const data = await request<GithubIssueItem[]>(
+          'https://api.github.com/repos/ant-design/ant-design-pro/issues',
+          {
+            params: {
+              ...params,
+              page: params.current,
+              per_page: params.pageSize,
+            },
+            timeout: 10000,
           },
-          timeout: 10000,
-        },
-      );
-      const totalObj = await request(
-        'https://api.github.com/repos/ant-design/ant-design-pro/issues?per_page=1',
-        {
-          params,
-          timeout: 10000,
-        },
-      );
-      return {
-        data,
-        page: params.current,
-        success: true,
-        total: ((totalObj[0] || { number: 0 }).number - 56) as number,
-      };
-    }}
-    rowKey="id"
-    rowSelection={{}}
-    pagination={{
-      size: 'default'
-    }}
-    dateFormatter="string"
-    headerTitle="Github Issue列表" // -> 自定义
-    tableAlertRender={false}
-    toolBarRender={(_, { selectedRowKeys }) => [
-      <Button key="3" type="primary">
-        <PlusOutlined />
-        新建
-      </Button>,
-      selectedRowKeys && selectedRowKeys.length && (
-        <Button
-          key="3"
-          onClick={() => {
-            console.log(selectedRowKeys.join('-'));
-          }}
-        >
-          批量删除
-        </Button>
-      ),
-    ]}
-  />
-);
+        );
+        const totalObj = await request(
+          'https://api.github.com/repos/ant-design/ant-design-pro/issues?per_page=1',
+          {
+            params,
+            timeout: 10000,
+          },
+        );
+        return {
+          data,
+          page: params.current,
+          success: true,
+          total: ((totalObj[0] || { number: 0 }).number - 56) as number,
+        };
+      }}
+      rowKey="id"
+      rowSelection={{}}
+      pagination={{
+        size: 'default'
+      }}
+      dateFormatter="string"
+      headerTitle="Github Issue列表" // -> 自定义
+      tableAlertRender={false}
+      toolBarRender={(_, { selectedRowKeys }) => [
+        <Button key="3" type="primary">
+          <PlusOutlined />
+          新建
+        </Button>,
+        selectedRowKeys && selectedRowKeys.length && (
+          <Button
+            key="3"
+            onClick={() => {
+              console.log(selectedRowKeys.join('-'));
+            }}
+          >
+            批量删除
+          </Button>
+        ),
+      ]}
+    />
+  );
+};
