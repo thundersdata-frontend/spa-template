@@ -1,3 +1,11 @@
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 陈杰
+ * @Date: 2020-04-26 10:26:49
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2020-05-15 18:04:34
+ */
 import { defineConfig } from 'umi';
 import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 import routeConfig from './routeConfig';
@@ -10,6 +18,7 @@ export default defineConfig({
   outputPath: 'build',
   routes: routeConfig,
   esbuild: {},
+  devtool: 'eval',
   metas: [
     { name: 'msapplication-TileColor', content: '#da532c' },
     { name: 'theme-color', content: '#ffffff' },
