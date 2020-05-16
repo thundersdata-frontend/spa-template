@@ -56,24 +56,24 @@ const DetailContent = ({
     <Spin spinning={loading}>
       <Form form={form} {...layout}>
         <Row>
-          <Col style={{ flex: 1 }}>
+          <Col span={12}>
             <Form.Item label="信息代码" name="code">
               <DetailValue />
             </Form.Item>
           </Col>
-          <Col style={{ flex: 1 }}>
+          <Col span={12}>
             <Form.Item label="信息名称" name="name">
               <DetailValue />
             </Form.Item>
           </Col>
         </Row>
         <Row>
-          <Col style={{ flex: 1 }}>
+          <Col span={12}>
             <Form.Item label="信息简称" name="simpleName">
               <DetailValue />
             </Form.Item>
           </Col>
-          <Col style={{ flex: 1 }}>
+          <Col span={12}>
             <Form.Item label="信息范围" name="area">
               <DetailValue />
             </Form.Item>
