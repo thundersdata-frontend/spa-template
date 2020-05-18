@@ -16,7 +16,7 @@
     "commit": "git-cz",
     "start": "cross-env UMI_UI=1 umi dev",
     "analyze": "cross-env ANALYZE=1 umi build",
-    "build": "cross-env UMI_ENV=prod umi build",
+    "build": "cross-env UMI_ENV=prod MOCK=none umi build",
     "test": "jest --passWithNoTests",
     "tsc": "tsc -p ./tsconfig.json",
     "eslint:fix": "eslint --fix --ext .ts,.tsx src/",
