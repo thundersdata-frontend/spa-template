@@ -4,17 +4,17 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 陈杰
- * @LastEditTime: 2020-04-27 13:51:17
+ * @LastEditTime: 2020-05-18 12:01:30
  */
 import isEmpty from 'lodash/isEmpty';
-import { request } from 'umi';
+import { request, dynamic } from 'umi';
 import { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils from '@/utils/array';
 import { PrivilegeResource } from './interfaces/common';
 
 interface Route {
   path: string;
-  component?: string;
+  component?: React.ComponentClass;
   routes?: Route[];
 }
 
@@ -123,10 +123,17 @@ function convertResourceToRoute(list: PrivilegeResource[]): Route[] {
         routes: convertResourceToRoute(item.children),
       };
     }
+    const DynamicComponent = dynamic({
+      loader: async () => {
+        const { default: Component } = await import(`./pages${item.apiUrl}`);
+        return Component;
+      },
+    });
+
     return {
       path: item.apiUrl,
-      component: require(`./pages${item.apiUrl}`).default,
-      title: item.description
+      component: DynamicComponent,
+      title: item.description,
     };
   });
 }
