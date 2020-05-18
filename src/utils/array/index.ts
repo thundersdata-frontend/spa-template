@@ -1,4 +1,12 @@
-import orderBy from 'lodash/orderBy';
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 陈杰
+ * @Date: 2020-05-18 12:00:35
+ * @LastEditors: 陈杰
+ * @LastEditTime: 2020-05-18 14:24:42
+ */
+import {orderBy} from 'lodash-es';
 
 export type OrderType = 'desc' | 'asc';
 

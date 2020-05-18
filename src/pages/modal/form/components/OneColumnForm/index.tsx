@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Modal, Form, Input, Select, Spin } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from 'lodash-es';
 
 export default ({
   visible,

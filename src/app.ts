@@ -4,13 +4,13 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 陈杰
- * @LastEditTime: 2020-05-18 12:01:30
+ * @LastEditTime: 2020-05-18 14:40:30
  */
-import isEmpty from 'lodash/isEmpty';
 import { request, dynamic } from 'umi';
 import { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils from '@/utils/array';
 import { PrivilegeResource } from './interfaces/common';
+import { isEmpty } from 'lodash-es';
 
 interface Route {
   path: string;
@@ -125,7 +125,8 @@ function convertResourceToRoute(list: PrivilegeResource[]): Route[] {
     }
     const DynamicComponent = dynamic({
       loader: async () => {
-        const { default: Component } = await import(`./pages${item.apiUrl}`);
+        // 这里的注释 webpackChunkName 可以指导 webpack 将该组件 HugeA 以这个名字单独拆出去
+        const { default: Component } = await import(/* webpackChunkName: "[request]" */ `./pages${item.apiUrl}`);
         return Component;
       },
     });
