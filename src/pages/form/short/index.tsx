@@ -8,42 +8,66 @@ import {
   InputNumber,
   Radio,
   Card,
+  message,
 } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { useToggle } from '@umijs/hooks';
 import { Store } from 'antd/es/form/interface';
 import Title from '@/components/Title';
+import { useRequest } from 'umi';
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 7 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 12 },
+    md: { span: 10 },
+  },
+};
+
+const submitFormLayout = {
+  wrapperCol: {
+    xs: { span: 24, offset: 0 },
+    sm: { span: 10, offset: 7 },
+  },
+};
+
 export default () => {
   const [form] = Form.useForm();
-  const submitBtn = useToggle(false);
 
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 7 },
+  useRequest('/form', {
+    onSuccess: data => {
+      form.setFieldsValue(data);
     },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 12 },
-      md: { span: 10 },
+    onError: error => {
+      message.error(error.message);
     },
-  };
+  });
 
-  const submitFormLayout = {
-    wrapperCol: {
-      xs: { span: 24, offset: 0 },
-      sm: { span: 10, offset: 7 },
-    },
-  };
-
-  const handleFinish = (values: Store) => {
+  const submit = (values: Store) => {
     console.log(values);
-    submitBtn.toggle();
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve({ success: true });
+      }, 1000);
+    });
   };
+
+  const { loading, run: handleFinish } = useRequest(submit, {
+    manual: true,
+    onSuccess: () => {
+      message.success('保存成功');
+    },
+    onError: error => {
+      console.error(error.message);
+      message.error('保存失败');
+    }
+  });
 
   return (
     <Card title={<Title text="单列表单" />}>
@@ -130,7 +154,7 @@ export default () => {
           </Radio.Group>
         </Form.Item>
         <Form.Item {...submitFormLayout} style={{ marginTop: 32 }}>
-          <Button type="primary" htmlType="submit" loading={submitBtn.state}>
+          <Button type="primary" htmlType="submit" loading={loading}>
             提交
           </Button>
           <Button style={{ marginLeft: 10 }}>取消</Button>

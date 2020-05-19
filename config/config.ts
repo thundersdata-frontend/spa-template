@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2020-04-26 10:26:49
  * @LastEditors: 陈杰
- * @LastEditTime: 2020-05-18 15:39:47
+ * @LastEditTime: 2020-05-18 19:59:12
  */
 import { defineConfig } from 'umi';
 import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
@@ -48,35 +48,7 @@ export default defineConfig({
       href: '//at.alicdn.com/t/font_1509107_vaarx0n4zz.css',
     },
   ],
-  chunks: ['antd', 'vendors', 'umi'],
   chainWebpack(config) {
     config.plugin('dayjs').use(AntdDayjsWebpackPlugin);
-    config.merge({
-      optimization: {
-        minimize: true,
-        splitChunks: {
-          chunks: 'all',
-          minSize: 30000,
-          minChunks: 3,
-          automaticNameDelimiter: '.',
-          cacheGroups: {
-            antd: {
-              name: 'antd',
-              test({ resource }) {
-                return /[\\/]node_modules[\\/](@ant-design|antd)[\\/]/.test(resource);
-              },
-              priority: -9,
-            },
-            vendor: {
-              name: 'vendors',
-              test({ resource }) {
-                return /[\\/]node_modules[\\/]/.test(resource);
-              },
-              priority: -10,
-            },
-          },
-        },
-      }
-    });
   },
 });
