@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-27 16:26:45
  * @LastEditors: 陈杰
- * @LastEditTime: 2020-04-28 14:31:53
+ * @LastEditTime: 2020-05-20 11:10:41
  */
 export default {
   '/resource': {
@@ -149,6 +149,16 @@ export default {
         apiUrl: '/table',
         icon: 'icon-screen',
         description: '表格',
+        type: 0,
+        orderValue: 7,
+        privilegeList: [],
+      },
+      {
+        id: 2010,
+        resourceKey: 'TABLE',
+        apiUrl: '/table2',
+        icon: 'icon-screen',
+        description: '不存在的表格页面',
         type: 0,
         orderValue: 7,
         privilegeList: [],

@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2020-04-22 16:17:52
  * @LastEditors: 陈杰
- * @LastEditTime: 2020-05-15 11:45:05
+ * @LastEditTime: 2020-05-20 10:51:38
  */
 export default [
   {
@@ -26,7 +26,53 @@ export default [
   {
     path: '/',
     component: '@/layouts/BasicLayout',
+    wrappers: ['@/wrappers/auth', '@/wrappers/guard'],
     routes: [
+      {
+        path: '/modal',
+        routes: [
+          { path: '/modal/form', component: './modal/form' },
+          { path: '/modal/detail', component: './modal/detail' },
+        ],
+      },
+      {
+        path: '/contacts',
+        component: './contacts',
+      },
+      {
+        path: '/form',
+        routes: [
+          {
+            path: '/form/short',
+            component: './form/short',
+          },
+          {
+            path: '/form/long',
+            component: './form/long',
+          },
+        ],
+      },
+      {
+        path: '/approval',
+        routes: [
+          {
+            path: '/approval/process/list',
+            component: './approval/process/list',
+          },
+          {
+            path: '/approval/seal/list',
+            component: './approval/seal/list',
+          },
+        ],
+      },
+      {
+        path: '/detail',
+        component: './detail',
+      },
+      {
+        path: '/table',
+        component: './table',
+      },
       {
         path: '/homepage',
         component: './homepage',

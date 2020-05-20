@@ -4,87 +4,41 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 陈杰
- * @LastEditTime: 2020-05-18 14:40:30
+ * @LastEditTime: 2020-05-20 11:02:49
  */
-import { request, dynamic } from 'umi';
+import { request } from 'umi';
 import { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils from '@/utils/array';
 import { PrivilegeResource } from './interfaces/common';
 import { isEmpty } from 'lodash-es';
 
-interface Route {
-  path: string;
-  component?: React.ComponentClass;
-  routes?: Route[];
-}
-
-let serverRoutes: Route[] = [];
-let menus: MenuDataItem[] = [];
-const privileges: string[] = [];
-
-/**
- * 改写整个应用render到dom树里。
- * 可能场景：
- *  1. 在渲染应用之前做权限校验，不通过则跳转到登录页（单点登录场景会很有用）
- *  2. 和pathRoutes配合，在render时请求后端接口，拿到动态路由
- * @param oldRender
- */
-export async function render(oldRender: Function) {
-  const result = await request('/resource');
-  const { code, success, data = [] } = result;
-  if (code === 20000 && success) {
-    const routes: PrivilegeResource[] = arrayUtils.deepOrder({
-      data,
-      childKey: 'children',
-      orderKey: 'orderValue',
-      type: 'asc',
-    });
-    const flatRoutes = arrayUtils.deepFlatten(routes);
-    flatRoutes.forEach((route) => {
-      privileges.push(...route.privilegeList);
-    });
-    // 将menus保存为应用的菜单、将privileges保存为应用的细粒度权限
-    serverRoutes = convertResourceToRoute(routes);
-    menus = convertResourceToMenu(routes);
-    oldRender();
-  } else {
-    oldRender();
-  }
-}
-
-/**
- * 运行时修改路由配置。和render配合使用，请求服务端根据相应动态更新路由。
- * 执行时机在第一次render之前，然后就再也不执行了
- * @param routes
- */
-export function patchRoutes(oldRoutes: { routes: Route[] }) {
-  oldRoutes.routes.forEach((route) => {
-    if (route.path === '/') {
-      serverRoutes.forEach((sr) => {
-        const len = sr.path.split('/').length;
-        if (route.routes) {
-          const res = route.routes?.filter(
-            (i) => i.path?.split('/').length > len,
-          ).length;
-          if (res < 0) {
-            route.routes.splice(1, 0, sr);
-          } else {
-            route.routes.splice(res + 1, 0, sr);
-          }
-        }
-      });
-    }
-  });
-}
-
 /** 初始化数据 */
 export async function getInitialState() {
-  return new Promise(resolve => {
-    resolve({
-      menus,
-      privileges,
-    })
-  })
+  let menus: MenuDataItem[] = [];
+  const privileges: string[] = [];
+
+  const accessToken = sessionStorage.getItem('accessToken');
+  if (accessToken) {
+    const result = await request('/resource');
+    const { code, success, data = [] } = result;
+    if (code === 20000 && success) {
+      const routes: PrivilegeResource[] = arrayUtils.deepOrder({
+        data,
+        childKey: 'children',
+        orderKey: 'orderValue',
+        type: 'asc',
+      });
+      const flatRoutes = arrayUtils.deepFlatten(routes);
+      flatRoutes.forEach(route => {
+        privileges.push(...route.privilegeList);
+      });
+      menus = convertResourceToMenu(routes);
+    }
+  }
+  return {
+    menus,
+    privileges,
+  };
 }
 
 /**
@@ -92,7 +46,7 @@ export async function getInitialState() {
  * @param resources
  */
 function convertResourceToMenu(list: PrivilegeResource[]): MenuDataItem[] {
-  return list.map((item) => {
+  return list.map(item => {
     if (!isEmpty(item.children)) {
       return {
         name: item.description,
@@ -115,26 +69,28 @@ function convertResourceToMenu(list: PrivilegeResource[]): MenuDataItem[] {
  * 将后台返回的权限资源，转换成应用的路由配置
  * @param list
  */
-function convertResourceToRoute(list: PrivilegeResource[]): Route[] {
-  return list.map((item) => {
-    if (!isEmpty(item.children)) {
-      return {
-        path: item.apiUrl,
-        routes: convertResourceToRoute(item.children),
-      };
-    }
-    const DynamicComponent = dynamic({
-      loader: async () => {
-        // 这里的注释 webpackChunkName 可以指导 webpack 将该组件 HugeA 以这个名字单独拆出去
-        const { default: Component } = await import(/* webpackChunkName: "[request]" */ `./pages${item.apiUrl}`);
-        return Component;
-      },
-    });
+// function convertResourceToRoute(list: PrivilegeResource[]): Route[] {
+//   return list.map(item => {
+//     if (!isEmpty(item.children)) {
+//       return {
+//         path: item.apiUrl,
+//         routes: convertResourceToRoute(item.children),
+//       };
+//     }
+//     const DynamicComponent = dynamic({
+//       loader: async () => {
+//         // 这里的注释 webpackChunkName 可以指导 webpack 将该组件 HugeA 以这个名字单独拆出去
+//         const { default: Component } = await import(
+//           /* webpackChunkName: "[request]" */ `./pages${item.apiUrl}`
+//         );
+//         return Component;
+//       },
+//     });
 
-    return {
-      path: item.apiUrl,
-      component: DynamicComponent,
-      title: item.description,
-    };
-  });
-}
+//     return {
+//       path: item.apiUrl,
+//       component: DynamicComponent,
+//       title: item.description,
+//     };
+//   });
+// }
