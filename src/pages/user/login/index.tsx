@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Alert, Checkbox } from 'antd';
-import { useRequest, Link } from 'umi';
+import { useRequest, Link, history, useModel } from 'umi';
 import LoginForm from '@/components/LoginForm';
 import { StateType, fakeAccountLogin, LoginParamsType } from '@/components/LoginForm/service';
+import useAuth from '@/hooks/useAuth';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginForm;
 
@@ -20,12 +21,19 @@ const LoginMessage: React.FC<{
 );
 
 export default function Login() {
+  const { saveToken } = useAuth();
+  const { refresh } = useModel('@@initialState');
   const [autoLogin, setAutoLogin] = useState(true);
   const [type, setType] = useState<string>('account');
 
   const { loading, data, run: submit } = useRequest<{ data: StateType }>(fakeAccountLogin, {
     manual: true,
     formatResult: (result) => result?.data,
+    onSuccess: () => {
+      saveToken('123');
+      refresh();
+      history.replace('/homepage');
+    }
   });
 
   const handleSubmit = (values: LoginParamsType) => {
