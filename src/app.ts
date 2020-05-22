@@ -30,7 +30,7 @@ export async function getInitialState() {
       });
       const flatRoutes = arrayUtils.deepFlatten(routes);
       flatRoutes.forEach(route => {
-        privileges.push(...route.privilegeList);
+        route.privilegeList && privileges.push(...route.privilegeList);
       });
       menus = convertResourceToMenu(routes);
     }
