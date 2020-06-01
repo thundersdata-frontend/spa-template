@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { TabPaneProps } from 'antd/es/tabs';
+import { TabPaneProps } from 'rc-tabs/lib/sugar/TabPane';
 import { Tabs } from 'antd';
 import LoginContext, { LoginContextProps } from './LoginContext';
 
@@ -18,7 +18,7 @@ interface LoginTabProps extends TabPaneProps {
   active?: boolean;
 }
 
-const LoginTab: React.FC<LoginTabProps> = (props) => {
+const LoginTab: React.FC<LoginTabProps> = props => {
   useEffect(() => {
     const uniqueId = generateId('login-tab-');
     const { tabUtil } = props;
@@ -33,9 +33,9 @@ const LoginTab: React.FC<LoginTabProps> = (props) => {
 
 const WrapContext: React.FC<TabPaneProps> & {
   typeName: string;
-} = (props) => (
+} = props => (
   <LoginContext.Consumer>
-    {(value) => <LoginTab tabUtil={value.tabUtil} {...props} />}
+    {value => <LoginTab tabUtil={value.tabUtil} {...props} />}
   </LoginContext.Consumer>
 );
 

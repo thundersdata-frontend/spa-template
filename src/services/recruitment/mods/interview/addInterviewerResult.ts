@@ -10,7 +10,7 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = undefined;
 
 export async function fetch(data = {}) {
-  const result = await request.post(
+  const result = await request().post(
     backEndUrl + '/interview/addInterviewerResult',
     {
       headers: {

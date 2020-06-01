@@ -10,7 +10,7 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = new defs.recruitment.JobDetails();
 
 export async function fetch(params = {}) {
-  const result = await request.get(backEndUrl + '/post/getPost', {
+  const result = await request().get(backEndUrl + '/post/getPost', {
     headers: {
       'Content-Type': 'application/json',
     },

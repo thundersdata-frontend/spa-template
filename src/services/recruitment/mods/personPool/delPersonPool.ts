@@ -10,12 +10,15 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = undefined;
 
 export async function fetch(params = {}) {
-  const result = await request.post(backEndUrl + '/personPool/delPersonPool', {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+  const result = await request().post(
+    backEndUrl + '/personPool/delPersonPool',
+    {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      params,
     },
-    params,
-  });
+  );
   if (!result.success) throw new Error(result.message);
   return result.data || undefined;
 }

@@ -10,7 +10,7 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = [];
 
 export async function fetch(params = {}) {
-  const result = await request.get(backEndUrl + '/interview/getPostEnums', {
+  const result = await request().get(backEndUrl + '/interview/getPostEnums', {
     headers: {
       'Content-Type': 'application/json',
     },

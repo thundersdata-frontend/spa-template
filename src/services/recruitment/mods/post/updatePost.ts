@@ -10,7 +10,7 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = undefined;
 
 export async function fetch(data = {}) {
-  const result = await request.post(backEndUrl + '/post/updatePost', {
+  const result = await request().post(backEndUrl + '/post/updatePost', {
     headers: {
       'Content-Type': 'application/json',
     },

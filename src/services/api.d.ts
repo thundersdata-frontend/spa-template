@@ -1,1 +1,1 @@
-// / <reference path="./recruitment/api.d.ts" />
+/// <reference path="./recruitment/api.d.ts" />

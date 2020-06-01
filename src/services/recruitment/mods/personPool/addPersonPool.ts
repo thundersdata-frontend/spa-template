@@ -10,12 +10,15 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = undefined;
 
 export async function fetch(data = {}) {
-  const result = await request.post(backEndUrl + '/personPool/addPersonPool', {
-    headers: {
-      'Content-Type': 'application/json',
+  const result = await request().post(
+    backEndUrl + '/personPool/addPersonPool',
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data,
     },
-    data,
-  });
+  );
   if (!result.success) throw new Error(result.message);
   return result.data || undefined;
 }

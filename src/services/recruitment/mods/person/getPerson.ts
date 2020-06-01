@@ -10,7 +10,7 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = new defs.recruitment.PersonResultDTO();
 
 export async function fetch(params = {}) {
-  const result = await request.get(backEndUrl + '/person/getPerson', {
+  const result = await request().get(backEndUrl + '/person/getPerson', {
     headers: {
       'Content-Type': 'application/json',
     },

@@ -10,12 +10,15 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = undefined;
 
 export async function fetch(params = {}) {
-  const result = await request.get(backEndUrl + '/personPool/clearRecycleBin', {
-    headers: {
-      'Content-Type': 'application/json',
+  const result = await request().get(
+    backEndUrl + '/personPool/clearRecycleBin',
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params,
     },
-    params,
-  });
+  );
   if (!result.success) throw new Error(result.message);
   return result.data || undefined;
 }
