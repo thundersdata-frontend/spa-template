@@ -4,6 +4,9 @@ import { extend, ExtendOptionsInit } from 'umi-request';
 export const commonRequestOptions: ExtendOptionsInit = {
   useCache: false,
   ttl: 60000,
-  credentials: 'include',
+  credentials: 'same-origin',
+  headers: {
+    access_token: sessionStorage.getItem('accessToken')!,
+  },
 };
-export const request = extend(commonRequestOptions);
+export const request = () => extend(commonRequestOptions);

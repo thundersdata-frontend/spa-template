@@ -10,7 +10,7 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = '';
 
 export async function fetch(params = {}) {
-  const result = await request.post(backEndUrl + '/basic/uploadFile', {
+  const result = await request().post(backEndUrl + '/basic/uploadFile', {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },

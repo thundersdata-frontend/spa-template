@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
- * @LastEditors: 黄姗姗
- * @LastEditTime: 2020-04-24 11:55:06
+ * @LastEditors: 廖军
+ * @LastEditTime: 2020-06-01 17:15:06
  */
 import { CodeGenerator, Interface, Property } from 'pont-engine';
 
@@ -12,7 +12,7 @@ export default class MyGenerator extends CodeGenerator {
   enum: Array<string | number> = [];
 
   setEnum(enums: Array<string | number> = []) {
-    this.enum = enums.map((value) => {
+    this.enum = enums.map(value => {
       if (typeof value === 'string') {
         if (!value.startsWith("'")) {
           value = `'${value}`;
@@ -52,13 +52,13 @@ export default class MyGenerator extends CodeGenerator {
   /** 获取所有基类文件代码 */
   getBaseClassesIndex() {
     const clsCodes = this.dataSource.baseClasses.map(
-      (base) => `
+      base => `
       class ${base.name} {
         ${base.properties
-          .map((prop) => {
+          .map(prop => {
             return this.toPropertyCodeWithInitValue(prop, base.name);
           })
-          .filter((id) => id)
+          .filter(id => id)
           .join('\n')}
       }
     `,
@@ -68,12 +68,12 @@ export default class MyGenerator extends CodeGenerator {
       return `
       ${clsCodes.join('\n')}
       export const ${this.dataSource.name} = {
-        ${this.dataSource.baseClasses.map((bs) => bs.name).join(',\n')}
+        ${this.dataSource.baseClasses.map(bs => bs.name).join(',\n')}
       }
     `;
     }
 
-    return clsCodes.map((cls) => `export ${cls}`).join('\n');
+    return clsCodes.map(cls => `export ${cls}`).join('\n');
   }
 
   toPropertyCodeWithInitValue(prop: Property, baseName = '') {
@@ -130,9 +130,8 @@ export default class MyGenerator extends CodeGenerator {
   getInterfaceContentInDeclaration(inter: Interface) {
     const paramsCode = inter.getParamsCode();
     const bodyParamsCode = inter.getBodyParamsCode();
-    const hasGetParams = !!inter.parameters.filter(
-      (param) => param.in !== 'body',
-    ).length;
+    const hasGetParams = !!inter.parameters.filter(param => param.in !== 'body')
+      .length;
     let requestParams = bodyParamsCode
       ? `bodyParams: ${bodyParamsCode}, params: Params`
       : `params: Params`;
@@ -157,9 +156,8 @@ export default class MyGenerator extends CodeGenerator {
     // type为body的参数
     const bodyParamsCode = inter.getBodyParamsCode();
     // 判断是否有params参数
-    const hasGetParams = !!inter.parameters.filter(
-      (param) => param.in !== 'body',
-    ).length;
+    const hasGetParams = !!inter.parameters.filter(param => param.in !== 'body')
+      .length;
     let requestParams = bodyParamsCode
       ? `data = {}, params = {}`
       : `params = {}`;
@@ -191,7 +189,7 @@ export default class MyGenerator extends CodeGenerator {
       export const init = ${initValue};
 
       export async function fetch(${requestParams}) {
-        const result = await request.${requestObj.method}(backEndUrl + '${inter.path}', {
+        const result = await request().${requestObj.method}(backEndUrl + '${inter.path}', {
           headers: {
             'Content-Type': '${requestObj.contentType}',
           },
@@ -261,5 +259,4 @@ export default class MyGenerator extends CodeGenerator {
       contentType,
     };
   }
-
 }

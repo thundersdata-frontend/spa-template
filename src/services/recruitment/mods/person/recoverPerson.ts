@@ -10,7 +10,7 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = undefined;
 
 export async function fetch(params = {}) {
-  const result = await request.post(backEndUrl + '/person/recoverPerson', {
+  const result = await request().post(backEndUrl + '/person/recoverPerson', {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },

@@ -10,7 +10,7 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = new defs.recruitment.TreeListDTO();
 
 export async function fetch(params = {}) {
-  const result = await request.get(backEndUrl + '/personPool/getPersonPool', {
+  const result = await request().get(backEndUrl + '/personPool/getPersonPool', {
     headers: {
       'Content-Type': 'application/json',
     },

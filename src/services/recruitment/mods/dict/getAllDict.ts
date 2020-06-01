@@ -10,7 +10,7 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = undefined;
 
 export async function fetch(params = {}) {
-  const result = await request.get(backEndUrl + '/dict/getAllDict', {
+  const result = await request().get(backEndUrl + '/dict/getAllDict', {
     headers: {
       'Content-Type': 'application/json',
     },

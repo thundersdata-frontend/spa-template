@@ -10,7 +10,7 @@ const backEndUrl = serverConfig()['recruitment'];
 export const init = new defs.recruitment.DeferredResult();
 
 export async function fetch(data = {}) {
-  const result = await request.post(backEndUrl + '/tenant/init', {
+  const result = await request().post(backEndUrl + '/tenant/init', {
     headers: {
       'Content-Type': 'application/json',
     },
