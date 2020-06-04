@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { TabPaneProps } from 'rc-tabs/lib/sugar/TabPane';
 import { Tabs } from 'antd';
 import LoginContext, { LoginContextProps } from './LoginContext';
+import { TabPaneProps } from 'antd/lib/tabs';
 
 const { TabPane } = Tabs;
 

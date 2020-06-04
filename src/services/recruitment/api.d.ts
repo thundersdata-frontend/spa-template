@@ -1089,14 +1089,19 @@ declare namespace API {
         export class Params {
           /** 面试官所属部门 */
           departmentName?: string;
+
           /** 面试官名称 */
           name?: string;
+
           /** page */
           page?: number;
+
           /** pageSize */
           pageSize?: number;
+
           /** 面试官职位 */
           positionName?: string;
+
           /** 面试官性别 */
           sex?: number;
         }
@@ -1250,18 +1255,25 @@ declare namespace API {
         export class Params {
           /** 是否是终面 */
           finalRound?: number;
+
           /** 面试结果 */
           interviewResult?: number;
+
           /** 面试官Code */
           interviewerEmployeeCode?: string;
+
           /** 页码 */
           page?: number;
+
           /** 行数 */
           pageSize?: number;
+
           /** 应聘人名称 */
           personName?: string;
+
           /** 面试岗位Code */
           postCode?: string;
+
           /** 面试轮数 */
           round?: number;
         }
@@ -1283,18 +1295,25 @@ declare namespace API {
         export class Params {
           /** 是否是终面 */
           finalRound?: number;
+
           /** 面试结果 */
           interviewResult?: number;
+
           /** 面试官Code */
           interviewerEmployeeCode?: string;
+
           /** 页码 */
           page?: number;
+
           /** 行数 */
           pageSize?: number;
+
           /** 应聘人名称 */
           personName?: string;
+
           /** 面试岗位Code */
           postCode?: string;
+
           /** 面试轮数 */
           round?: number;
         }
@@ -1489,26 +1508,37 @@ declare namespace API {
         export class Params {
           /** 创建人 */
           employeeName?: string;
+
           /** 年龄区间-结束年龄 */
           endAge?: number;
+
           /** 工作经验 */
           experience?: number;
+
           /** 是否有意向 */
           hasIntention?: number;
+
           /** 起始页 */
           page?: number;
+
           /** 页长 */
           pageSize?: number;
+
           /** 姓名 */
           personName?: string;
+
           /** 联系方式 */
           phone?: string;
+
           /** 人才库编码 */
           poolCode?: string;
+
           /** 岗位 */
           postName?: string;
+
           /** 性别 */
           sex?: number;
+
           /** 年龄区间-开始年龄 */
           startAge?: number;
         }
@@ -1733,10 +1763,13 @@ declare namespace API {
         export class Params {
           /** page */
           page?: number;
+
           /** pageSize */
           pageSize?: number;
+
           /** 岗位名称 */
           postName?: string;
+
           /** 岗位类别 */
           postType?: number;
         }
