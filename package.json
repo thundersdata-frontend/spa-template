@@ -89,7 +89,7 @@
     "pont-engine": "1.0.3",
     "standard-version": "^8.0.0",
     "typescript": "^3.8.3",
-    "umi-plugin-page-creator": "^1.4.1"
+    "umi-plugin-page-creator": "^1.4.3"
   },
   "engines": {
     "node": ">=8.0.0"
