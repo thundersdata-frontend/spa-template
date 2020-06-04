@@ -43,3 +43,12 @@ export const commonRequestOptions: ExtendOptionsInit = {
 };
 
 export const request = () => extend(commonRequestOptions);
+
+request().interceptors.response.use(response => {
+  response.clone().json().then(res => {
+    if (!res.success) {
+      console.error(res.message);
+    }
+  });
+  return response;
+});
