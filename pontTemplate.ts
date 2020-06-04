@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
- * @LastEditors: 廖军
- * @LastEditTime: 2020-06-01 17:15:06
+ * @LastEditors: 黄姗姗
+ * @LastEditTime: 2020-06-04 15:30:23
  */
 import { CodeGenerator, Interface, Property } from 'pont-engine';
 
@@ -195,8 +195,12 @@ export default class MyGenerator extends CodeGenerator {
           },
           ${requestStr},
         });
-        if (!result.success) throw new Error(result.message);
-        return result.data || ${initValue};
+        if (result) {
+          if (!result.success) throw new Error(result.message);
+          return result.data || ${initValue};
+        } else {
+          throw new Error();
+        }
       }
     `;
   }
