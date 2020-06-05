@@ -1,11 +1,3 @@
-/*
- * @文件描述: 
- * @公司: thundersdata
- * @作者: 黄姗姗
- * @Date: 2020-05-25 14:34:43
- * @LastEditors: 黄姗姗
- * @LastEditTime: 2020-06-04 15:13:59
- */ 
 /**
  * @description 获取所有字典
  */

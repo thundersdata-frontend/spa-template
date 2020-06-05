@@ -19,6 +19,10 @@ export async function fetch(params = {}) {
       params,
     },
   );
-  if (!result.success) throw new Error(result.message);
-  return result.data || new defs.recruitment.Page();
+  if (result) {
+    if (!result.success) throw new Error(result.message);
+    return result.data || new defs.recruitment.Page();
+  } else {
+    throw new Error();
+  }
 }

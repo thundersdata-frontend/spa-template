@@ -19,6 +19,10 @@ export async function fetch(params = {}) {
       params,
     },
   );
-  if (!result.success) throw new Error(result.message);
-  return result.data || new defs.recruitment.HrmInterviewDTO();
+  if (result) {
+    if (!result.success) throw new Error(result.message);
+    return result.data || new defs.recruitment.HrmInterviewDTO();
+  } else {
+    throw new Error();
+  }
 }

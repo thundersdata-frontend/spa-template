@@ -16,6 +16,10 @@ export async function fetch(params = {}) {
     },
     params,
   });
-  if (!result.success) throw new Error(result.message);
-  return result.data || new defs.recruitment.JobDetails();
+  if (result) {
+    if (!result.success) throw new Error(result.message);
+    return result.data || new defs.recruitment.JobDetails();
+  } else {
+    throw new Error();
+  }
 }
