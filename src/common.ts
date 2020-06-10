@@ -1,4 +1,4 @@
-import { extend, ExtendOptionsInit, ResponseError } from 'umi-request';
+import { extend, ResponseError } from 'umi-request';
 
 const codeMessage: { [key: number]: string } = {
   200: '服务器成功返回请求的数据。',
@@ -15,7 +15,7 @@ const codeMessage: { [key: number]: string } = {
   500: '服务器发生错误，请检查服务器。',
   502: '网关错误。',
   503: '服务不可用，服务器暂时过载或维护。',
-  504: '网关超时。'
+  504: '网关超时。',
 };
 
 export function errorHandler(error: ResponseError) {
@@ -26,29 +26,31 @@ export function errorHandler(error: ResponseError) {
 
     console.error({
       message: `请求错误 ${status}: ${url}`,
-      description: errortext
+      description: errortext,
     });
   }
 }
 
-/** 这边可对接口请求做一些统一的封装 */
-export const commonRequestOptions: ExtendOptionsInit = {
-  useCache: false,
-  ttl: 60000,
-  credentials: 'same-origin',
-  headers: {
-    access_token: sessionStorage.getItem('accessToken')!,
-  },
-  errorHandler,
-};
-
-export const request = () => extend(commonRequestOptions);
+export const request = () =>
+  /** 这边可对接口请求做一些统一的封装 */
+  extend({
+    useCache: false,
+    ttl: 60000,
+    credentials: 'same-origin',
+    headers: {
+      access_token: sessionStorage.getItem('accessToken')!,
+    },
+    errorHandler,
+  });
 
 request().interceptors.response.use(response => {
-  response.clone().json().then(res => {
-    if (!res.success) {
-      console.error(res.message);
-    }
-  });
+  response
+    .clone()
+    .json()
+    .then(res => {
+      if (!res.success) {
+        console.error(res.message);
+      }
+    });
   return response;
 });
