@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-05-25 16:07:51
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-12 10:52:36
+ * @LastEditTime: 2020-06-12 13:54:29
  */
 import { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
@@ -286,3 +286,20 @@ export function transformFile(files?: UploadFile[]): FileDTO[] {
  * 图片地址
  */
 export const getImgPreviewUrl = (fileId: string) => `${UPLOAD_URL}/file/preview?fileId=${fileId}`;
+
+/**
+ * 转换后端文件格式为文件图片预览列表（用于编辑页面）
+ * @param fileList
+ */
+export const imgFileTransform = (fileList?: FileDTO[]) =>
+  fileTransform(
+    fileList?.map(item => {
+      const { fileId = '', fileName = '', fileUrl } = item;
+      return {
+        ...item,
+        fileId,
+        fileName,
+        fileUrl: fileUrl || getImgPreviewUrl(fileId),
+      };
+    }) || [],
+  );
