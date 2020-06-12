@@ -9,21 +9,28 @@ import { useToggle } from '@umijs/hooks';
 import { EyeOutlined, DownloadOutlined } from '@ant-design/icons';
 import { IMAGE_TYPES } from '@/constant';
 import styles from './index.module.less';
+import { getDownloadUrlWithId } from '@/utils/upload';
 
 type DetailValueType = 'default' | 'file';
 
 export default ({
   value,
   type = 'default',
+  generateUrl,
 }: {
   value?: number | string | FileDTO[];
   type?: DetailValueType;
+  generateUrl?: (file: FileDTO) => string;
 }) => {
   const toggle = useToggle(false);
   const [url, setUrl] = useState<string>();
 
-  const handleDownload = () => {
-    console.log(456);
+  const handleDownload = (file: FileDTO) => {
+    if (file.fileUrl) {
+      window.open(file.fileUrl, '_blank');
+    } else {
+      window.open(getDownloadUrlWithId(file.fileId), '_blank');
+    }
   };
 
   if (type === 'default') {
@@ -36,39 +43,48 @@ export default ({
     return (
       <>
         <Row gutter={[16, 16]}>
-          {images.map(file => (
-            <Col key={file.fileId}>
-              <div className={styles['file-item-image-card']}>
-                <div className={styles['file-item-image-info']}>
-                  <img src={file.fileUrl} alt="图片不存在" style={{ width: '100%' }} />
+          {images.map(file => {
+            const { fileUrl, fileId } = file;
+            const filePreviewUrl = (generateUrl && generateUrl(file)) || fileUrl;
+            return (
+              <Col key={fileId}>
+                <div className={styles['file-item-image-card']}>
+                  <div className={styles['file-item-image-info']}>
+                    <img src={filePreviewUrl} alt="图片不存在" style={{ width: '100%' }} />
+                  </div>
+                  <span className={styles['file-item-image-actions']}>
+                    <a rel="noopener noreferrer" title="预览图片" style={{ marginRight: 16 }}>
+                      <EyeOutlined
+                        style={{ fontSize: 20, color: 'white' }}
+                        onClick={() => {
+                          setUrl(filePreviewUrl);
+                          toggle.toggle();
+                        }}
+                      />
+                    </a>
+                    <a rel="noopener noreferrer" title="下载图片">
+                      <DownloadOutlined
+                        style={{ fontSize: 20, color: 'white' }}
+                        onClick={() => handleDownload(file)}
+                      />
+                    </a>
+                  </span>
                 </div>
-                <span className={styles['file-item-image-actions']}>
-                  <a rel="noopener noreferrer" title="预览图片" style={{ marginRight: 16 }}>
-                    <EyeOutlined
-                      style={{ fontSize: 20, color: 'white' }}
-                      onClick={() => {
-                        setUrl(file.fileUrl);
-                        toggle.toggle();
-                      }}
-                    />
-                  </a>
-                  <a rel="noopener noreferrer" title="下载图片">
-                    <DownloadOutlined
-                      style={{ fontSize: 20, color: 'white' }}
-                      onClick={handleDownload}
-                    />
-                  </a>
-                </span>
-              </div>
-            </Col>
-          ))}
+              </Col>
+            );
+          })}
         </Row>
         {otherTypeFiles.map(file => (
           <div
             key={file.fileId}
-            style={{ lineHeight: '32px', border: '1px solid #cccccc', marginBottom: 8, padding: 4 }}
+            style={{
+              lineHeight: '32px',
+              border: '1px solid #cccccc',
+              marginBottom: 8,
+              padding: 4,
+            }}
           >
-            <a href={file.fileUrl}>{file.fileName}</a>
+            <a href={(generateUrl && generateUrl(file)) || file.fileUrl}>{file.fileName}</a>
           </div>
         ))}
         <Modal
