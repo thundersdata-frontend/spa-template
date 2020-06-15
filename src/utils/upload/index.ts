@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-05-25 16:07:51
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-12 13:57:38
+ * @LastEditTime: 2020-06-15 15:19:36
  */
 import { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
@@ -42,7 +42,7 @@ export const BASE_BYTE = 1024;
 
 /** 文件类型映射 */
 export const FILE_TYPE_MAP = {
-  图片: ['.png', '.jpg', '.bmp', '.gif'],
+  图片: ['.jpg', '.jpeg', '.gif', '.png', '.bmp', '.webp'],
   压缩包: ['.rar', '.zip'],
   文档: ['.doc', '.docx', '.pdf'],
   表格: ['.xls'],
