@@ -4,11 +4,16 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-24 12:12:49
+ * @LastEditTime: 2020-06-24 15:07:29
  */
 import React, { useState } from 'react';
 import { Form, Button, Upload } from 'antd';
-import { getFileValidators, getPublicUploadProps, handleUpload } from '@/utils/upload';
+import {
+  getFileValidators,
+  getPublicUploadProps,
+  handleUpload,
+  ATTACHMENT_MAX_FILE_COUNT,
+} from '@/utils/upload';
 import { InternalFieldProps } from 'rc-field-form/es/Field';
 import { UploadProps, UploadChangeParam } from 'antd/lib/upload';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
@@ -55,12 +60,12 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
   } = uploadItemProps;
   // 超出或达到最大文件个数，禁用上传
   const [uploadDisabled, setUploadDisabled] = useState<boolean>(false);
-
   const formatedAccept = Array.isArray(accept) ? accept.join(',') : accept;
+  const maxCountNumber = maxCount === true ? ATTACHMENT_MAX_FILE_COUNT : maxCount;
 
   /** 改变上传文件调用 */
   const handleChange = (info: UploadChangeParam) => {
-    maxCount && setUploadDisabled(info.fileList.length >= maxCount);
+    maxCountNumber && setUploadDisabled(info.fileList.length >= maxCountNumber);
     onChange && onChange(info);
   };
 
