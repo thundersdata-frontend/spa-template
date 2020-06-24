@@ -4,15 +4,11 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-11 11:20:36
+ * @LastEditTime: 2020-06-24 12:12:49
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Upload } from 'antd';
-import {
-  getFileValidators,
-  getPublicUploadProps,
-  handleUpload,
-} from '@/utils/upload';
+import { getFileValidators, getPublicUploadProps, handleUpload } from '@/utils/upload';
 import { InternalFieldProps } from 'rc-field-form/es/Field';
 import { UploadProps, UploadChangeParam } from 'antd/lib/upload';
 import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
@@ -38,7 +34,7 @@ export interface UploadFormItemProps {
   onChange?: (info: UploadChangeParam) => void;
   /** formItem 属性 */
   formItemProps?: InternalFieldProps & FormItemLabelProps;
-  /** uplaod 属性 */
+  /** upload 属性 */
   uploadProps?: UploadProps;
 }
 
@@ -57,8 +53,16 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     onChange,
     children,
   } = uploadItemProps;
+  // 超出或达到最大文件个数，禁用上传
+  const [uploadDisabled, setUploadDisabled] = useState<boolean>(false);
 
   const formatedAccept = Array.isArray(accept) ? accept.join(',') : accept;
+
+  /** 改变上传文件调用 */
+  const handleChange = (info: UploadChangeParam) => {
+    maxCount && setUploadDisabled(info.fileList.length >= maxCount);
+    onChange && onChange(info);
+  };
 
   return (
     <Form.Item
@@ -78,14 +82,14 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
       {...formItemProps}
     >
       <Upload
-        accept={formatedAccept}
         {...getPublicUploadProps()}
+        accept={formatedAccept}
         disabled={disabled}
         multiple={multiple}
-        onChange={onChange}
+        onChange={handleChange}
         {...uploadProps}
       >
-        {children || <Button>上传</Button>}
+        {!uploadDisabled && (children || <Button>上传</Button>)}
       </Upload>
     </Form.Item>
   );
