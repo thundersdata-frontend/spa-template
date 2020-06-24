@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-24 14:51:09
+ * @LastEditTime: 2020-06-24 15:07:29
  */
 import React, { useState } from 'react';
 import { Form, Button, Upload } from 'antd';
@@ -65,7 +65,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
 
   /** 改变上传文件调用 */
   const handleChange = (info: UploadChangeParam) => {
-    maxCount && setUploadDisabled(info.fileList.length >= maxCountNumber);
+    maxCountNumber && setUploadDisabled(info.fileList.length >= maxCountNumber);
     onChange && onChange(info);
   };
 
