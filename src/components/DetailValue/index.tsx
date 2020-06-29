@@ -5,7 +5,7 @@
 import React, { useState } from 'react';
 import { FileDTO } from '@/interfaces/common';
 import { Row, Col, Modal } from 'antd';
-import { useToggle } from '@umijs/hooks';
+import { useToggle } from 'ahooks';
 import { EyeOutlined, DownloadOutlined } from '@ant-design/icons';
 import { IMAGE_TYPES } from '@/constant';
 import styles from './index.module.less';
@@ -22,7 +22,7 @@ export default ({
   type?: DetailValueType;
   generateUrl?: (file: FileDTO) => string;
 }) => {
-  const toggle = useToggle(false);
+  const [visible, toggle] = useToggle(false);
   const [url, setUrl] = useState<string>();
 
   const handleDownload = (file: FileDTO) => {
@@ -88,7 +88,7 @@ export default ({
           </div>
         ))}
         <Modal
-          visible={toggle.state}
+          visible={visible}
           title="图片预览"
           centered
           destroyOnClose

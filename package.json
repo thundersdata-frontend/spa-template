@@ -13,7 +13,7 @@
     "url": "https://github.com/thundersdata-frontend/spa-template/issues"
   },
   "scripts": {
-    "nc-u": "cross-env NPM_CHECK_INSTALLER=cnpm npm-check -u",
+    "nc-u": "npx npm-check --registry=http://npm.taobao.org/ -u",
     "commit": "git-cz",
     "start": "cross-env UMI_UI=1 umi dev",
     "analyze": "cross-env ANALYZE=1 umi build",
@@ -48,9 +48,9 @@
     "@ant-design/icons": "^4.0.6",
     "@ant-design/pro-layout": "^5.0.12",
     "@ant-design/pro-table": "^2.2.6",
-    "@umijs/hooks": "^1.9.2",
     "@umijs/plugin-esbuild": "^1.0.0-beta.2",
     "@umijs/preset-react": "^1.5.2",
+    "ahooks": "^2.0.1",
     "antd": "^4.2.2",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.25",
