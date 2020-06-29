@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
- * @LastEditors: 陈杰
- * @LastEditTime: 2020-05-20 11:02:49
+ * @LastEditors: 廖军
+ * @LastEditTime: 2020-06-29 16:48:42
  */
 import { request } from 'umi';
 import { MenuDataItem } from '@ant-design/pro-layout';
@@ -16,6 +16,7 @@ import { isEmpty } from 'lodash-es';
 export async function getInitialState() {
   let menus: MenuDataItem[] = [];
   const privileges: string[] = [];
+  const userInfo = {};
 
   const accessToken = sessionStorage.getItem('accessToken');
   if (accessToken) {
@@ -33,11 +34,13 @@ export async function getInitialState() {
         route.privilegeList && privileges.push(...route.privilegeList);
       });
       menus = convertResourceToMenu(routes);
+      // TODO：这里请求userInfo的数据
     }
   }
   return {
     menus,
     privileges,
+    userInfo,
   };
 }
 

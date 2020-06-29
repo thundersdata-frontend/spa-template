@@ -41,8 +41,8 @@
 
 "@ant-design/pro-layout@^6.0.0":
   version "6.0.0"
-  resolved "https://registry.npm.taobao.org/@ant-design/pro-layout/download/@ant-design/pro-layout-6.0.0.tgz?cache=0&sync_timestamp=1593411388751&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40ant-design%2Fpro-layout%2Fdownload%2F%40ant-design%2Fpro-layout-6.0.0.tgz#89f98a802895633016079f3c7d99a8a3ef453184"
-  integrity sha1-ifmKgCiVYzAWB588fZmoo+9FMYQ=
+  resolved "https://registry.npmjs.org/@ant-design/pro-layout/-/pro-layout-6.0.0.tgz#89f98a802895633016079f3c7d99a8a3ef453184"
+  integrity sha512-NaJXHvGtYE7BcToNPxflMYx9tubOSAlgRoZr6OCXu31q++gEC4/avMZU6938lz9acndiV5LbXzLK+ecc/Te/Lg==
   dependencies:
     "@ant-design/icons" "^4.0.0"
     "@umijs/route-utils" "^1.0.5"
@@ -3865,7 +3865,7 @@ aggregate-error@^3.0.0:
 
 ahooks@^2.0.1:
   version "2.0.1"
-  resolved "https://registry.yarnpkg.com/ahooks/-/ahooks-2.0.1.tgz#12bcdaf7db5c6f03a0ab566eaac598696c2ec8c8"
+  resolved "https://registry.npmjs.org/ahooks/-/ahooks-2.0.1.tgz#12bcdaf7db5c6f03a0ab566eaac598696c2ec8c8"
   integrity sha512-zTe8C+sAg3/JDX9lQ23JhLp9FZifdCIBtkRoFOkUSfnM20e0VS7IMr7U84h5eHE5J4T9pYbkPK8ebnzKxWZKYg==
   dependencies:
     "@ahooksjs/use-request" "^2.0.1"
@@ -16966,8 +16966,8 @@ uglify-js@^3.1.4:
 
 umi-plugin-page-creator@^1.5.0:
   version "1.5.0"
-  resolved "https://registry.npm.taobao.org/umi-plugin-page-creator/download/umi-plugin-page-creator-1.5.0.tgz#6db6a78b517aad0061b6170d597dcac4ae411f57"
-  integrity sha1-bbani1F6rQBhthcNWX3KxK5BH1c=
+  resolved "https://registry.npmjs.org/umi-plugin-page-creator/-/umi-plugin-page-creator-1.5.0.tgz#6db6a78b517aad0061b6170d597dcac4ae411f57"
+  integrity sha512-NVdf9t8LVI654epgzR0jxIFeXNdwRa/NxNmBWb38xQj2AuXGtdW0XyxV+grjlLVYyTWeMvDRjaXptkSSTrUXfg==
 
 umi-request@^1.2.14, umi-request@^1.2.17:
   version "1.3.5"
