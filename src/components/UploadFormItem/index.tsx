@@ -4,19 +4,20 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-24 15:07:29
+ * @LastEditTime: 2020-06-29 17:37:02
  */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Upload } from 'antd';
 import {
   getFileValidators,
   getPublicUploadProps,
-  handleUpload,
   ATTACHMENT_MAX_FILE_COUNT,
+  handleUpload,
 } from '@/utils/upload';
 import { InternalFieldProps } from 'rc-field-form/es/Field';
 import { UploadProps, UploadChangeParam } from 'antd/lib/upload';
-import { FormItemLabelProps } from 'antd/es/form/FormItemLabel';
+import { FormItemLabelProps } from 'antd/lib/form/FormItemLabel';
+import { FormItemInputProps } from 'antd/lib/form/FormItemInput';
 
 export interface UploadFormItemProps {
   /** formItem 的标签 */
@@ -38,10 +39,13 @@ export interface UploadFormItemProps {
   /** 改变事件 */
   onChange?: (info: UploadChangeParam) => void;
   /** formItem 属性 */
-  formItemProps?: InternalFieldProps & FormItemLabelProps;
+  formItemProps?: InternalFieldProps & FormItemLabelProps & FormItemInputProps;
   /** upload 属性 */
   uploadProps?: UploadProps;
 }
+
+// 初始化文件长度
+const INITIAL_FILE_LENGTH = 0;
 
 const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
   const {
@@ -58,16 +62,22 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     onChange,
     children,
   } = uploadItemProps;
+  const maxCountNumber = maxCount === true ? ATTACHMENT_MAX_FILE_COUNT : maxCount;
+  // 文件个数
+  const [fileLength, setFileLength] = useState<number>(INITIAL_FILE_LENGTH);
   // 超出或达到最大文件个数，禁用上传
   const [uploadDisabled, setUploadDisabled] = useState<boolean>(false);
   const formatedAccept = Array.isArray(accept) ? accept.join(',') : accept;
-  const maxCountNumber = maxCount === true ? ATTACHMENT_MAX_FILE_COUNT : maxCount;
 
   /** 改变上传文件调用 */
   const handleChange = (info: UploadChangeParam) => {
-    maxCountNumber && setUploadDisabled(info.fileList.length >= maxCountNumber);
+    maxCount && setUploadDisabled(info.fileList.length >= maxCountNumber);
     onChange && onChange(info);
   };
+
+  useEffect(() => {
+    maxCount && setUploadDisabled(fileLength >= maxCountNumber);
+  }, [fileLength]);
 
   return (
     <Form.Item
@@ -84,6 +94,10 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
         }),
       ]}
       getValueFromEvent={handleUpload}
+      getValueProps={value => {
+        value && setFileLength(value.length);
+        return { fileList: value };
+      }}
       {...formItemProps}
     >
       <Upload
