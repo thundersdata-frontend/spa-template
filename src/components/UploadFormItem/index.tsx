@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-29 17:37:02
+ * @LastEditTime: 2020-06-29 17:48:11
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Upload } from 'antd';
@@ -71,12 +71,12 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
 
   /** 改变上传文件调用 */
   const handleChange = (info: UploadChangeParam) => {
-    maxCount && setUploadDisabled(info.fileList.length >= maxCountNumber);
+    maxCountNumber && setUploadDisabled(info.fileList.length >= maxCountNumber);
     onChange && onChange(info);
   };
 
   useEffect(() => {
-    maxCount && setUploadDisabled(fileLength >= maxCountNumber);
+    maxCountNumber && setUploadDisabled(fileLength >= maxCountNumber);
   }, [fileLength]);
 
   return (
