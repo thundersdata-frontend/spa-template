@@ -11,13 +11,13 @@ import { Settings } from '@ant-design/pro-layout';
 const defaultSettings: Partial<Settings> = {
   navTheme: 'dark',
   primaryColor: '#1890ff',
-  layout: 'sidemenu',
+  layout: 'side',
   contentWidth: 'Fluid',
   fixedHeader: true,
   fixSiderbar: true,
   colorWeak: false,
   menu: {
-    locale: true,
+    locale: false,
     defaultOpenAll: false,
   },
   title: '中台模板'

@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function useSpinning(status: boolean = false) {
-  const [spinning, setSpinning] = useState(status);
+export default function useSpinning(state = false) {
+  const [spinning, setSpinning] = useState(false);
   const [tip, setTip] = useState('');
+
+  useEffect(() => {
+    setSpinning(state);
+  }, [])
 
   return {
     spinning,

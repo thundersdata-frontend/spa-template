@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ProLayout, {
   Settings,
   MenuDataItem,
-  getMenuData,
   SettingDrawer,
 } from '@ant-design/pro-layout';
 import { IRouteComponentProps, Link, useModel } from 'umi';
@@ -10,7 +9,7 @@ import Iconfont from '@/components/Iconfont';
 import CustomHeaderRight from './components/CustomHeaderRight';
 import defaultSettings from './defaultSettings';
 import Logo from './components/Logo';
-import { ConfigProvider, Empty, Breadcrumb } from 'antd';
+import { ConfigProvider, Empty } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import { validateMessages } from './validateMessages';
 
@@ -21,27 +20,6 @@ export default function BasicLayout(props: IRouteComponentProps) {
 
   const { menus = [] } = initialState as { menus: MenuDataItem[] };
   const menuDataRender = () => menus;
-  const { breadcrumb } = getMenuData(
-    props.route.routes!,
-    { locale: true },
-    () => '',
-    menuDataRender,
-  );
-
-  let breadcrumbs: { name: string; link?: string }[] = [];
-  const config = Object.entries(breadcrumb).find(
-    ([key]) => key === props.location.pathname,
-  );
-  if (config) {
-    const { locale = '', parentKeys = [] } = config[1];
-    if (parentKeys.length > 1) {
-      const names = locale?.toString().replace('menu', '首页').split('.');
-      breadcrumbs = names?.map((name, index) => ({
-        name,
-        link: index === 0 ? parentKeys[index] : undefined,
-      }));
-    }
-  }
 
   return (
     <ConfigProvider
@@ -97,21 +75,9 @@ export default function BasicLayout(props: IRouteComponentProps) {
         }
         onMenuHeaderClick={() => props.history.push('/')}
         menuDataRender={menuDataRender}
+        disableMobile
         {...settings}
       >
-        {breadcrumbs.length > 0 && (
-          <Breadcrumb style={{ marginBottom: 16 }}>
-            {breadcrumbs.map((item) => (
-              <Breadcrumb.Item key={item.name}>
-                {item.link ? (
-                  <Link to={item.link}>{item.name}</Link>
-                ) : (
-                  <span>{item.name}</span>
-                )}
-              </Breadcrumb.Item>
-            ))}
-          </Breadcrumb>
-        )}
         {props.children}
       </ProLayout>
       <SettingDrawer settings={settings} onSettingChange={setSettings} />
