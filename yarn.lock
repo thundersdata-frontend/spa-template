@@ -39,9 +39,9 @@
     insert-css "^2.0.0"
     rc-util "^5.0.1"
 
-"@ant-design/pro-layout@6.0.0":
+"@ant-design/pro-layout@^6.0.0":
   version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@ant-design/pro-layout/-/pro-layout-6.0.0.tgz#89f98a802895633016079f3c7d99a8a3ef453184"
+  resolved "https://registry.npmjs.org/@ant-design/pro-layout/-/pro-layout-6.0.0.tgz#89f98a802895633016079f3c7d99a8a3ef453184"
   integrity sha512-NaJXHvGtYE7BcToNPxflMYx9tubOSAlgRoZr6OCXu31q++gEC4/avMZU6938lz9acndiV5LbXzLK+ecc/Te/Lg==
   dependencies:
     "@ant-design/icons" "^4.0.0"
@@ -3865,7 +3865,7 @@ aggregate-error@^3.0.0:
 
 ahooks@^2.0.1:
   version "2.0.1"
-  resolved "https://registry.yarnpkg.com/ahooks/-/ahooks-2.0.1.tgz#12bcdaf7db5c6f03a0ab566eaac598696c2ec8c8"
+  resolved "https://registry.npmjs.org/ahooks/-/ahooks-2.0.1.tgz#12bcdaf7db5c6f03a0ab566eaac598696c2ec8c8"
   integrity sha512-zTe8C+sAg3/JDX9lQ23JhLp9FZifdCIBtkRoFOkUSfnM20e0VS7IMr7U84h5eHE5J4T9pYbkPK8ebnzKxWZKYg==
   dependencies:
     "@ahooksjs/use-request" "^2.0.1"
@@ -16964,10 +16964,10 @@ uglify-js@^3.1.4:
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.10.0.tgz#397a7e6e31ce820bfd1cb55b804ee140c587a9e7"
   integrity sha512-Esj5HG5WAyrLIdYU74Z3JdG2PxdIusvj6IWHMtlyESxc7kcDz7zYlYjpnSokn1UbpV0d/QX9fan7gkCNd/9BQA==
 
-umi-plugin-page-creator@^1.4.6:
-  version "1.4.6"
-  resolved "https://registry.yarnpkg.com/umi-plugin-page-creator/-/umi-plugin-page-creator-1.4.6.tgz#4c284b9b5586db9ef97072096ba50654a2aa4b59"
-  integrity sha512-LPw6xX6XPdUTtAORFl1TRful7evn0VA3RO+Y2DFDNxnOmvk18ZSl+tQhas3vPtaupsU+39oMPutvOwa/QTdpBQ==
+umi-plugin-page-creator@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npmjs.org/umi-plugin-page-creator/-/umi-plugin-page-creator-1.5.0.tgz#6db6a78b517aad0061b6170d597dcac4ae411f57"
+  integrity sha512-NVdf9t8LVI654epgzR0jxIFeXNdwRa/NxNmBWb38xQj2AuXGtdW0XyxV+grjlLVYyTWeMvDRjaXptkSSTrUXfg==
 
 umi-request@^1.2.14, umi-request@^1.2.17:
   version "1.3.5"
