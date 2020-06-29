@@ -4,20 +4,23 @@
  * @作者: 陈杰
  * @Date: 2020-05-20 09:57:13
  * @LastEditors: 廖军
- * @LastEditTime: 2020-06-01 17:14:14
+ * @LastEditTime: 2020-06-29 16:46:58
  */
 import { useMemo, useState } from 'react';
+import { useModel } from 'umi';
 
 export default function useAuth() {
-  const [accessToken, setAccessToken] = useState(
-    sessionStorage.getItem('accessToken'),
-  );
+  const [accessToken, setAccessToken] = useState(sessionStorage.getItem('accessToken'));
+  const { refresh, setInitialState } = useModel('@@initialState');
 
   const isLogin = useMemo(() => !!accessToken, [accessToken]);
 
   const clearToken = () => {
     setAccessToken('');
     sessionStorage.removeItem('accessToken');
+    /** 退出登录应重置初始化数据，否则可能引起一些问题 */
+    setInitialState({ menus: [], privileges: [], userInfo: {} });
+    refresh();
   };
 
   return {
