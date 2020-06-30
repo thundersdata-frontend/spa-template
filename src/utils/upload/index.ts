@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-05-25 16:07:51
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-15 15:19:36
+ * @LastEditTime: 2020-06-29 17:39:23
  */
 import { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
@@ -34,11 +34,17 @@ const VALIDATOR_MAP = Object.freeze({
 // 最大文件个数限制
 export const ATTACHMENT_MAX_FILE_COUNT = 10;
 
-// 最大文件大小限制
-export const ATTACHMENT_MAX_FILE_SIZE = 20;
-
 // 基础字节
 export const BASE_BYTE = 1024;
+
+// 最大文件大小限制 20M
+export const ATTACHMENT_MAX_FILE_SIZE = 20 * BASE_BYTE;
+
+// 最大图片大小限制 300 KB
+export const MAX_IMAGE_SIZE = 300;
+
+// 最大缩略图大小限制 50 KB
+export const MAX_THUMBNAIL_SIZE = 50;
 
 /** 文件类型映射 */
 export const FILE_TYPE_MAP = {
@@ -145,7 +151,7 @@ export function uploadValidator(
 
 /**
  * 对附件大小进行校验
- * @param params maxSize
+ * @param params maxSize (KB)
  * @param {object} 返回验证rule对象
  */
 export function validatorFileListSizeRule(params = { maxSize: ATTACHMENT_MAX_FILE_SIZE }) {
@@ -153,12 +159,14 @@ export function validatorFileListSizeRule(params = { maxSize: ATTACHMENT_MAX_FIL
   return {
     validator: (_rule: unknown, values: UploadFile[], callback: (error?: string) => void) => {
       if (values && values.length) {
-        const validationFailedList = values.filter(
-          file => file.size / BASE_BYTE / BASE_BYTE > maxSize,
-        );
+        const validationFailedList = values.filter(file => file.size / BASE_BYTE > maxSize);
         if (validationFailedList.length) {
           const names = validationFailedList.map(file => file.name).join(',');
-          callback(`${names}，文件大小超过${maxSize}M`);
+          callback(
+            `${names}，文件大小超过${
+              maxSize > BASE_BYTE ? `${maxSize / 1024} M` : `${maxSize} KB`
+            }`,
+          );
         } else {
           callback();
         }
