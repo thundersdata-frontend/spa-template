@@ -1,4 +1,8 @@
 import { extend, ResponseError } from 'umi-request';
+import { history } from 'umi';
+
+const controller = new AbortController();
+const { signal } = controller;
 
 const codeMessage: { [key: number]: string } = {
   200: '服务器成功返回请求的数据。',
@@ -38,9 +42,10 @@ export const request = () =>
     ttl: 60000,
     credentials: 'same-origin',
     headers: {
-      access_token: sessionStorage.getItem('accessToken')!,
+      access_token: localStorage.getItem('accessToken')!,
     },
     errorHandler,
+    signal,
   });
 
 request().interceptors.response.use(response => {
@@ -50,6 +55,15 @@ request().interceptors.response.use(response => {
     .then(res => {
       if (!res.success) {
         console.error(res.message);
+        /**
+         * 用户认证失败 token无效或者过期
+         * 1、需要取消所有请求（防止多个请求时，其中一个响应速度太慢，导致重新登录成功后又多次回到登录页面）；
+         * 2、跳转到登录页面。
+         */
+        if (res.code === 40001) {
+          controller.abort();
+          history.replace('/user/login');
+        }
       }
     });
   return response;
