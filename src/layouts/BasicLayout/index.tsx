@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import ProLayout, {
-  Settings,
-  MenuDataItem,
-  SettingDrawer,
-} from '@ant-design/pro-layout';
+import ProLayout, { Settings, MenuDataItem, SettingDrawer } from '@ant-design/pro-layout';
 import { IRouteComponentProps, Link, useModel } from 'umi';
 import Iconfont from '@/components/Iconfont';
+import { ConfigProvider, Empty, message } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
+import { UseRequestProvider } from 'ahooks';
 import CustomHeaderRight from './components/CustomHeaderRight';
 import defaultSettings from './defaultSettings';
 import Logo from './components/Logo';
-import { ConfigProvider, Empty } from 'antd';
-import zhCN from 'antd/es/locale/zh_CN';
 import { validateMessages } from './validateMessages';
 
 export default function BasicLayout(props: IRouteComponentProps) {
@@ -22,29 +19,49 @@ export default function BasicLayout(props: IRouteComponentProps) {
   const menuDataRender = () => menus;
 
   return (
-    <ConfigProvider
-      locale={zhCN}
-      renderEmpty={() => (
-        <Empty
-          image={require('../../assets/pic_empty.png')}
-          description="暂无数据"
-        />
-      )}
-      form={{ validateMessages }}
+    <UseRequestProvider
+      value={{
+        /** 全局请求的默认配置 */
+        onError: (error: Error) => {
+          console.warn(error);
+          message.error(`请求失败: ${error.message}`);
+        },
+      }}
     >
-      <ProLayout
-        logo={<Logo />}
-        collapsed={collapsed}
-        onCollapse={handleMenuCollapse}
-        menuHeaderRender={(logoDom, titleDom) => (
-          <Link to="/">
-            {logoDom}
-            {titleDom}
-          </Link>
+      <ConfigProvider
+        locale={zhCN}
+        renderEmpty={() => (
+          <Empty image={require('../../assets/pic_empty.png')} description="暂无数据" />
         )}
-        menuItemRender={(menuItemProps, defaultDom) => {
-          return (
-            <Link to={menuItemProps.path || '/'}>
+        form={{ validateMessages }}
+      >
+        <ProLayout
+          logo={<Logo />}
+          collapsed={collapsed}
+          onCollapse={handleMenuCollapse}
+          menuHeaderRender={(logoDom, titleDom) => (
+            <Link to="/">
+              {logoDom}
+              {titleDom}
+            </Link>
+          )}
+          menuItemRender={(menuItemProps, defaultDom) => {
+            return (
+              <Link to={menuItemProps.path || '/'}>
+                <span>
+                  {menuItemProps.customIcon && (
+                    <Iconfont
+                      name={menuItemProps.customIcon}
+                      style={{ marginRight: 10, fontSize: 17 }}
+                    />
+                  )}
+                </span>
+                <span>{defaultDom}</span>
+              </Link>
+            );
+          }}
+          subMenuItemRender={(menuItemProps, defaultDom) => {
+            return (
               <span>
                 {menuItemProps.customIcon && (
                   <Iconfont
@@ -52,35 +69,20 @@ export default function BasicLayout(props: IRouteComponentProps) {
                     style={{ marginRight: 10, fontSize: 17 }}
                   />
                 )}
+                <span>{defaultDom}</span>
               </span>
-              <span>{defaultDom}</span>
-            </Link>
-          );
-        }}
-        subMenuItemRender={(menuItemProps, defaultDom) => {
-          return (
-            <span>
-              {menuItemProps.customIcon && (
-                <Iconfont
-                  name={menuItemProps.customIcon}
-                  style={{ marginRight: 10, fontSize: 17 }}
-                />
-              )}
-              <span>{defaultDom}</span>
-            </span>
-          );
-        }}
-        rightContentRender={
-          (/** props: HeaderViewProps */) => <CustomHeaderRight />
-        }
-        onMenuHeaderClick={() => props.history.push('/')}
-        menuDataRender={menuDataRender}
-        disableMobile
-        {...settings}
-      >
-        {props.children}
-      </ProLayout>
-      <SettingDrawer settings={settings} onSettingChange={setSettings} />
-    </ConfigProvider>
+            );
+          }}
+          rightContentRender={(/** props: HeaderViewProps */) => <CustomHeaderRight />}
+          onMenuHeaderClick={() => props.history.push('/')}
+          menuDataRender={menuDataRender}
+          disableMobile
+          {...settings}
+        >
+          {props.children}
+        </ProLayout>
+        <SettingDrawer settings={settings} onSettingChange={setSettings} />
+      </ConfigProvider>
+    </UseRequestProvider>
   );
 }
