@@ -1,4 +1,5 @@
 import { extend, ResponseError } from 'umi-request';
+import { message } from 'antd';
 
 const codeMessage: { [key: number]: string } = {
   200: '服务器成功返回请求的数据。',
@@ -21,12 +22,12 @@ const codeMessage: { [key: number]: string } = {
 export function errorHandler(error: ResponseError) {
   const { response } = error;
   if (response && response.status) {
-    const errortext = codeMessage[response.status] || response.statusText;
+    const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
 
     console.error({
       message: `请求错误 ${status}: ${url}`,
-      description: errortext,
+      description: errorText,
     });
   }
 }
@@ -54,3 +55,18 @@ request().interceptors.response.use(response => {
     });
   return response;
 });
+
+/** table的默认配置 */
+export const defaultTableProps = {
+  onRequestError: (error: Error) => {
+    console.error(error.message);
+    message.error('数据加载失败');
+  },
+  bordered: false,
+  search: true,
+  pagination: {
+    size: 'default',
+  },
+  dateFormatter: 'string',
+  tableAlertRender: false,
+};
