@@ -18,7 +18,7 @@ export async function getInitialState() {
   const privileges: string[] = [];
   const userInfo = {};
 
-  const accessToken = sessionStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem('accessToken');
   if (accessToken) {
     const result = await request('/resource');
     const { code, success, data = [] } = result;

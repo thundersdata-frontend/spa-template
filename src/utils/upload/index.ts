@@ -62,12 +62,12 @@ export const getDownloadUrlWithId = (fileId: number | string) => {
   const regs = /^[0-9]+$/;
   // 判断是否加密,若为已加密
   if (!regs.test('' + fileId)) {
-    return `${UPLOAD_URL}/download/direct?fileId=${fileId}&access_token=${sessionStorage.getItem(
+    return `${UPLOAD_URL}/download/direct?fileId=${fileId}&access_token=${localStorage.getItem(
       'accessToken',
     )}`;
   }
   // 若没有加密
-  return `${UPLOAD_URL}/file/download?fileId=${fileId}&access_token=${sessionStorage.getItem(
+  return `${UPLOAD_URL}/file/download?fileId=${fileId}&access_token=${localStorage.getItem(
     'accessToken',
   )}`;
 };
@@ -111,7 +111,7 @@ export const getPublicUploadProps: () => UploadProps = () => ({
   withCredentials: false,
   action: `${UPLOAD_URL}/file/uploadToPub`,
   data: {
-    access_token: sessionStorage.getItem('accessToken'),
+    access_token: localStorage.getItem('accessToken'),
   },
   showUploadList: {
     showDownloadIcon: false,

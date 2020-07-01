@@ -1,12 +1,10 @@
 import React from 'react';
 import { Avatar, Dropdown, Menu } from 'antd';
-import useAuth from '@/hooks/useAuth';
 import { history } from 'umi';
 import { ClickParam } from 'antd/es/menu';
 import { UserOutlined } from '@ant-design/icons';
 
 export default function CustomHeaderRight(/** props: HeaderViewProps */) {
-  const { clearToken } = useAuth();
   const handleMenuClick = ({ key }: ClickParam) => {
     switch (key) {
       case 'personal':
@@ -14,7 +12,6 @@ export default function CustomHeaderRight(/** props: HeaderViewProps */) {
         alert('你点击的是个人信息');
         break;
       case 'logout':
-        clearToken();
         history.replace('/user/login');
         break;
     }

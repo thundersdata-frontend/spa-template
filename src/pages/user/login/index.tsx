@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, Checkbox } from 'antd';
 import { useRequest, Link, history, useModel } from 'umi';
 import LoginForm from '@/components/LoginForm';
@@ -21,19 +21,26 @@ const LoginMessage: React.FC<{
 );
 
 export default function Login() {
-  const { saveToken } = useAuth();
+  const { saveToken, clearToken } = useAuth();
   const { refresh } = useModel('@@initialState');
   const [autoLogin, setAutoLogin] = useState(true);
   const [type, setType] = useState<string>('account');
 
+  /**
+   * 确保登录之前token和全局初始化数据是清空的
+   */
+  useEffect(() => {
+    clearToken();
+  }, []);
+
   const { loading, data, run: submit } = useRequest<{ data: StateType }>(fakeAccountLogin, {
     manual: true,
-    formatResult: (result) => result?.data,
+    formatResult: result => result?.data,
     onSuccess: () => {
       saveToken('123');
       refresh();
       history.replace('/homepage');
-    }
+    },
   });
 
   const handleSubmit = (values: LoginParamsType) => {
@@ -104,10 +111,7 @@ export default function Login() {
           />
         </Tab>
         <div>
-          <Checkbox
-            checked={autoLogin}
-            onChange={(e) => setAutoLogin(e.target.checked)}
-          >
+          <Checkbox checked={autoLogin} onChange={e => setAutoLogin(e.target.checked)}>
             自动登录
           </Checkbox>
           <a
@@ -121,9 +125,7 @@ export default function Login() {
         <Submit loading={loading}>登录</Submit>
       </LoginForm>
       <div>
-        <Link to="/user/register">
-          还没有账户？去注册&gt;&gt;
-        </Link>
+        <Link to="/user/register">还没有账户？去注册&gt;&gt;</Link>
       </div>
     </div>
   );
