@@ -6,7 +6,7 @@
  * @作者: 廖军
  * @Date: 2020-06-17 15:48:22
  * @LastEditors: 廖军
- * @LastEditTime: 2020-06-29 16:48:01
+ * @LastEditTime: 2020-07-01 17:45:14
  */
 import { useRequest } from 'ahooks';
 import { BaseOptions, PaginatedParams } from 'ahooks/lib/useAntdTable';
@@ -20,9 +20,8 @@ export default function useModelRequest<T>(
   const { initialState } = useModel('@@initialState');
   const { menus = [] } = initialState || {};
 
-  return (useRequest(fetchData, {
-    /** 有菜单权限的数据才会请求 */
-    ready: menus.length > 0,
+  /** ready只会在第一次生效，现在这种写法可以有效阻断请求的发出，暂时没有发现更好的方法 */
+  return (useRequest(menus.length > 0 ? fetchData : () => false, {
     refreshDeps: [menus.length],
     ...options,
   }) as unknown) as BaseResult<T, PaginatedParams>;
