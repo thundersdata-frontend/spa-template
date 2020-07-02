@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-29 17:48:11
+ * @LastEditTime: 2020-07-01 19:40:25
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Upload } from 'antd';
@@ -95,7 +95,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
       ]}
       getValueFromEvent={handleUpload}
       getValueProps={value => {
-        value && setFileLength(value.length);
+        setFileLength(value?.length || INITIAL_FILE_LENGTH);
         return { fileList: value };
       }}
       {...formItemProps}
