@@ -23,8 +23,11 @@ export default function BasicLayout(props: IRouteComponentProps) {
       value={{
         /** 全局请求的默认配置 */
         onError: (error: Error) => {
-          console.warn(error);
-          message.error(`请求失败: ${error.message}`);
+          console.error(error);
+          if (error) {
+            const errorJSON = JSON.parse(error.message);
+            message.error(errorJSON.message);
+          }
         },
       }}
     >

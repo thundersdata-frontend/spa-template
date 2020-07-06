@@ -40,4 +40,11 @@ export default {
     message: '成功',
     success: true,
   },
+  '/banner/insert': (req, res) => {
+    res.status(500).send({
+      success: false,
+      message: 'error',
+      code: 50000,
+    })
+  }
 };

@@ -6,7 +6,7 @@
  * @LastEditors: 廖军
  * @LastEditTime: 2020-06-01 17:31:09
  */
-import { request } from '@/common';
+import { initRequest } from '@/common';
 
 export interface StateType {
   status?: 'ok' | 'error';
@@ -22,12 +22,14 @@ export interface LoginParamsType {
 }
 
 export async function fakeAccountLogin(params: LoginParamsType) {
-  return request()('/api/login/account', {
+  const request = await initRequest();
+  return request('/api/login/account', {
     method: 'POST',
     data: params,
   });
 }
 
 export async function getFakeCaptcha(mobile: string) {
-  return request()(`/api/login/captcha?mobile=${mobile}`);
+  const request = await initRequest();
+  return request(`/api/login/captcha?mobile=${mobile}`);
 }

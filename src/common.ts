@@ -1,6 +1,7 @@
 import { extend, ResponseError } from 'umi-request';
 import { message } from 'antd';
 import { history } from 'umi';
+import { LOGIN_FAILURE } from './constant';
 
 const controller = new AbortController();
 const { signal } = controller;
@@ -29,46 +30,51 @@ export function errorHandler(error: ResponseError) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
 
-    console.error({
-      message: `请求错误 ${status}: ${url}`,
-      description: errorText,
-    });
+    throw new Error(JSON.stringify({
+      message: errorText,
+      description: `请求错误 ${status}: ${url}`,
+    }));
   }
+  throw error;
 }
 
-export const request = () =>
+const getToken = () =>
+  new Promise(resolve => {
+    setTimeout(() => {
+      const token = localStorage.getItem('accessToken');
+      resolve(token);
+    }, 0);
+  });
+
+export const initRequest = async () => {
+  const token = await getToken();
   /** 这边可对接口请求做一些统一的封装 */
-  extend({
+  const request = extend({
     useCache: false,
     ttl: 60000,
     credentials: 'same-origin',
     headers: {
-      access_token: localStorage.getItem('accessToken')!,
+      accessToken: token! as string,
     },
     errorHandler,
     signal,
   });
 
-request().interceptors.response.use(response => {
-  response
-    .clone()
-    .json()
-    .then(res => {
-      if (!res.success) {
-        console.error(res.message);
-        /**
-         * 用户认证失败 token无效或者过期
-         * 1、需要取消所有请求（防止多个请求时，其中一个响应速度太慢，导致重新登录成功后又多次回到登录页面）；
-         * 2、跳转到登录页面。
-         */
-        if (res.code === 40001) {
+  request.interceptors.response.use(response => {
+    response
+      .clone()
+      .json()
+      .then(res => {
+        if ([LOGIN_FAILURE['不允许登录'], LOGIN_FAILURE['登录过期']].includes(res.code)) {
           controller.abort();
           history.replace('/user/login');
         }
-      }
-    });
-  return response;
-});
+      });
+    return response;
+  });
+
+  return request;
+};
 
 /** table的默认配置 */
 export const defaultTableProps = {

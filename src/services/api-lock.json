@@ -3,7 +3,6 @@
     "mods": [
       {
         "description": "应聘管理相关接口",
-        "name": "apply",
         "interfaces": [
           {
             "consumes": [
@@ -152,11 +151,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "apply"
       },
       {
         "description": "认证相关接口",
-        "name": "auth",
         "interfaces": [
           {
             "description": "获取当前登录用户信息",
@@ -174,11 +173,11 @@
             },
             "parameters": []
           }
-        ]
+        ],
+        "name": "auth"
       },
       {
         "description": "上传文件相关接口",
-        "name": "basic",
         "interfaces": [
           {
             "consumes": [
@@ -215,11 +214,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "basic"
       },
       {
         "description": "字典相关接口",
-        "name": "dict",
         "interfaces": [
           {
             "description": "获取所有字典",
@@ -311,11 +310,11 @@
             },
             "parameters": []
           }
-        ]
+        ],
+        "name": "dict"
       },
       {
         "description": "面试官相关接口",
-        "name": "employee",
         "interfaces": [
           {
             "consumes": [
@@ -537,11 +536,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "employee"
       },
       {
         "description": "面试管理相关接口",
-        "name": "interview",
         "interfaces": [
           {
             "consumes": [
@@ -1103,11 +1102,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "interview"
       },
       {
         "description": "岗位类型相关接口",
-        "name": "jobCategory",
         "interfaces": [
           {
             "consumes": [
@@ -1256,11 +1255,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "jobCategory"
       },
       {
         "description": "人才管理",
-        "name": "person",
         "interfaces": [
           {
             "consumes": [
@@ -1711,11 +1710,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "person"
       },
       {
         "description": "人才目录管理",
-        "name": "personPool",
         "interfaces": [
           {
             "consumes": [
@@ -1924,11 +1923,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "personPool"
       },
       {
         "description": "岗位管理相关接口",
-        "name": "post",
         "interfaces": [
           {
             "consumes": [
@@ -2152,11 +2151,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "post"
       },
       {
         "description": "多租户相关接口",
-        "name": "tenant",
         "interfaces": [
           {
             "consumes": [
@@ -2248,14 +2247,14 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "tenant"
       }
     ],
     "name": "recruitment",
     "baseClasses": [
       {
         "name": "AddDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2285,12 +2284,12 @@
             "description": "岗位类别",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "应聘人添加DTO",
         "name": "ApplyAddDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2414,12 +2413,12 @@
             "description": "备注",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "删除应聘详情DTO",
         "name": "ApplyDeleteDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2435,12 +2434,12 @@
             "description": "应聘人编码",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "应聘结果DTO",
         "name": "ApplyResultDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2620,12 +2619,12 @@
             "description": "备注",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "应聘修改DTO",
         "name": "ApplyUpdateDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2763,11 +2762,11 @@
             "description": "备注",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "AuthUserInfo",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2860,11 +2859,11 @@
             "name": "username",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CandidatesMoveObjects",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2903,11 +2902,11 @@
             "description": "目标人才库id",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CertificationCenterUsers",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2937,12 +2936,12 @@
             "description": "CertificationCenterUsers名",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "复制到人才库DTO",
         "name": "CopyPersonDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2982,21 +2981,11 @@
             "description": "人才库id",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "DeferredResult",
-        "templateArgs": [
-          {
-            "typeArgs": [],
-            "typeName": "TenantResultDTO",
-            "isDefsType": true,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
-          }
-        ],
         "properties": [
           {
             "dataType": {
@@ -3024,11 +3013,21 @@
             "name": "setOrExpired",
             "required": false
           }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "TenantResultDTO",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
         ]
       },
       {
         "name": "DictionaryObjectDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3072,12 +3071,12 @@
             "description": "字典内容",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "面试官添加DTO",
         "name": "EmployeeAddDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3135,12 +3134,12 @@
             "description": "面试官性别",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "面试官返回DTO",
         "name": "EmployeeResultDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3226,12 +3225,12 @@
             "description": "面试官性别",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "面试官更新DTO",
         "name": "EmployeeUpdateDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3303,12 +3302,12 @@
             "description": "面试官性别",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "面试信息",
         "name": "HrmInterview",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3505,12 +3504,12 @@
             "name": "tenantCode",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "面试详情返回DTO",
         "name": "HrmInterviewDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3777,12 +3776,12 @@
             "name": "tenantCode",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "人才池",
         "name": "HrmPersonPool",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3826,12 +3825,12 @@
             "description": "目录名称",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "面试列表返回DTO",
         "name": "InterviewListDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4057,11 +4056,11 @@
             "description": "面试轮数",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "InterviewRecordAddDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4203,12 +4202,12 @@
             "description": "面试轮数",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "面试结果添加",
         "name": "InterviewResultAddDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4266,12 +4265,12 @@
             "description": "面试结果",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "面试官选择列表返回DTO",
         "name": "InterviewerEnumDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4301,11 +4300,11 @@
             "description": "面试官名称",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "JobCategoryAddDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4321,11 +4320,11 @@
             "description": "字典内容",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "JobCategoryUpdateDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4355,11 +4354,11 @@
             "description": "字典内容",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "JobDetails",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4416,11 +4415,11 @@
             "description": "岗位类别",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "MoveDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4450,21 +4449,11 @@
             "description": "人才id",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "Page",
-        "templateArgs": [
-          {
-            "typeArgs": [],
-            "typeName": "EmployeeResultDTO",
-            "isDefsType": true,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
-          }
-        ],
         "properties": [
           {
             "dataType": {
@@ -4528,12 +4517,22 @@
             "name": "total",
             "required": false
           }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "EmployeeResultDTO",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
         ]
       },
       {
         "description": "人才添加DTO",
         "name": "PersonAddDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4950,12 +4949,12 @@
             "name": "speciality",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "人才删除DTO",
         "name": "PersonDeleteDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4995,12 +4994,12 @@
             "description": "人才库编码",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "人才详情",
         "name": "PersonResultDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -5520,12 +5519,12 @@
             "description": "专业",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "人才更新DTO",
         "name": "PersonUpdateDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -5956,11 +5955,11 @@
             "name": "speciality",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "PostDeleteDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -5976,12 +5975,12 @@
             "description": "岗位编码",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "职位选择列表DTO",
         "name": "PostEnumDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6011,11 +6010,11 @@
             "description": "职位名称",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "PostModificationDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6059,12 +6058,12 @@
             "description": "岗位类别",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "租户添加DTO",
         "name": "TenantAddDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6150,11 +6149,11 @@
             "description": "租户英文名",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "TenantResultDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6221,11 +6220,11 @@
             "name": "tenantName",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "TreeListDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6307,7 +6306,8 @@
             "description": "目录名称",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       }
     ]
   }
