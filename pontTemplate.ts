@@ -189,28 +189,22 @@ export default class MyGenerator extends CodeGenerator {
       export const init = ${initValue};
 
       export async function fetch(${requestParams}) {
-        return new Promise(async (resolve, reject) => {
-          try {
-            const request = await initRequest();
-            const result = await request.${requestObj.method}(backEndUrl + '${inter.path}', {
-              headers: {
-                'Content-Type': '${requestObj.contentType}',
-              },
-              ${requestStr},
-            });
-            if (result) {
-              if (result.success) {
-                resolve(result.data);
-              } else {
-                reject(new Error(JSON.stringify({ message: result.message })));
-              }
-            } else {
-              reject(new Error(JSON.stringify({ message: '接口未响应' })));
-            }
-          } catch (error) {
-            reject(error);
-          }
+        const request = await initRequest();
+        const result = await request.${requestObj.method}(backEndUrl + '${inter.path}', {
+          headers: {
+            'Content-Type': '${requestObj.contentType}',
+          },
+          ${requestStr},
         });
+        if (result) {
+          if (!result.success)  {
+            throw new Error(JSON.stringify({ message: result.message }));
+          } else {
+            return result.data || ${initValue};
+          }
+        } else {
+          throw new Error(JSON.stringify({ message: '接口未响应' }));
+        }
       }
     `;
   }

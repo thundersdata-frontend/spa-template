@@ -3863,10 +3863,10 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
-ahooks@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/ahooks/-/ahooks-2.0.1.tgz#12bcdaf7db5c6f03a0ab566eaac598696c2ec8c8"
-  integrity sha512-zTe8C+sAg3/JDX9lQ23JhLp9FZifdCIBtkRoFOkUSfnM20e0VS7IMr7U84h5eHE5J4T9pYbkPK8ebnzKxWZKYg==
+ahooks@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ahooks/-/ahooks-2.1.0.tgz#699931063eba2219c7faf5a0352c632690621e4d"
+  integrity sha512-PZ8Im/ehtSYB0Le2zvnbf2ciQyUiNIu6kOJx5E895ajk4rEcZGNKSU3V7GKCCl3YiblxyEfBzZpp48l7kpXIYw==
   dependencies:
     "@ahooksjs/use-request" "^2.0.1"
     intersection-observer "^0.7.0"
