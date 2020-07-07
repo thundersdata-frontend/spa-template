@@ -3,7 +3,7 @@
  */
 export const initialPagination = {
   page: 1,
-  pageSize: 10
+  pageSize: 10,
 };
 
 /**
@@ -16,3 +16,8 @@ export enum LOGIN_FAILURE {
   登录过期 = 50400,
   不允许登录 = 50402,
 }
+
+/**
+ * 文件服务地址
+ */
+export const UPLOAD_URL = 'http://object-service.dev.thundersdata.com';
