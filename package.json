@@ -50,6 +50,8 @@
     "@ant-design/pro-table": "^2.4.0",
     "ahooks": "^2.1.0",
     "antd": "^4.4.0",
+    "braft-editor": "^2.3.9",
+    "braft-extensions": "^0.1.0",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.25",
     "immer": "^6.0.5",
@@ -59,7 +61,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "umi": "^3.2.6",
-    "use-immer": "^0.4.0"
+    "use-immer": "^0.4.0",
+    "xss": "^1.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
