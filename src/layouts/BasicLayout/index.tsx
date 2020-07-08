@@ -36,6 +36,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
         renderEmpty={() => (
           <Empty image={require('../../assets/pic_empty.png')} description="暂无数据" />
         )}
+        getPopupContainer={trigger => trigger.parentElement || document.body}
         form={{ validateMessages }}
       >
         <ProLayout

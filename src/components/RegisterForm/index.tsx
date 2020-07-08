@@ -171,12 +171,6 @@ export default function RegisterForm() {
           <Input size="large" placeholder="邮箱" autoComplete="off" />
         </FormItem>
         <Popover
-          getPopupContainer={(node) => {
-            if (node && node.parentNode) {
-              return node.parentNode as HTMLElement;
-            }
-            return node;
-          }}
           content={
             visible && (
               <div style={{ padding: '4px 0' }}>
