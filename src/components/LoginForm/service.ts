@@ -23,7 +23,7 @@ export interface LoginParamsType {
 
 export async function fakeAccountLogin(params: LoginParamsType) {
   const request = await initRequest();
-  return request('/api/login/account', {
+  return request('/account', {
     method: 'POST',
     data: params,
   });
@@ -31,5 +31,5 @@ export async function fakeAccountLogin(params: LoginParamsType) {
 
 export async function getFakeCaptcha(mobile: string) {
   const request = await initRequest();
-  return request(`/api/login/captcha?mobile=${mobile}`);
+  return request(`/captcha?mobile=${mobile}`);
 }

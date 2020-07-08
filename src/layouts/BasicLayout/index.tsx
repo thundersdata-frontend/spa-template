@@ -16,7 +16,9 @@ export default function BasicLayout(props: IRouteComponentProps) {
   const { initialState } = useModel('@@initialState');
 
   const { menus = [] } = initialState as { menus: MenuDataItem[] };
+  console.log(menus);
   const menuDataRender = () => menus;
+
 
   return (
     <UseRequestProvider

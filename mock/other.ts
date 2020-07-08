@@ -1,4 +1,11 @@
 export default {
+  'POST /account': {
+    code: 20000,
+    success: true,
+    data: {
+      accessToken: '123'
+    },
+  },
   '/detail': {
     code: 20000,
     data: {

@@ -1,7 +1,7 @@
 import { extend, ResponseError } from 'umi-request';
 import { message } from 'antd';
 import { history } from 'umi';
-import { LOGIN_FAILURE } from './constant';
+import { LoginFailure } from './constant';
 
 const controller = new AbortController();
 const { signal } = controller;
@@ -65,7 +65,7 @@ export const initRequest = async () => {
       .clone()
       .json()
       .then(res => {
-        if ([LOGIN_FAILURE['不允许登录'], LOGIN_FAILURE['登录过期']].includes(res.code)) {
+        if ([LoginFailure['不允许登录'], LoginFailure['登录过期']].includes(res.code)) {
           controller.abort();
           history.replace('/user/login');
         }

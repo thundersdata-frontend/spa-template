@@ -12,7 +12,7 @@ export const initialPagination = {
 export const IMAGE_TYPES = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'webp'];
 
 // 后端返回的code
-export enum LOGIN_FAILURE {
+export enum LoginFailure {
   登录过期 = 50400,
   不允许登录 = 50402,
 }
