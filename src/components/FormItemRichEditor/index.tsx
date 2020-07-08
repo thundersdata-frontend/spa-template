@@ -5,44 +5,62 @@ import 'braft-extensions/dist/table.css';
 import { UPLOAD_URL } from '@/constant';
 import Table from 'braft-extensions/dist/table';
 import request from 'umi-request';
-import xss from 'xss';
+import xss from '@/utils/xss';
+import MobilePreview from '../MobilePreview';
 
-interface FormItemRichEditorProps {
+export interface FormItemRichEditorProps {
   value?: string;
   onChange?: (value: string) => void;
+  showMobile?: boolean;
+  mobileTitle?: string;
 }
 
 type Ref = BraftEditor;
-const FormItemRichEditor = forwardRef<Ref, FormItemRichEditorProps>(({ value, onChange }, ref) => {
-  const [editorState, setEditorState] = useState<EditorState>(null);
+const FormItemRichEditor = forwardRef<Ref, FormItemRichEditorProps>(
+  ({ value, onChange, showMobile, mobileTitle }, ref) => {
+    const [editorState, setEditorState] = useState<EditorState>(null);
 
-  useEffect(() => {
-    // 拓展表格模块
-    BraftEditor.use(Table());
-  }, []);
+    useEffect(() => {
+      if (value && !editorState) {
+        setEditorState(BraftEditor.createEditorState(xss(value)));
+      }
+    }, [value]);
 
-  const handleEditorChange = (editorState: EditorState) => {
-    setEditorState(editorState);
-    if (onChange) {
-      onChange(editorState.toHTML());
-    }
-  };
+    useEffect(() => {
+      // 拓展表格模块
+      BraftEditor.use(Table());
+    }, []);
 
-  return (
-    <div style={{ border: '1px solid #ccc' }}>
-      <BraftEditor
-        ref={ref}
-        defaultValue={value && BraftEditor.createEditorState(xss(value))}
-        value={editorState}
-        onChange={handleEditorChange}
-        excludeControls={['emoji']}
-        media={{
-          uploadFn: uploadEditorMediaFiles,
-        }}
-      />
-    </div>
-  );
-});
+    const handleEditorChange = (editorState: EditorState) => {
+      setEditorState(editorState);
+      onChange && onChange(xss(editorState.toHTML()));
+    };
+
+    return (
+      <div style={{ display: 'flex' }}>
+        <div style={{ border: '1px solid #ccc' }}>
+          <BraftEditor
+            style={{ flex: 1 }}
+            ref={ref}
+            value={editorState}
+            onChange={handleEditorChange}
+            excludeControls={['emoji']}
+            media={{
+              uploadFn: uploadEditorMediaFiles,
+            }}
+          />
+        </div>
+        {showMobile && (
+          <MobilePreview
+            style={{ marginLeft: 16 }}
+            htmlText={editorState ? editorState.toHTML() : ''}
+            title={mobileTitle}
+          />
+        )}
+      </div>
+    );
+  },
+);
 
 export default FormItemRichEditor;
 
