@@ -4,12 +4,13 @@
  * @作者: 廖军
  * @Date: 2020-05-25 16:07:51
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-29 17:39:23
+ * @LastEditTime: 2020-07-09 17:45:56
  */
 import { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
-import { UploadFile } from 'antd/lib/upload/interface';
+import { UploadFile, RcFile } from 'antd/lib/upload/interface';
 import { FileDTO } from '@/interfaces/common';
+import { message } from 'antd';
 
 // 文件服务开发环境地址
 export const UPLOAD_URL = 'http://object-service.dev.thundersdata.com';
@@ -52,6 +53,7 @@ export const FILE_TYPE_MAP = {
   压缩包: ['.rar', '.zip'],
   文档: ['.doc', '.docx', '.pdf'],
   表格: ['.xls'],
+  视频: ['.avi', '.wmv', '.mpg', '.mpeg', '.mov', '.mp4', '.rm', '.ram'],
 };
 
 /**
@@ -80,30 +82,13 @@ export const onPreview = (file: UploadFile) => {
 export const isPermitFile = (
   file: UploadFile,
   allowFileList: string[] | string = FILE_TYPE_MAP['图片'],
-  validateItem: string[] | string = ['type'],
 ) => {
   // 文件后缀
   const fileSuffix = '.' + string.getLastSubstring(file.name, '.');
   const formatedAllowFileList = Array.isArray(allowFileList)
     ? allowFileList
     : allowFileList.split(',');
-  const isPermitType = formatedAllowFileList.includes(fileSuffix);
-  const validateObj = {
-    type: isPermitType,
-  };
-  // 若传入字符串单项
-  if (typeof validateItem === 'string') {
-    return validateObj[validateItem];
-  }
-  // 若传入校验类型数组
-  if (Array.isArray(validateItem)) {
-    for (let i = 0; i < validateItem.length; i += 1) {
-      if (!validateObj[validateItem[i]]) {
-        return false;
-      }
-    }
-  }
-  return true;
+  return formatedAllowFileList.includes(fileSuffix);
 };
 
 export const getPublicUploadProps: () => UploadProps = () => ({
@@ -164,7 +149,7 @@ export function validatorFileListSizeRule(params = { maxSize: ATTACHMENT_MAX_FIL
           const names = validationFailedList.map(file => file.name).join(',');
           callback(
             `${names}，文件大小超过${
-              maxSize > BASE_BYTE ? `${maxSize / 1024} M` : `${maxSize} KB`
+            maxSize > BASE_BYTE ? `${maxSize / 1024} M` : `${maxSize} KB`
             }`,
           );
         } else {
@@ -192,7 +177,7 @@ export function validatorFileListSuffixRule(
     validator: (_: unknown, values: UploadFile[], callback: (error?: string) => void) => {
       if (values && values.length) {
         const typeValidationFailedList = values.filter(
-          (file: UploadFile) => !isPermitFile(file, accept, 'type'),
+          (file: UploadFile) => !isPermitFile(file, accept),
         );
         if (typeValidationFailedList.length) {
           const names = typeValidationFailedList.map((file: UploadFile) => file.name).join(',');
@@ -244,6 +229,24 @@ export const getFileValidators = (params: FileValidatorsProps) => {
   );
 };
 
+/** 
+ * 传入校验数组获得 beforeUpload 函数(如果有单独的 Upload 需要类型、大小校验可以用这个函数)
+ * maxCount 最好不要在 beforeUpload 中处理，因为拿到的 fileList 只是改变的文件列表而不包含原来的
+ */
+export const getBeforeUpload = (validatorObj: FileValidatorsProps, showMessage?: boolean) => (_file: RcFile, fileList: RcFile[]) => {
+  const errorMessageList: string[] = [];
+  /** 若不符合要求阻断上传 */
+  getFileValidators(validatorObj).forEach(item => {
+    item.validator('', fileList, (error?: string) => {
+      if (error) {
+        errorMessageList.push(error);
+        showMessage && message.error(error);
+      }
+    })
+  })
+  return errorMessageList.length === 0;
+}
+
 /**
  * 将后端返回的附件转换成上传文件需要的格式
  * @param files
@@ -251,22 +254,22 @@ export const getFileValidators = (params: FileValidatorsProps) => {
 export function fileTransform(files?: FileDTO[]): UploadFile[] {
   return files && files.length > 0
     ? files.map(({ fileId, fileName, fileUrl, ...rest }) => ({
-        ...rest,
-        uid: fileId,
-        status: 'done',
-        size: 0,
-        type: '',
-        name: fileName || getDownloadUrlWithId(fileId),
-        url: fileUrl,
-        response: {
-          success: true,
-          data: {
-            fileId,
-            fileName: fileName || getDownloadUrlWithId(fileId),
-            url: fileUrl,
-          },
+      ...rest,
+      uid: fileId,
+      status: 'done',
+      size: 0,
+      type: '',
+      name: fileName || getDownloadUrlWithId(fileId),
+      url: fileUrl,
+      response: {
+        success: true,
+        data: {
+          fileId,
+          fileName: fileName || getDownloadUrlWithId(fileId),
+          url: fileUrl,
         },
-      }))
+      },
+    }))
     : [];
 }
 
@@ -277,14 +280,14 @@ export function fileTransform(files?: FileDTO[]): UploadFile[] {
 export function transformFile(files?: UploadFile[]): FileDTO[] {
   return files && files.length > 0
     ? files.map(file => {
-        const { fileId, fileName, url } = file.response.data;
-        return {
-          fileId,
-          fileName,
-          fileUrl: url,
-          type: '',
-        };
-      })
+      const { fileId, fileName, url } = file.response.data;
+      return {
+        fileId,
+        fileName,
+        fileUrl: url,
+        type: '',
+      };
+    })
     : [];
 }
 
