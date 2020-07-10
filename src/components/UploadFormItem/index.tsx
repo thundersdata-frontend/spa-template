@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-09 17:38:52
+ * @LastEditTime: 2020-07-10 09:59:04
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Upload } from 'antd';
@@ -75,7 +75,6 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     maxSize,
     accept,
   }
-  const fileValidatorsList = getFileValidators(validatorObj);
 
   /** 改变上传文件调用 */
   const handleChange = (info: UploadChangeParam) => {
@@ -96,7 +95,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
       required={required}
       rules={[
         { required },
-        ...fileValidatorsList,
+        ...getFileValidators(validatorObj),
       ]}
       getValueFromEvent={handleUpload}
       getValueProps={value => {
