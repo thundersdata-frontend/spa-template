@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-01 19:40:25
+ * @LastEditTime: 2020-07-10 09:59:04
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Upload } from 'antd';
@@ -13,6 +13,7 @@ import {
   getPublicUploadProps,
   ATTACHMENT_MAX_FILE_COUNT,
   handleUpload,
+  getBeforeUpload,
 } from '@/utils/upload';
 import { InternalFieldProps } from 'rc-field-form/es/Field';
 import { UploadProps, UploadChangeParam } from 'antd/lib/upload';
@@ -62,12 +63,18 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     onChange,
     children,
   } = uploadItemProps;
-  const maxCountNumber = maxCount === true ? ATTACHMENT_MAX_FILE_COUNT : maxCount;
+  const maxCountNumber =
+    maxCount === true ? ATTACHMENT_MAX_FILE_COUNT : maxCount;
   // 文件个数
   const [fileLength, setFileLength] = useState<number>(INITIAL_FILE_LENGTH);
   // 超出或达到最大文件个数，禁用上传
   const [uploadDisabled, setUploadDisabled] = useState<boolean>(false);
   const formatedAccept = Array.isArray(accept) ? accept.join(',') : accept;
+  const validatorObj = {
+    maxCount,
+    maxSize,
+    accept,
+  }
 
   /** 改变上传文件调用 */
   const handleChange = (info: UploadChangeParam) => {
@@ -79,6 +86,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     maxCountNumber && setUploadDisabled(fileLength >= maxCountNumber);
   }, [fileLength]);
 
+
   return (
     <Form.Item
       label={label}
@@ -87,11 +95,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
       required={required}
       rules={[
         { required },
-        ...getFileValidators({
-          maxCount,
-          maxSize,
-          accept,
-        }),
+        ...getFileValidators(validatorObj),
       ]}
       getValueFromEvent={handleUpload}
       getValueProps={value => {
@@ -106,6 +110,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
         disabled={disabled}
         multiple={multiple}
         onChange={handleChange}
+        beforeUpload={getBeforeUpload(validatorObj)}
         {...uploadProps}
       >
         {!uploadDisabled && (children || <Button>上传</Button>)}
