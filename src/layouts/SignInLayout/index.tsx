@@ -3,6 +3,7 @@ import { Layout, message } from 'antd';
 import { CopyrightOutlined } from '@ant-design/icons';
 import { IRouteComponentProps } from 'umi';
 import { UseRequestProvider } from 'ahooks';
+import { THROTTLE_INTERVAL } from '@/constant';
 
 const { Header, Content, Footer } = Layout;
 
@@ -18,6 +19,7 @@ export default function SignInLayout(props: IRouteComponentProps) {
             message.error(errorJSON.message);
           }
         },
+        throttleInterval: THROTTLE_INTERVAL,
       }}
     >
       <Layout

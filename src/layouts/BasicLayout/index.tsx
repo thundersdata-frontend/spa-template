@@ -9,6 +9,7 @@ import CustomHeaderRight from './components/CustomHeaderRight';
 import defaultSettings from './defaultSettings';
 import Logo from './components/Logo';
 import { validateMessages } from './validateMessages';
+import { THROTTLE_INTERVAL } from '@/constant';
 
 export default function BasicLayout(props: IRouteComponentProps) {
   const [collapsed, handleMenuCollapse] = useState<boolean>(false);
@@ -31,6 +32,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
             message.error(errorJSON.message);
           }
         },
+        throttleInterval: THROTTLE_INTERVAL,
       }}
     >
       <ConfigProvider

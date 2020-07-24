@@ -21,3 +21,5 @@ export enum LoginFailure {
  * 文件服务地址
  */
 export const UPLOAD_URL = 'http://object-service.dev.thundersdata.com';
+
+export const THROTTLE_INTERVAL = 500;
