@@ -18745,7 +18745,7 @@ uglify-js@^3.1.4:
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.10.0.tgz#397a7e6e31ce820bfd1cb55b804ee140c587a9e7"
   integrity sha512-Esj5HG5WAyrLIdYU74Z3JdG2PxdIusvj6IWHMtlyESxc7kcDz7zYlYjpnSokn1UbpV0d/QX9fan7gkCNd/9BQA==
 
-umi-plugin-page-creator@^1.5.5:
+umi-plugin-page-creator@^1.5.6:
   version "1.5.6"
   resolved "https://registry.yarnpkg.com/umi-plugin-page-creator/-/umi-plugin-page-creator-1.5.6.tgz#5c46390da7798ad6902525d17197063f5a1e9a9d"
   integrity sha512-B2YiAmSbRvZmkb6WSPFLYH8Yl4odmgUDk8Za+ftMD7uH3pb+Iv+oFEIxxdZze6XMiC7xgNuzPV529nyNhgSdiQ==
