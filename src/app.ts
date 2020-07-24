@@ -4,14 +4,14 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 廖军
- * @LastEditTime: 2020-07-08 16:35:12
+ * @LastEditTime: 2020-07-24 16:16:36
  */
 import { request } from 'umi';
 import { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils from '@/utils/array';
 import { isEmpty } from 'lodash-es';
 import { PrivilegeResource } from './interfaces/common';
-import { showGlobalLoading, hideGlobalLoading } from './components/GlobalLoading';
+import { showGlobalLoading } from './components/GlobalLoading';
 
 /** 初始化数据 */
 export async function getInitialState() {
@@ -22,6 +22,7 @@ export async function getInitialState() {
   const accessToken = localStorage.getItem('accessToken');
   if (accessToken) {
     try {
+      /** 将会在 components/LoadingPage 中调用 hideGlobalLoading */
       showGlobalLoading();
       const result = await request('/resource');
       const { code, success, data = [] } = result;
@@ -39,10 +40,8 @@ export async function getInitialState() {
         menus = convertResourceToMenu(routes);
         // TODO：这里请求userInfo的数据
       }
-      hideGlobalLoading();
     } catch (error) {
       console.error(error);
-      hideGlobalLoading();
     }
   }
   return {

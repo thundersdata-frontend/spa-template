@@ -10,7 +10,7 @@ import React from 'react';
 import { history } from 'umi';
 import useAuth from '@/hooks/useAuth';
 
-const Auth: React.FC = (props) => {
+const Auth: React.FC = props => {
   const { isLogin } = useAuth();
 
   if (isLogin) {
