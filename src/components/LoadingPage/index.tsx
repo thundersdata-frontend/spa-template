@@ -34,9 +34,7 @@ export default () => {
             fontWeight: 300,
             marginBottom: 16,
           }}
-        >
-          雷数后台管理系统
-        </div>
+        />
         <img src={require('@/assets/loading.gif')} alt="loading" />
       </div>
     </div>

@@ -9,7 +9,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Loading from './Loading';
+import LoadingPage from './LoadingPage';
 
 /**
  * 加载全局loading
@@ -22,7 +22,7 @@ export const showGlobalLoading = () => {
   loadingDom.style.width = '100vw';
   loadingDom.style.height = '100vh';
   document.body.appendChild(loadingDom);
-  ReactDOM.render(<Loading />, loadingDom);
+  ReactDOM.render(<LoadingPage />, loadingDom);
 };
 
 /**
