@@ -29,7 +29,7 @@ export default function SignInLayout(props: IRouteComponentProps) {
       >
         <Header style={{ height: 100, paddingLeft: 320, paddingRight: 320 }}>
           <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-            <img src={require('../../assets/signin_logo.png')} alt="雷数科技" />
+            <img src={require('../../assets/sign_logo.png')} alt="雷数科技" />
           </div>
         </Header>
         <Content
