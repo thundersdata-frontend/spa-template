@@ -19,7 +19,7 @@ export async function fetch(data = {}) {
   });
   if (result) {
     if (!result.success) {
-      throw new Error(JSON.stringify({ message: result.message }));
+      throw new Error(JSON.stringify(result));
     } else {
       return result.data || undefined;
     }

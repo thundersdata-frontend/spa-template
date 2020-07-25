@@ -11,12 +11,36 @@ interface AjaxResponse<T> {
 
 declare namespace defs {
   export namespace recruitment {
-    export class AddDTO {
-      /** 岗位名称 */
-      postName: string;
+    export class AddDTOToInterviewRecords {
+      /** 反馈 */
+      feedback?: string;
 
-      /** 岗位类别 */
-      postType?: number;
+      /** 是否终面 */
+      finalRound?: number;
+
+      /** 面试时间 */
+      interviewAt?: string;
+
+      /** 面试结果 */
+      interviewResult?: number;
+
+      /** 面试官id */
+      interviewerEmployeeCode?: string;
+
+      /** 面试官姓名 */
+      interviewerEmployeeName?: string;
+
+      /** 面试地点 */
+      location?: string;
+
+      /** 面试方式 */
+      method?: number;
+
+      /** 预约时间 */
+      reserveAt?: string;
+
+      /** 面试轮数 */
+      round?: number;
     }
 
     export class ApplyAddDTO {
@@ -27,7 +51,7 @@ declare namespace defs {
       entryStatus?: number;
 
       /** 面试记录 */
-      interviewListDTOS?: Array<defs.recruitment.InterviewRecordAddDTO>;
+      interviewListDTOS?: Array<defs.recruitment.AddDTOToInterviewRecords>;
 
       /** 应聘人id */
       personCode?: string;
@@ -99,7 +123,7 @@ declare namespace defs {
       entryStatus?: number;
 
       /** 面试记录 */
-      interviewListDTOS?: Array<defs.recruitment.InterviewRecordAddDTO>;
+      interviewListDTOS?: Array<defs.recruitment.AddDTOToInterviewRecords>;
 
       /** 应聘人id */
       personCode?: string;
@@ -140,20 +164,20 @@ declare namespace defs {
       username?: string;
     }
 
+    export class AuthenticationCenterUser {
+      /** AuthenticationCenterUserid */
+      userId?: number;
+
+      /** AuthenticationCenterUser名 */
+      username?: string;
+    }
+
     export class CandidatesMoveObjects {
       /** moves */
       moves?: Array<defs.recruitment.MoveDTO>;
 
       /** 目标人才库id */
       toPoolCode?: string;
-    }
-
-    export class CertificationCenterUsers {
-      /** CertificationCenterUsersid */
-      userId?: number;
-
-      /** CertificationCenterUsers名 */
-      username?: string;
     }
 
     export class CopyPersonDTO {
@@ -390,38 +414,6 @@ declare namespace defs {
 
       /** 面试岗位 */
       postName?: string;
-
-      /** 预约时间 */
-      reserveAt?: string;
-
-      /** 面试轮数 */
-      round?: number;
-    }
-
-    export class InterviewRecordAddDTO {
-      /** 反馈 */
-      feedback?: string;
-
-      /** 是否终面 */
-      finalRound?: number;
-
-      /** 面试时间 */
-      interviewAt?: string;
-
-      /** 面试结果 */
-      interviewResult?: number;
-
-      /** 面试官id */
-      interviewerEmployeeCode?: string;
-
-      /** 面试官姓名 */
-      interviewerEmployeeName?: string;
-
-      /** 面试地点 */
-      location?: string;
-
-      /** 面试方式 */
-      method?: number;
 
       /** 预约时间 */
       reserveAt?: string;
@@ -815,6 +807,14 @@ declare namespace defs {
       speciality?: string;
     }
 
+    export class PostAddDTO {
+      /** 岗位名称 */
+      postName: string;
+
+      /** 岗位类别 */
+      postType?: number;
+    }
+
     export class PostDeleteDTO {
       /** 岗位编码 */
       postCode: string;
@@ -914,7 +914,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.ApplyAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -930,7 +930,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.ApplyDeleteDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -947,7 +947,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -963,7 +963,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.ApplyUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -982,7 +982,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
     }
 
@@ -1001,7 +1001,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
     }
 
@@ -1023,7 +1023,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -1040,7 +1040,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
     }
 
@@ -1061,7 +1061,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.EmployeeAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1078,7 +1078,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1107,7 +1107,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1123,7 +1123,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.EmployeeUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -1144,7 +1144,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.HrmInterview,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1160,7 +1160,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.InterviewResultAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1177,7 +1177,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1194,7 +1194,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1211,7 +1211,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1225,7 +1225,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -1239,7 +1239,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -1272,7 +1272,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1305,7 +1305,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1321,7 +1321,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.HrmInterview,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -1342,7 +1342,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.JobCategoryAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1359,7 +1359,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1376,7 +1376,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1392,7 +1392,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.JobCategoryUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -1413,7 +1413,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.PersonAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1429,7 +1429,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.CopyPersonDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1445,7 +1445,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.PersonDeleteDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1462,7 +1462,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1478,7 +1478,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.CandidatesMoveObjects,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1519,7 +1519,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1536,7 +1536,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1552,7 +1552,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.PersonUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -1573,7 +1573,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.HrmPersonPool,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1587,7 +1587,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -1604,7 +1604,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1618,7 +1618,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -1635,7 +1635,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1652,7 +1652,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1668,7 +1668,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.HrmPersonPool,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -1688,8 +1688,8 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(
-          bodyParams: defs.recruitment.AddDTO,
-        ): Promise<AjaxResponse<Response>>;
+          bodyParams: defs.recruitment.PostAddDTO,
+        ): Promise<Response>;
       }
 
       /**
@@ -1705,7 +1705,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.PostDeleteDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1722,7 +1722,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1747,7 +1747,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1763,7 +1763,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.PostModificationDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -1783,8 +1783,8 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(
-          bodyParams: Array<defs.recruitment.CertificationCenterUsers>,
-        ): Promise<AjaxResponse<Response>>;
+          bodyParams: Array<defs.recruitment.AuthenticationCenterUser>,
+        ): Promise<Response>;
       }
 
       /**
@@ -1802,7 +1802,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.recruitment.TenantAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
   }

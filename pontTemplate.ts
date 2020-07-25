@@ -4,7 +4,7 @@
  * @作者: 黄姗姗
  * @Date: 2019-10-28 16:29:26
  * @LastEditors: 黄姗姗
- * @LastEditTime: 2020-06-04 15:30:23
+ * @LastEditTime: 2020-06-19 16:10:02
  */
 import { CodeGenerator, Interface, Property } from 'pont-engine';
 
@@ -79,11 +79,7 @@ export default class MyGenerator extends CodeGenerator {
   toPropertyCodeWithInitValue(prop: Property, baseName = '') {
     this.setEnum(prop.dataType.enum);
     const { typeName, isDefsType } = prop.dataType;
-    let typeWithValue = `= ${this.getInitialValue(
-      typeName,
-      isDefsType,
-      false,
-    )}`;
+    let typeWithValue = `= ${this.getInitialValue(typeName, isDefsType, false)}`;
 
     if (prop.dataType.typeName === baseName) {
       typeWithValue = `= {}`;
@@ -130,8 +126,7 @@ export default class MyGenerator extends CodeGenerator {
   getInterfaceContentInDeclaration(inter: Interface) {
     const paramsCode = inter.getParamsCode();
     const bodyParamsCode = inter.getBodyParamsCode();
-    const hasGetParams = !!inter.parameters.filter(param => param.in !== 'body')
-      .length;
+    const hasGetParams = !!inter.parameters.filter(param => param.in !== 'body').length;
     let requestParams = bodyParamsCode
       ? `bodyParams: ${bodyParamsCode}, params: Params`
       : `params: Params`;
@@ -147,20 +142,18 @@ export default class MyGenerator extends CodeGenerator {
 
       export const init: Response;
 
-      export function fetch(${requestParams}): Promise<AjaxResponse<Response>>;
+      export function fetch(${requestParams}): Promise<Response>;
     `;
   }
 
   /** 生成的接口请求部分 */
+  // eslint-disable-next-line complexity
   getInterfaceContent(inter: Interface) {
     // type为body的参数
     const bodyParamsCode = inter.getBodyParamsCode();
     // 判断是否有params参数
-    const hasGetParams = !!inter.parameters.filter(param => param.in !== 'body')
-      .length;
-    let requestParams = bodyParamsCode
-      ? `data = {}, params = {}`
-      : `params = {}`;
+    const hasGetParams = !!inter.parameters.filter(param => param.in !== 'body').length;
+    let requestParams = bodyParamsCode ? `data = {}, params = {}` : `params = {}`;
     let requestStr = bodyParamsCode ? `data, params` : `params`;
     if (!hasGetParams) {
       requestParams = bodyParamsCode ? `data = {}` : 'params = {}';
@@ -198,7 +191,7 @@ export default class MyGenerator extends CodeGenerator {
         });
         if (result) {
           if (!result.success)  {
-            throw new Error(JSON.stringify({ message: result.message }));
+            throw new Error(JSON.stringify(result));
           } else {
             return result.data || ${initValue};
           }
@@ -236,6 +229,7 @@ export default class MyGenerator extends CodeGenerator {
     }
   }
 
+  // eslint-disable-next-line complexity
   getRequest(bodyParamsCode: string, method: string) {
     // 为避免method匹配不上，全部转化为大写
     const upperMethod = method.toUpperCase();

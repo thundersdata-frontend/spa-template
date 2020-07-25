@@ -1,9 +1,33 @@
-class AddDTO {
-  /** 岗位名称 */
-  postName = '';
+class AddDTOToInterviewRecords {
+  /** 反馈 */
+  feedback = '';
 
-  /** 岗位类别 */
-  postType = undefined;
+  /** 是否终面 */
+  finalRound = undefined;
+
+  /** 面试时间 */
+  interviewAt = '';
+
+  /** 面试结果 */
+  interviewResult = undefined;
+
+  /** 面试官id */
+  interviewerEmployeeCode = '';
+
+  /** 面试官姓名 */
+  interviewerEmployeeName = '';
+
+  /** 面试地点 */
+  location = '';
+
+  /** 面试方式 */
+  method = undefined;
+
+  /** 预约时间 */
+  reserveAt = '';
+
+  /** 面试轮数 */
+  round = undefined;
 }
 
 class ApplyAddDTO {
@@ -127,20 +151,20 @@ class AuthUserInfo {
   username = '';
 }
 
+class AuthenticationCenterUser {
+  /** AuthenticationCenterUserid */
+  userId = undefined;
+
+  /** AuthenticationCenterUser名 */
+  username = '';
+}
+
 class CandidatesMoveObjects {
   /** moves */
   moves = [];
 
   /** 目标人才库id */
   toPoolCode = '';
-}
-
-class CertificationCenterUsers {
-  /** CertificationCenterUsersid */
-  userId = undefined;
-
-  /** CertificationCenterUsers名 */
-  username = '';
 }
 
 class CopyPersonDTO {
@@ -377,38 +401,6 @@ class InterviewListDTO {
 
   /** 面试岗位 */
   postName = '';
-
-  /** 预约时间 */
-  reserveAt = '';
-
-  /** 面试轮数 */
-  round = undefined;
-}
-
-class InterviewRecordAddDTO {
-  /** 反馈 */
-  feedback = '';
-
-  /** 是否终面 */
-  finalRound = undefined;
-
-  /** 面试时间 */
-  interviewAt = '';
-
-  /** 面试结果 */
-  interviewResult = undefined;
-
-  /** 面试官id */
-  interviewerEmployeeCode = '';
-
-  /** 面试官姓名 */
-  interviewerEmployeeName = '';
-
-  /** 面试地点 */
-  location = '';
-
-  /** 面试方式 */
-  method = undefined;
 
   /** 预约时间 */
   reserveAt = '';
@@ -802,6 +794,14 @@ class PersonUpdateDTO {
   speciality = '';
 }
 
+class PostAddDTO {
+  /** 岗位名称 */
+  postName = '';
+
+  /** 岗位类别 */
+  postType = undefined;
+}
+
 class PostDeleteDTO {
   /** 岗位编码 */
   postCode = '';
@@ -881,14 +881,14 @@ class TreeListDTO {
 }
 
 export const recruitment = {
-  AddDTO,
+  AddDTOToInterviewRecords,
   ApplyAddDTO,
   ApplyDeleteDTO,
   ApplyResultDTO,
   ApplyUpdateDTO,
   AuthUserInfo,
+  AuthenticationCenterUser,
   CandidatesMoveObjects,
-  CertificationCenterUsers,
   CopyPersonDTO,
   DeferredResult,
   DictionaryObjectDTO,
@@ -899,7 +899,6 @@ export const recruitment = {
   HrmInterviewDTO,
   HrmPersonPool,
   InterviewListDTO,
-  InterviewRecordAddDTO,
   InterviewResultAddDTO,
   InterviewerEnumDTO,
   JobCategoryAddDTO,
@@ -911,6 +910,7 @@ export const recruitment = {
   PersonDeleteDTO,
   PersonResultDTO,
   PersonUpdateDTO,
+  PostAddDTO,
   PostDeleteDTO,
   PostEnumDTO,
   PostModificationDTO,

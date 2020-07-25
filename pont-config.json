@@ -5,5 +5,9 @@
   "origins": [{
     "name": "recruitment",
     "originUrl": "http://recruitment.test.thundersdata.com/v2/api-docs"
+  },
+  {
+    "name": "authorization",
+    "originUrl": "http://authorization.dev.thundersdata.com/v2/api-docs"
   }]
 }
