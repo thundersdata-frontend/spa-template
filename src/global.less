@@ -34,17 +34,17 @@ body {
 
     > div {
       width: calc(100% - 18px);
+    }
+    .ant-layout-content {
+      margin: 16px;
+      width: calc(100% - 50px);
+      min-height: calc(100vh - 64px - 32px);
 
-      .ant-layout-content {
-        margin: 16px;
-        min-height: calc(100vh - 64px - 32px);
+      > div {
+        height: 100%;
 
-        > div {
-          height: 100%;
-
-          .ant-pro-grid-content {
-            overflow-y: auto;
-          }
+        .ant-pro-grid-content {
+          overflow-y: auto;
         }
       }
     }
