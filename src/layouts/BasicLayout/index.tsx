@@ -17,19 +17,20 @@ export default function BasicLayout(props: IRouteComponentProps) {
   const { initialState } = useModel('@@initialState');
 
   const { menus = [] } = initialState as { menus: MenuDataItem[] };
-  console.log(menus);
   const menuDataRender = () => menus;
-
 
   return (
     <UseRequestProvider
       value={{
         /** 全局请求的默认配置 */
         onError: (error: Error) => {
-          console.error(error);
-          if (error) {
-            const errorJSON = JSON.parse(error.message);
-            message.error(errorJSON.message);
+          try {
+            if (error) {
+              const errorJSON = JSON.parse(error.message);
+              message.error(errorJSON.message);
+            }
+          } catch (err) {
+            console.error(err.message);
           }
         },
         throttleInterval: THROTTLE_INTERVAL,
