@@ -6,7 +6,7 @@
  * @LastEditors: 廖军
  * @LastEditTime: 2020-07-08 16:19:39
  */
-import xss from 'xss';
+import * as xss from 'xss';
 
 /**
  * 允许出现的合法标签

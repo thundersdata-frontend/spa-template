@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'antd';
 import { history } from 'umi';
 
-export default function () {
+export default function() {
   return (
     <div
       style={{

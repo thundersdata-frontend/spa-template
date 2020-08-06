@@ -1,5 +1,4 @@
 import { extend, ResponseError } from 'umi-request';
-import { message } from 'antd';
 import { history } from 'umi';
 import { LoginFailure } from './constant';
 
@@ -20,6 +19,7 @@ const codeMessage: { [key: number]: string } = {
   502: '网关错误。',
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
+  405: 'xxxx',
 };
 
 export function errorHandler(error: ResponseError) {
@@ -28,10 +28,12 @@ export function errorHandler(error: ResponseError) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
 
-    throw new Error(JSON.stringify({
-      message: errorText,
-      description: `请求错误 ${status}: ${url}`,
-    }));
+    throw new Error(
+      JSON.stringify({
+        message: errorText,
+        description: `请求错误 ${status}: ${url}`,
+      }),
+    );
   }
   throw error;
 }
@@ -73,19 +75,4 @@ export const initRequest = async () => {
   });
 
   return request;
-};
-
-/** table的默认配置 */
-export const defaultTableProps = {
-  onRequestError: (error: Error) => {
-    console.error(error.message);
-    message.error('数据加载失败');
-  },
-  bordered: false,
-  search: true,
-  pagination: {
-    size: 'default',
-  },
-  dateFormatter: 'string',
-  tableAlertRender: false,
 };
