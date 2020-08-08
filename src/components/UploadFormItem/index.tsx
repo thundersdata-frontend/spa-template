@@ -4,27 +4,32 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-10 09:59:04
+ * @LastEditTime: 2020-08-08 14:58:45
  */
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Upload } from 'antd';
+import { Form, Button, Upload, Tooltip } from 'antd';
 import {
   getFileValidators,
   getPublicUploadProps,
   ATTACHMENT_MAX_FILE_COUNT,
   handleUpload,
+  getFileSizeName,
   getBeforeUpload,
 } from '@/utils/upload';
 import { InternalFieldProps } from 'rc-field-form/es/Field';
 import { UploadProps, UploadChangeParam } from 'antd/lib/upload';
 import { FormItemLabelProps } from 'antd/lib/form/FormItemLabel';
 import { FormItemInputProps } from 'antd/lib/form/FormItemInput';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import styles from './index.module.less';
 
 export interface UploadFormItemProps {
-  /** formItem 的标签 */
-  label?: string;
   /** formItem 的字段名 */
   name?: string;
+  /** formItem 的标签 */
+  label?: string;
+  /** 是否隐藏 label 的 tooltip 提示 */
+  hiddenTooltip?: boolean;
   /** 是否必选 */
   required?: boolean;
   /** 限制文件后缀,为可选后缀列表(支持string),传入 true 默认为图片 */
@@ -50,8 +55,9 @@ const INITIAL_FILE_LENGTH = 0;
 
 const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
   const {
-    label = '',
     name = '',
+    label = '',
+    hiddenTooltip = false,
     required = false,
     accept,
     maxSize = false,
@@ -63,18 +69,17 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     onChange,
     children,
   } = uploadItemProps;
-  const maxCountNumber =
-    maxCount === true ? ATTACHMENT_MAX_FILE_COUNT : maxCount;
+  const maxCountNumber = maxCount === true ? ATTACHMENT_MAX_FILE_COUNT : maxCount;
   // 文件个数
   const [fileLength, setFileLength] = useState<number>(INITIAL_FILE_LENGTH);
   // 超出或达到最大文件个数，禁用上传
   const [uploadDisabled, setUploadDisabled] = useState<boolean>(false);
-  const formatedAccept = Array.isArray(accept) ? accept.join(',') : accept;
+  const formattedAccept = Array.isArray(accept) ? accept.join(',') : accept;
   const validatorObj = {
     maxCount,
     maxSize,
     accept,
-  }
+  };
 
   /** 改变上传文件调用 */
   const handleChange = (info: UploadChangeParam) => {
@@ -86,17 +91,39 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     maxCountNumber && setUploadDisabled(fileLength >= maxCountNumber);
   }, [fileLength]);
 
+  /** 渲染tooltip 的 title */
+  const renderLabelTitle = () => (
+    <div className={styles.labelWrap}>
+      {maxCountNumber && <div>个数：最多上传 {maxCountNumber} 个文件</div>}
+      {maxSize && <div>大小：文件大小限制 {getFileSizeName(maxSize)}</div>}
+      {accept && (
+        <div>
+          可接受的文件格式：<div>{accept}</div>
+        </div>
+      )}
+    </div>
+  );
+
+  /** 渲染表单 label（带 tooltip） */
+  const renderLabel = () =>
+    !hiddenTooltip && (maxSize || maxCountNumber || accept) ? (
+      <div>
+        <span>{label}&nbsp;</span>
+        <Tooltip placement="topLeft" title={renderLabelTitle()}>
+          <QuestionCircleOutlined />
+        </Tooltip>
+      </div>
+    ) : (
+      <span>{label}</span>
+    );
 
   return (
     <Form.Item
-      label={label}
+      label={renderLabel()}
       name={name}
       valuePropName="fileList"
       required={required}
-      rules={[
-        { required },
-        ...getFileValidators(validatorObj),
-      ]}
+      rules={[{ required, message: `'${label}' 是必填字段` }, ...getFileValidators(validatorObj)]}
       getValueFromEvent={handleUpload}
       getValueProps={value => {
         setFileLength(value?.length || INITIAL_FILE_LENGTH);
@@ -106,7 +133,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     >
       <Upload
         {...getPublicUploadProps()}
-        accept={formatedAccept}
+        accept={formattedAccept}
         disabled={disabled}
         multiple={multiple}
         onChange={handleChange}

@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-05-25 16:07:51
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-07-09 17:45:56
+ * @LastEditTime: 2020-08-08 14:33:21
  */
 import { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
@@ -134,6 +134,17 @@ export function uploadValidator(
   }
 }
 
+/** 得到文件大小的文本 */
+export const getFileSizeName = (size: number | boolean): string => {
+  if (typeof size === 'number') {
+    return size > BASE_BYTE ? `${size / 1024} M` : `${size} KB`;
+  }
+  if (size) {
+    return getFileSizeName(ATTACHMENT_MAX_FILE_SIZE);
+  }
+  return '';
+};
+
 /**
  * 对附件大小进行校验
  * @param params maxSize (KB)
@@ -149,7 +160,7 @@ export function validatorFileListSizeRule(params = { maxSize: ATTACHMENT_MAX_FIL
           const names = validationFailedList.map(file => file.name).join(',');
           callback(
             `${names}，文件大小超过${
-            maxSize > BASE_BYTE ? `${maxSize / 1024} M` : `${maxSize} KB`
+              maxSize > BASE_BYTE ? `${maxSize / 1024} M` : `${maxSize} KB`
             }`,
           );
         } else {
@@ -229,23 +240,25 @@ export const getFileValidators = (params: FileValidatorsProps) => {
   );
 };
 
-/** 
+/**
  * 传入校验数组获得 beforeUpload 函数(如果有单独的 Upload 需要类型、大小校验可以用这个函数)
  * maxCount 最好不要在 beforeUpload 中处理，因为拿到的 fileList 只是改变的文件列表而不包含原来的
  */
-export const getBeforeUpload = (validatorObj: FileValidatorsProps, showMessage?: boolean) => (_file: RcFile, fileList: RcFile[]) => {
+export const getBeforeUpload = (validatorObj: FileValidatorsProps, showMessage?: boolean) => (
+  file: RcFile,
+) => {
   const errorMessageList: string[] = [];
   /** 若不符合要求阻断上传 */
   getFileValidators(validatorObj).forEach(item => {
-    item.validator('', fileList, (error?: string) => {
+    item.validator('', [file], (error?: string) => {
       if (error) {
         errorMessageList.push(error);
         showMessage && message.error(error);
       }
-    })
-  })
+    });
+  });
   return errorMessageList.length === 0;
-}
+};
 
 /**
  * 将后端返回的附件转换成上传文件需要的格式
@@ -254,22 +267,22 @@ export const getBeforeUpload = (validatorObj: FileValidatorsProps, showMessage?:
 export function fileTransform(files?: FileDTO[]): UploadFile[] {
   return files && files.length > 0
     ? files.map(({ fileId, fileName, fileUrl, ...rest }) => ({
-      ...rest,
-      uid: fileId,
-      status: 'done',
-      size: 0,
-      type: '',
-      name: fileName || getDownloadUrlWithId(fileId),
-      url: fileUrl,
-      response: {
-        success: true,
-        data: {
-          fileId,
-          fileName: fileName || getDownloadUrlWithId(fileId),
-          url: fileUrl,
+        ...rest,
+        uid: fileId,
+        status: 'done',
+        size: 0,
+        type: '',
+        name: fileName || getDownloadUrlWithId(fileId),
+        url: fileUrl,
+        response: {
+          success: true,
+          data: {
+            fileId,
+            fileName: fileName || getDownloadUrlWithId(fileId),
+            url: fileUrl,
+          },
         },
-      },
-    }))
+      }))
     : [];
 }
 
@@ -280,14 +293,14 @@ export function fileTransform(files?: FileDTO[]): UploadFile[] {
 export function transformFile(files?: UploadFile[]): FileDTO[] {
   return files && files.length > 0
     ? files.map(file => {
-      const { fileId, fileName, url } = file.response.data;
-      return {
-        fileId,
-        fileName,
-        fileUrl: url,
-        type: '',
-      };
-    })
+        const { fileId, fileName, url } = file.response.data;
+        return {
+          fileId,
+          fileName,
+          fileUrl: url,
+          type: '',
+        };
+      })
     : [];
 }
 
