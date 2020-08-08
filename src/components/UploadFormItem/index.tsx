@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-08-08 14:58:45
+ * @LastEditTime: 2020-08-08 17:08:24
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Upload, Tooltip } from 'antd';
@@ -32,6 +32,8 @@ export interface UploadFormItemProps {
   hiddenTooltip?: boolean;
   /** 是否必选 */
   required?: boolean;
+  /** 必选报错提示信息 */
+  requiredMessage?: string;
   /** 限制文件后缀,为可选后缀列表(支持string),传入 true 默认为图片 */
   accept?: string | string[];
   /** 限制文件大小,单位为 M,默认 10 M */
@@ -59,6 +61,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     label = '',
     hiddenTooltip = false,
     required = false,
+    requiredMessage = `'${label}' 是必填字段`,
     accept,
     maxSize = false,
     maxCount = false,
@@ -123,7 +126,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
       name={name}
       valuePropName="fileList"
       required={required}
-      rules={[{ required, message: `'${label}' 是必填字段` }, ...getFileValidators(validatorObj)]}
+      rules={[{ required, message: requiredMessage }, ...getFileValidators(validatorObj)]}
       getValueFromEvent={handleUpload}
       getValueProps={value => {
         setFileLength(value?.length || INITIAL_FILE_LENGTH);
