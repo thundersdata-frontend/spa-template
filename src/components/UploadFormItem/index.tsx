@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-08-08 17:08:24
+ * @LastEditTime: 2020-08-10 10:58:49
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Upload, Tooltip } from 'antd';
@@ -124,6 +124,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     <Form.Item
       label={renderLabel()}
       name={name}
+      className={styles.uploadItemWrap}
       valuePropName="fileList"
       required={required}
       rules={[{ required, message: requiredMessage }, ...getFileValidators(validatorObj)]}
