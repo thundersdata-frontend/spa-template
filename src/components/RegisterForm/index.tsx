@@ -171,7 +171,7 @@ export default function RegisterForm() {
           <Input size="large" placeholder="邮箱" autoComplete="off" />
         </FormItem>
         <Popover
-          getPopupContainer={(node) => {
+          getPopupContainer={node => {
             if (node && node.parentNode) {
               return node.parentNode as HTMLElement;
             }
@@ -205,7 +205,12 @@ export default function RegisterForm() {
               },
             ]}
           >
-            <Input size="large" type="password" placeholder="至少6位密码，区分大小写" autoComplete="off" />
+            <Input
+              size="large"
+              type="password"
+              placeholder="至少6位密码，区分大小写"
+              autoComplete="off"
+            />
           </FormItem>
         </Popover>
         <FormItem
