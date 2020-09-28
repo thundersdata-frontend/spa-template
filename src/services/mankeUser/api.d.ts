@@ -2000,7 +2000,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2014,7 +2014,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -2049,7 +2049,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2082,7 +2082,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2107,7 +2107,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2144,7 +2144,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2160,7 +2160,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.CityPartnerUpdateJoinCityDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2176,7 +2176,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.CityPartnerRemarkDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2192,7 +2192,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.CityPartnerStatusDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -2213,7 +2213,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.CityPartnerApplyAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2227,7 +2227,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -2264,7 +2264,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2280,7 +2280,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.CityPartnerRemarkDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2296,7 +2296,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.CityPartnerStatusApplyDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -2315,7 +2315,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -2346,7 +2346,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2362,7 +2362,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.CloseAccountRemarkDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2378,7 +2378,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.CloseAccountStatusDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -2400,7 +2400,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2416,7 +2416,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.AddDTOToTheBlackList,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -2437,7 +2437,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.BlackListUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2453,7 +2453,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.ValidFriendDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2472,7 +2472,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2486,7 +2486,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -2500,7 +2500,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -2518,7 +2518,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.FriendQueryDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2545,7 +2545,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2559,7 +2559,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
     }
 
@@ -2581,7 +2581,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2598,7 +2598,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
     }
 
@@ -2638,7 +2638,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2673,7 +2673,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
     }
 
@@ -2694,7 +2694,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.LoginDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2710,7 +2710,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.LoginDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2726,7 +2726,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.LoginDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2740,7 +2740,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -2756,7 +2756,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.LoginDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2772,7 +2772,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.LoginDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2788,7 +2788,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.LoginDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2804,7 +2804,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.WeChatLoginDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -2826,7 +2826,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2843,7 +2843,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2882,7 +2882,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2901,7 +2901,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
     }
 
@@ -2922,7 +2922,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.MemberBanDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2939,7 +2939,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2970,7 +2970,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2997,7 +2997,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3015,7 +3015,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.AreaMemberQueryDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3042,7 +3042,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3058,7 +3058,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.MemberRemarkDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -3077,7 +3077,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3104,7 +3104,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3131,7 +3131,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
     }
 
@@ -3152,7 +3152,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.DeptDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3166,7 +3166,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3182,7 +3182,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.DeptDeleteDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3198,7 +3198,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.DeptDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -3219,7 +3219,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.OpUserDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3233,7 +3233,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3250,7 +3250,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3266,7 +3266,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.DisableEnable,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3299,7 +3299,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3316,7 +3316,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3332,7 +3332,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.OpUserDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3348,7 +3348,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.UserResetPassword,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -3367,7 +3367,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3381,7 +3381,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3410,7 +3410,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3426,7 +3426,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.ProxyApplyStatusListDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -3445,7 +3445,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3462,7 +3462,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3476,7 +3476,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3493,7 +3493,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3522,7 +3522,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3538,7 +3538,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.ProxyUserRemarkDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3554,7 +3554,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.ProxyUserStatusDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -3573,7 +3573,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3589,7 +3589,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.RegisterPhoneDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3606,7 +3606,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3622,7 +3622,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.InvitationBindingDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3638,7 +3638,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.RegisterUserDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3654,7 +3654,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.WeChatRegisterDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3670,7 +3670,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.SendSmsDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -3691,7 +3691,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.WeChatBindDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3705,7 +3705,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3721,7 +3721,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.CardCertificationDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3737,7 +3737,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.UpdatePhoneDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3751,7 +3751,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3767,7 +3767,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.FaceCertificationDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3781,7 +3781,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3795,7 +3795,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3809,7 +3809,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3825,7 +3825,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.ManualCertificationDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3842,7 +3842,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3858,7 +3858,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.RentSoundDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3872,7 +3872,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3888,7 +3888,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.AvatarNickUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3904,7 +3904,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.NickNameUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3920,7 +3920,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.UpdatePasswordByPhoneDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3936,7 +3936,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.StateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3952,7 +3952,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.UserLivingDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -3973,7 +3973,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.ReceiverAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3989,7 +3989,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.ReceiverDeleteDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -4014,7 +4014,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -4030,7 +4030,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeUser.ReceiverUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
   }

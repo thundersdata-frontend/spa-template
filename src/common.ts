@@ -1,10 +1,8 @@
 import { extend, ResponseError } from 'umi-request';
-import { message } from 'antd';
 import { history } from 'umi';
+import { LoginFailure } from './constant';
 
-const controller = new AbortController();
-const { signal } = controller;
-
+let controller = new AbortController();
 const codeMessage: { [key: number]: string } = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -21,6 +19,7 @@ const codeMessage: { [key: number]: string } = {
   502: '网关错误。',
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
+  405: 'xxxx',
 };
 
 export function errorHandler(error: ResponseError) {
@@ -29,58 +28,51 @@ export function errorHandler(error: ResponseError) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
 
-    console.error({
-      message: `请求错误 ${status}: ${url}`,
-      description: errorText,
-    });
+    throw new Error(
+      JSON.stringify({
+        message: errorText,
+        description: `请求错误 ${status}: ${url}`,
+      }),
+    );
   }
+  throw error;
 }
 
-export const request = () =>
+const getToken = () =>
+  new Promise(resolve => {
+    setTimeout(() => {
+      const token = localStorage.getItem('accessToken');
+      resolve(token);
+    }, 0);
+  });
+
+export const initRequest = async () => {
+  const token = await getToken();
   /** 这边可对接口请求做一些统一的封装 */
-  extend({
+  const request = extend({
     useCache: false,
     ttl: 60000,
     credentials: 'same-origin',
     headers: {
-      access_token: localStorage.getItem('accessToken')!,
+      accessToken: token! as string,
     },
     errorHandler,
-    signal,
+    signal: controller.signal,
   });
 
-request().interceptors.response.use(response => {
-  response
-    .clone()
-    .json()
-    .then(res => {
-      if (!res.success) {
-        console.error(res.message);
-        /**
-         * 用户认证失败 token无效或者过期
-         * 1、需要取消所有请求（防止多个请求时，其中一个响应速度太慢，导致重新登录成功后又多次回到登录页面）；
-         * 2、跳转到登录页面。
-         */
-        if (res.code === 40001) {
+  request.interceptors.response.use(response => {
+    response
+      .clone()
+      .json()
+      .then(res => {
+        if ([LoginFailure['不允许登录'], LoginFailure['登录过期']].includes(res.code)) {
           controller.abort();
+          controller = new AbortController();
           history.replace('/user/login');
         }
-      }
-    });
-  return response;
-});
+      });
+    return response;
+  });
 
-/** table的默认配置 */
-export const defaultTableProps = {
-  onRequestError: (error: Error) => {
-    console.error(error.message);
-    message.error('数据加载失败');
-  },
-  bordered: false,
-  search: true,
-  pagination: {
-    size: 'default',
-  },
-  dateFormatter: 'string',
-  tableAlertRender: false,
+  return request;
 };

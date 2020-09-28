@@ -4,13 +4,14 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 廖军
- * @LastEditTime: 2020-06-29 16:48:42
+ * @LastEditTime: 2020-07-24 16:16:36
  */
 import { request } from 'umi';
 import { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils from '@/utils/array';
-import { PrivilegeResource } from './interfaces/common';
 import { isEmpty } from 'lodash-es';
+import { PrivilegeResource } from './interfaces/common';
+import { showGlobalLoading } from './components/GlobalLoading';
 
 /** 初始化数据 */
 export async function getInitialState() {
@@ -20,21 +21,27 @@ export async function getInitialState() {
 
   const accessToken = localStorage.getItem('accessToken');
   if (accessToken) {
-    const result = await request('/resource');
-    const { code, success, data = [] } = result;
-    if (code === 20000 && success) {
-      const routes: PrivilegeResource[] = arrayUtils.deepOrder({
-        data,
-        childKey: 'children',
-        orderKey: 'orderValue',
-        type: 'asc',
-      });
-      const flatRoutes = arrayUtils.deepFlatten(routes);
-      flatRoutes.forEach(route => {
-        route.privilegeList && privileges.push(...route.privilegeList);
-      });
-      menus = convertResourceToMenu(routes);
-      // TODO：这里请求userInfo的数据
+    try {
+      /** 将会在 components/LoadingPage 中调用 hideGlobalLoading */
+      showGlobalLoading();
+      const result = await request('/resource');
+      const { code, success, data = [] } = result;
+      if (code === 20000 && success) {
+        const routes: PrivilegeResource[] = arrayUtils.deepOrder({
+          data,
+          childKey: 'children',
+          orderKey: 'orderValue',
+          type: 'asc',
+        });
+        const flatRoutes = arrayUtils.deepFlatten(routes);
+        flatRoutes.forEach(route => {
+          route.privilegeList && privileges.push(...route.privilegeList);
+        });
+        menus = convertResourceToMenu(routes);
+        // TODO：这里请求userInfo的数据
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
   return {

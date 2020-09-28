@@ -9,6 +9,7 @@ import CustomHeaderRight from './components/CustomHeaderRight';
 import defaultSettings from './defaultSettings';
 import Logo from './components/Logo';
 import { validateMessages } from './validateMessages';
+import { THROTTLE_INTERVAL } from '@/constant';
 
 export default function BasicLayout(props: IRouteComponentProps) {
   const [collapsed, handleMenuCollapse] = useState<boolean>(false);
@@ -23,9 +24,16 @@ export default function BasicLayout(props: IRouteComponentProps) {
       value={{
         /** 全局请求的默认配置 */
         onError: (error: Error) => {
-          console.warn(error);
-          message.error(`请求失败: ${error.message}`);
+          try {
+            if (error) {
+              const errorJSON = JSON.parse(error.message);
+              message.error(errorJSON.message);
+            }
+          } catch (err) {
+            console.error(err.message);
+          }
         },
+        throttleInterval: THROTTLE_INTERVAL,
       }}
     >
       <ConfigProvider
@@ -33,6 +41,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
         renderEmpty={() => (
           <Empty image={require('../../assets/pic_empty.png')} description="暂无数据" />
         )}
+        getPopupContainer={trigger => trigger.parentElement || document.body}
         form={{ validateMessages }}
       >
         <ProLayout

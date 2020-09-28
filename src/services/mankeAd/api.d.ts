@@ -1616,7 +1616,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1633,7 +1633,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1650,7 +1650,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1666,7 +1666,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AccountCompanyAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1682,7 +1682,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AccountPersonAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1698,7 +1698,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AreaAdQueryDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1729,7 +1729,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1760,7 +1760,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1776,7 +1776,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AccountBanTypeDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1792,7 +1792,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AccountBanTypeDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -1813,7 +1813,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.ApplyCompanyAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1829,7 +1829,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.ApplyPersonAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1843,7 +1843,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -1860,7 +1860,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1877,7 +1877,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1908,7 +1908,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1939,7 +1939,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -1955,7 +1955,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.ApplyStatusDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1971,7 +1971,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.ApplyRemarkDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -1987,7 +1987,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.ApplyStatusDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2003,7 +2003,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.ApplyRemarkDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -2041,7 +2041,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2074,7 +2074,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
     }
 
@@ -2095,7 +2095,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AdFreeAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2111,7 +2111,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AdFreeDeleteDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2136,7 +2136,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2165,7 +2165,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2181,7 +2181,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AdFreeUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2197,7 +2197,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AdFreeStatusDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -2218,7 +2218,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AdFreePayDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2234,7 +2234,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.OrderCallbackDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2269,7 +2269,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
     }
 
@@ -2309,7 +2309,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2348,7 +2348,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
     }
 
@@ -2370,7 +2370,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
     }
 
@@ -2391,7 +2391,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.PredictionAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2407,7 +2407,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.PredictionDeleteDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2421,7 +2421,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -2448,7 +2448,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2464,7 +2464,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.PredictionUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -2485,7 +2485,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AdvertisingAppQueryDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2501,7 +2501,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AdvertisingAppQueryDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -2520,7 +2520,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -2551,7 +2551,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2584,7 +2584,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2600,7 +2600,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.RechargePayDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2616,7 +2616,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.OrderCallbackDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -2635,7 +2635,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -2649,7 +2649,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -2663,7 +2663,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -2686,7 +2686,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2709,7 +2709,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2725,7 +2725,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AdOpStatisticsQueryDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2748,7 +2748,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2771,7 +2771,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2789,7 +2789,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AdOpStatisticsQueryDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -2810,7 +2810,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AdvertisingAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -2827,7 +2827,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2856,7 +2856,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2887,7 +2887,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2904,7 +2904,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2921,7 +2921,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2938,7 +2938,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2955,7 +2955,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2972,7 +2972,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -2991,7 +2991,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3007,7 +3007,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.AdvertisingUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -3028,7 +3028,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.ManagerAddDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3045,7 +3045,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3059,7 +3059,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3075,7 +3075,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.DisableEnable,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3110,7 +3110,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3126,7 +3126,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.ManagerLoginDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3142,7 +3142,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.ManagerLoginDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3158,7 +3158,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.ManagerUpdateDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3174,7 +3174,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.UserResetPassword,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
 
       /**
@@ -3190,7 +3190,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.SendSmsDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
 
@@ -3220,7 +3220,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(params: Params): Promise<AjaxResponse<Response>>;
+        export function fetch(params: Params): Promise<Response>;
       }
 
       /**
@@ -3234,7 +3234,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(): Promise<AjaxResponse<Response>>;
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -3250,7 +3250,7 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.mankeAd.MessageReadDTO,
-        ): Promise<AjaxResponse<Response>>;
+        ): Promise<Response>;
       }
     }
   }

@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2020-04-26 10:26:49
- * @LastEditors: 陈杰
- * @LastEditTime: 2020-05-18 15:39:47
+ * @LastEditors: 廖军
+ * @LastEditTime: 2020-07-24 16:15:33
  */
 import { defineConfig } from 'umi';
 import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
@@ -12,7 +12,7 @@ import routeConfig from './routeConfig';
 
 export default defineConfig({
   dynamicImport: {
-    loading: '@/components/Loading.tsx',
+    loading: '@/components/LoadingPage',
   },
   hash: true,
   outputPath: 'build',
@@ -75,7 +75,7 @@ export default defineConfig({
             },
           },
         },
-      }
+      },
     });
   },
 });

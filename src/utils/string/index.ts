@@ -1,4 +1,4 @@
-type valueType = object | number | string;
+type ValueType = object | number | string;
 
 export default {
   /**
@@ -35,7 +35,7 @@ export default {
    * 值格式化为string
    * @param value
    */
-  valueToString(value: valueType | valueType[]) {
+  valueToString(value: ValueType | ValueType[]) {
     if (typeof value === 'string') {
       return value;
     }

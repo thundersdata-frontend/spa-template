@@ -1,4 +1,11 @@
 export default {
+  'POST /account': {
+    code: 20000,
+    success: true,
+    data: {
+      accessToken: '123'
+    },
+  },
   '/detail': {
     code: 20000,
     data: {
@@ -40,4 +47,11 @@ export default {
     message: '成功',
     success: true,
   },
+  '/banner/insert': (req, res) => {
+    res.status(500).send({
+      success: false,
+      message: 'error',
+      code: 50000,
+    })
+  }
 };

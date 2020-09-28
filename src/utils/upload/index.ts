@@ -4,12 +4,13 @@
  * @作者: 廖军
  * @Date: 2020-05-25 16:07:51
  * @LastEditors: 阮旭松
- * @LastEditTime: 2020-06-29 17:39:23
+ * @LastEditTime: 2020-08-08 14:33:21
  */
 import { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
-import { UploadFile } from 'antd/lib/upload/interface';
+import { UploadFile, RcFile } from 'antd/lib/upload/interface';
 import { FileDTO } from '@/interfaces/common';
+import { message } from 'antd';
 
 // 文件服务开发环境地址
 export const UPLOAD_URL = 'http://object-service.dev.thundersdata.com';
@@ -52,6 +53,7 @@ export const FILE_TYPE_MAP = {
   压缩包: ['.rar', '.zip'],
   文档: ['.doc', '.docx', '.pdf'],
   表格: ['.xls'],
+  视频: ['.avi', '.wmv', '.mpg', '.mpeg', '.mov', '.mp4', '.rm', '.ram'],
 };
 
 /**
@@ -80,30 +82,13 @@ export const onPreview = (file: UploadFile) => {
 export const isPermitFile = (
   file: UploadFile,
   allowFileList: string[] | string = FILE_TYPE_MAP['图片'],
-  validateItem: string[] | string = ['type'],
 ) => {
   // 文件后缀
   const fileSuffix = '.' + string.getLastSubstring(file.name, '.');
   const formatedAllowFileList = Array.isArray(allowFileList)
     ? allowFileList
     : allowFileList.split(',');
-  const isPermitType = formatedAllowFileList.includes(fileSuffix);
-  const validateObj = {
-    type: isPermitType,
-  };
-  // 若传入字符串单项
-  if (typeof validateItem === 'string') {
-    return validateObj[validateItem];
-  }
-  // 若传入校验类型数组
-  if (Array.isArray(validateItem)) {
-    for (let i = 0; i < validateItem.length; i += 1) {
-      if (!validateObj[validateItem[i]]) {
-        return false;
-      }
-    }
-  }
-  return true;
+  return formatedAllowFileList.includes(fileSuffix);
 };
 
 export const getPublicUploadProps: () => UploadProps = () => ({
@@ -149,6 +134,17 @@ export function uploadValidator(
   }
 }
 
+/** 得到文件大小的文本 */
+export const getFileSizeName = (size: number | boolean): string => {
+  if (typeof size === 'number') {
+    return size > BASE_BYTE ? `${size / 1024} M` : `${size} KB`;
+  }
+  if (size) {
+    return getFileSizeName(ATTACHMENT_MAX_FILE_SIZE);
+  }
+  return '';
+};
+
 /**
  * 对附件大小进行校验
  * @param params maxSize (KB)
@@ -192,7 +188,7 @@ export function validatorFileListSuffixRule(
     validator: (_: unknown, values: UploadFile[], callback: (error?: string) => void) => {
       if (values && values.length) {
         const typeValidationFailedList = values.filter(
-          (file: UploadFile) => !isPermitFile(file, accept, 'type'),
+          (file: UploadFile) => !isPermitFile(file, accept),
         );
         if (typeValidationFailedList.length) {
           const names = typeValidationFailedList.map((file: UploadFile) => file.name).join(',');
@@ -242,6 +238,26 @@ export const getFileValidators = (params: FileValidatorsProps) => {
   return validatorList.map(item =>
     params[item] === true ? VALIDATOR_MAP[item]() : VALIDATOR_MAP[item]({ [item]: params[item] }),
   );
+};
+
+/**
+ * 传入校验数组获得 beforeUpload 函数(如果有单独的 Upload 需要类型、大小校验可以用这个函数)
+ * maxCount 最好不要在 beforeUpload 中处理，因为拿到的 fileList 只是改变的文件列表而不包含原来的
+ */
+export const getBeforeUpload = (validatorObj: FileValidatorsProps, showMessage?: boolean) => (
+  file: RcFile,
+) => {
+  const errorMessageList: string[] = [];
+  /** 若不符合要求阻断上传 */
+  getFileValidators(validatorObj).forEach(item => {
+    item.validator('', [file], (error?: string) => {
+      if (error) {
+        errorMessageList.push(error);
+        showMessage && message.error(error);
+      }
+    });
+  });
+  return errorMessageList.length === 0;
 };
 
 /**

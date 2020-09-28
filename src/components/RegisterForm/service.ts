@@ -7,7 +7,7 @@
  * @LastEditTime: 2020-06-01 17:30:59
  */
 
-import { request } from '@/common';
+import { initRequest } from '@/common';
 
 export interface StateType {
   status?: 'ok' | 'error';
@@ -24,7 +24,8 @@ export interface UserRegisterParams {
 }
 
 export async function fakeRegister(params: UserRegisterParams) {
-  return request()('/api/register', {
+  const request = await initRequest();
+  return request('/api/register', {
     method: 'POST',
     data: params,
   });

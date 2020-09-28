@@ -3,23 +3,27 @@
  */
 
 import serverConfig from '../../../../../server.config';
-import { request } from '@/common';
+import { initRequest } from '@/common';
 
 const backEndUrl = serverConfig()['mankeUser'];
 
 export const init = false;
 
 export async function fetch(data = {}) {
-  const result = await request().post(backEndUrl + '/opUser/updatePassword', {
+  const request = await initRequest();
+  const result = await request.post(backEndUrl + '/opUser/updatePassword', {
     headers: {
       'Content-Type': 'application/json',
     },
     data,
   });
   if (result) {
-    if (!result.success) throw new Error(result.message);
-    return result.data || false;
+    if (!result.success) {
+      throw new Error(JSON.stringify(result));
+    } else {
+      return result.data || false;
+    }
   } else {
-    throw new Error();
+    throw new Error(JSON.stringify({ message: '接口未响应' }));
   }
 }

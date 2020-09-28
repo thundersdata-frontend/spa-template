@@ -3,6 +3,7 @@ import { Layout, message } from 'antd';
 import { CopyrightOutlined } from '@ant-design/icons';
 import { IRouteComponentProps } from 'umi';
 import { UseRequestProvider } from 'ahooks';
+import { THROTTLE_INTERVAL } from '@/constant';
 
 const { Header, Content, Footer } = Layout;
 
@@ -12,9 +13,13 @@ export default function SignInLayout(props: IRouteComponentProps) {
       value={{
         /** 全局请求的默认配置 */
         onError: (error: Error) => {
-          console.warn(error);
-          message.error(`请求失败: ${error.message}`);
+          console.error(error);
+          if (error) {
+            const errorJSON = JSON.parse(error.message);
+            message.error(errorJSON.message);
+          }
         },
+        throttleInterval: THROTTLE_INTERVAL,
       }}
     >
       <Layout
@@ -24,7 +29,7 @@ export default function SignInLayout(props: IRouteComponentProps) {
       >
         <Header style={{ height: 100, paddingLeft: 320, paddingRight: 320 }}>
           <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-            <img src={require('../../assets/signin_logo.png')} alt="雷数科技" />
+            <img src={require('../../assets/sign_logo.png')} alt="雷数科技" />
           </div>
         </Header>
         <Content
