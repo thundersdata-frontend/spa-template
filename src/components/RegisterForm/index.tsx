@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2020-04-26 16:31:35
- * @LastEditors: 陈杰
- * @LastEditTime: 2020-04-27 14:01:21
+ * @LastEditors: 黄姗姗
+ * @LastEditTime: 2020-09-28 11:36:13
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Col, Input, Row, Select, message } from 'antd';
@@ -91,8 +91,8 @@ export default function RegisterForm() {
             styles.password
           }
           rules={[
-            {required: true, message: '请输入密码'},
-            {min: 6, message: '密码最少为6位'},
+            { required: true, message: '请输入密码' },
+            { min: 6, message: '密码最少为6位' },
           ]}
         >
           <Input

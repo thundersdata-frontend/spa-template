@@ -1,12 +1,12 @@
-import { defs as recruitmentDefs, recruitment } from './recruitment';
+import { defs as mankeAdDefs, mankeAd } from './mankeAd';
 
-import { defs as authorizationDefs, authorization } from './authorization';
+import { defs as mankeUserDefs, mankeUser } from './mankeUser';
 
 (window as any).defs = {
-  recruitment: recruitmentDefs,
-  authorization: authorizationDefs,
+  mankeAd: mankeAdDefs,
+  mankeUser: mankeUserDefs,
 };
 (window as any).API = {
-  recruitment,
-  authorization,
+  mankeAd,
+  mankeUser,
 };

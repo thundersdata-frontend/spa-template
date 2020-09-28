@@ -2,12 +2,19 @@
   "outDir": "./src/services",
   "templatePath": "./pontTemplate",
   "usingMultipleOrigins": true,
-  "origins": [{
-    "name": "recruitment",
-    "originUrl": "http://recruitment.test.thundersdata.com/v2/api-docs"
+  "mocks": {
+    "enable": true,
+    "wrapper": "{\"code\": 20000, \"success\": true, \"data\": {response}, \"message\": \"\"}",
+    "containDataSources": ["mankeUser"]
   },
-  {
-    "name": "authorization",
-    "originUrl": "http://authorization.dev.thundersdata.com/v2/api-docs"
-  }]
+  "origins": [
+    {
+      "name": "mankeAd",
+      "originUrl": "http://maq.dev.thundersdata.com/maq-ad/v2/api-docs"
+    },
+    {
+      "name": "mankeUser",
+      "originUrl": "http://maq.dev.thundersdata.com/maq-user/v2/api-docs"
+    }
+  ]
 }
