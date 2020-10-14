@@ -1,12 +1,14 @@
 import { Button, Col, Input, Row, Form, message } from 'antd';
 import React, { useState, useCallback, useEffect } from 'react';
-
 import omit from 'omit.js';
 import { FormItemProps } from 'antd/es/form/FormItem';
 import ItemMap from './map';
 import LoginContext, { LoginContextProps } from './LoginContext';
-import { getFakeCaptcha } from './service';
 import styles from './index.less';
+import { AUTH_API_URL, LOGIN_CONFIG, SMS_TYPE_ENUM } from '@/constant';
+import { useRequest } from 'ahooks';
+import request from 'umi-request';
+import { Store } from 'antd/es/form/interface';
 
 export type WrappedLoginItemProps = LoginItemProps;
 export type LoginItemKeyType = keyof typeof ItemMap;
@@ -31,6 +33,7 @@ export interface LoginItemProps extends Partial<FormItemProps> {
   customProps?: { [key: string]: unknown };
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   tabUtil?: LoginContextProps['tabUtil'];
+  smsType?: number;
 }
 
 const FormItem = Form.Item;
@@ -72,20 +75,55 @@ const LoginItem: React.FC<LoginItemProps> = props => {
     updateActive,
     type,
     tabUtil,
+    smsType = SMS_TYPE_ENUM.登录,
     ...restProps
   } = props;
 
-  const onGetCaptcha = useCallback(async (mobile: string) => {
-    if (!mobile) {
+  /**
+   * 获取验证码
+   * http://mindoc.internal.thundersdata.com/docs/platform/platform-1atuk4sroh108
+   * @param values
+   */
+  const fetchVerificationCode = async (values: Store) => {
+    const result = await request(`${AUTH_API_URL}/authz/sms/send`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      params: {
+        mobile: values.mobilePhone,
+        type: values.type,
+        clientId: LOGIN_CONFIG.clientId,
+        appVersion: '1.0.0',
+      },
+    });
+    if (!result.success) {
+      result.message = result.msg;
+      throw new Error(JSON.stringify(result));
+    }
+    return result.result;
+  };
+
+  /**
+   * 获取验证码
+   */
+  const { run: sendVerificationCode } = useRequest(fetchVerificationCode, {
+    manual: true,
+    onSuccess: () => {
+      message.success('获取验证码成功！');
+      setTiming(true);
+    },
+  });
+
+  const onGetCaptcha = useCallback(async (mobilePhone: string) => {
+    if (!mobilePhone) {
       message.warning('请输入手机号码!');
       return;
     }
-    const result = await getFakeCaptcha(mobile);
-    if (result === false) {
-      return;
-    }
-    message.success('获取验证码成功！验证码为：1234');
-    setTiming(true);
+    sendVerificationCode({
+      mobilePhone,
+      type: smsType,
+    });
   }, []);
 
   useEffect(() => {
