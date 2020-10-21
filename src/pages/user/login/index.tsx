@@ -93,6 +93,7 @@ export default function Login() {
   const loginSubmit = (values: LoginParamsType) =>
     type === 'account' ? accountLogin(values) : smsLogin(values);
 
+  // 本地新建项目跳过登录可使用 fakeAccountLogin
   const { loading, data, run: submit } = useRequest(loginSubmit, {
     manual: true,
     onSuccess: data => {
