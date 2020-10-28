@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 廖军
- * @LastEditTime: 2020-07-24 16:16:36
+ * @LastEditTime: 2020-10-28 20:51:08
  */
 import { request } from 'umi';
 import { MenuDataItem } from '@ant-design/pro-layout';
@@ -12,6 +12,7 @@ import arrayUtils from '@/utils/array';
 import { isEmpty } from 'lodash-es';
 import { PrivilegeResource } from './interfaces/common';
 import { showGlobalLoading } from './components/GlobalLoading';
+import { LOGIN_CONFIG } from './constant';
 
 /** 初始化数据 */
 export async function getInitialState() {
@@ -20,7 +21,7 @@ export async function getInitialState() {
   const userInfo = {};
 
   const accessToken = localStorage.getItem('accessToken');
-  if (accessToken) {
+  if (LOGIN_CONFIG.isSSO || accessToken) {
     try {
       /** 将会在 components/LoadingPage 中调用 hideGlobalLoading */
       showGlobalLoading();
