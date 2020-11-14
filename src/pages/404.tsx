@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'antd';
 import { history } from 'umi';
 
-export default function() {
+export default () => {
   return (
     <div
       style={{
@@ -20,4 +20,4 @@ export default function() {
       </div>
     </div>
   );
-}
+};

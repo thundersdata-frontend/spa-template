@@ -76,7 +76,7 @@ declare namespace defs {
       id?: number;
 
       /** isDeleted */
-      isDeleted?: string;
+      isDeleted?: number;
 
       /** moduleName */
       moduleName?: string;
@@ -359,7 +359,7 @@ declare namespace defs {
       id?: number;
 
       /** isDeleted */
-      isDeleted?: string;
+      isDeleted?: number;
 
       /** 是否默认可见 */
       isVisible?: number;
@@ -412,7 +412,7 @@ declare namespace defs {
       id?: number;
 
       /** isDeleted */
-      isDeleted?: string;
+      isDeleted?: number;
 
       /** 是否默认可见 */
       isVisible?: number;
@@ -458,6 +458,9 @@ declare namespace defs {
       /** isDeleted */
       isDeleted?: boolean;
 
+      /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+      operationRange?: number;
+
       /** 角色名称 */
       role: string;
 
@@ -466,9 +469,6 @@ declare namespace defs {
 
       /** 更新时间 */
       updatedAt?: string;
-
-      /** userId */
-      userId?: number;
     }
 
     export class ResourceRolePageObject {
@@ -489,6 +489,9 @@ declare namespace defs {
 
       /** isDeleted */
       isDeleted?: boolean;
+
+      /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+      operationRange?: number;
 
       /** ResourceObject列表 */
       resourceVOList?: Array<defs.authorization.ResourceObject>;
@@ -566,6 +569,9 @@ declare namespace defs {
       /** isDeleted */
       isDeleted?: boolean;
 
+      /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+      operationRange?: number;
+
       /** 资源id列表 */
       resourceIds: Array<number>;
 
@@ -603,7 +609,70 @@ declare namespace defs {
 declare namespace API {
   export namespace authorization {
     /**
-     * Client Controller
+     * 新的资源管理接口
+     */
+    export namespace authResource {
+      /**
+       * 添加资源
+       * /auth/resource/save
+       */
+      export namespace save {
+        export class Params {}
+
+        export type Response = number;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.authorization.ResourceObject,
+        ): Promise<Response>;
+      }
+
+      /**
+       * 批量添加资源
+       * /auth/resource/saveList
+       */
+      export namespace saveList {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: Array<defs.authorization.ResourceObject>,
+        ): Promise<Response>;
+      }
+    }
+
+    /**
+     * 新的ResourceRole管理接口
+     */
+    export namespace authResourceRole {
+      /**
+       * 校验用户是否已经绑定该角色
+       * /auth/role/resource/hasRole
+       */
+      export namespace hasRole {
+        export class Params {
+          /** 客户端标志 */
+          clientKey: string;
+          /** 角色id */
+          roleId: string;
+          /** 用户id */
+          userId: string;
+        }
+
+        export type Response = boolean;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+    }
+
+    /**
+     * 客户端管理
      */
     export namespace client {
       /**
@@ -666,10 +735,10 @@ declare namespace API {
           clientKey?: string;
           /** clientName */
           clientName?: string;
-          /** secret */
-          secret?: string;
           /** note */
           note?: string;
+          /** secret */
+          secret?: string;
         }
 
         export type Response = ObjectMap<any, string>;
@@ -681,7 +750,7 @@ declare namespace API {
     }
 
     /**
-     * Data Controller
+     * 数据管理
      */
     export namespace data {
       /**
@@ -883,290 +952,19 @@ declare namespace API {
     }
 
     /**
-     * Resource Controller
+     * 数据角色管理
      */
-    export namespace resource {
-      /**
-       * 删除资源
-       * /resource/delete
-       */
-      export namespace deleteResource {
-        export class Params {
-          /** 客户端标志 */
-          clientKey: string;
-          /** id */
-          id: string;
-        }
-
-        export type Response = any;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-
-      /**
-       * 查询ResourceDetails
-       * /resource/detail
-       */
-      export namespace detail {
-        export class Params {
-          /** 资源id */
-          id: number;
-        }
-
-        export type Response = defs.authorization.ResourceDetails;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-
-      /**
-       * 校验用户是否拥有权限
-       * /resource/getPermissionByUrl
-       */
-      export namespace getPermissionByUrl {
-        export class Params {
-          /** 客户端标志 */
-          clientKey: string;
-          /** apiUrl */
-          apiUrl: string;
-          /** 拓展业务字段 */
-          businessValue: string;
-          /** 用户id */
-          userId: string;
-        }
-
-        export type Response = any;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-
-      /**
-       * 列表
-       * /resource/list
-       */
-      export namespace listResource {
-        export class Params {
-          /** 客户端标志 */
-          clientKey: string;
-          /** 角色id */
-          roleId?: string;
-        }
-
-        export type Response = Array<defs.authorization.ResourceObject>;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-
-      /**
-       * 查询资源列表
-       * /resource/listPagination
-       */
-      export namespace listPagination {
-        export class Params {
-          /** 客户端标识 */
-          clientKey: string;
-          /** 资源标识 */
-          resourceKey?: string;
-          /** 类型 */
-          type?: number;
-          /** 分页参数 */
-          page: number;
-          /** 分页参数 */
-          pageSize: number;
-        }
-
-        export type Response = defs.authorization.PagingEntity<
-          defs.authorization.ResourceObject
-        >;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-
-      /**
-       * 全部资源列表（树形）
-       * /resource/listTree
-       */
-      export namespace listTree {
-        export class Params {
-          /** 客户端标识 */
-          clientKey: string;
-          /** 拓展业务字段 */
-          businessValue?: string;
-        }
-
-        export type Response = Array<defs.authorization.ResourceTreeObject>;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-
-      /**
-       * 保存资源
-       * /resource/save
-       */
-      export namespace newResource {
-        export class Params {
-          /** id */
-          id?: number;
-          /** 资源标志 */
-          resourceKey: string;
-          /** 客户端标志 */
-          clientKey: string;
-          /** api url */
-          apiUrl: string;
-          /** 图标 */
-          icon?: string;
-          /** 类型 */
-          type?: number;
-          /** 资源顺位 */
-          orderValue?: number;
-          /** 描述 */
-          description: string;
-          /** 备注 */
-          comment: string;
-          /** 资源拓展字段 */
-          resourceBusinessValue?: string;
-          /** isDeleted */
-          isDeleted?: string;
-          /** 父级菜单id */
-          parentId?: number;
-          /** 是否默认可见 */
-          isVisible?: number;
-          /** 资源码 */
-          permissionCode?: string;
-          /** 创建时间 */
-          createdAt?: string;
-          /** 更新时间 */
-          updatedAt?: string;
-        }
-
-        export type Response = number;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-
-      /**
-       * 保存资源（批量）
-       * /resource/saveList
-       */
-      export namespace postSaveList {
-        export class Params {
-          /** permissionResourceList */
-          permissionResourceList?: Array<defs.authorization.ResourceObject>;
-        }
-
-        export type Response = any;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-
-      /**
-       * 测试swagger文登接口
-       * /resource/test
-       */
-      export namespace test {
-        export class Params {
-          /** 客户端标志 */
-          clientKey: string;
-          /** 角色id */
-          roleId: string;
-        }
-
-        export type Response = defs.authorization.ResourceObject;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-
-      /**
-       * 用户资源列表
-       * /resource/user/list
-       */
-      export namespace listUserResource {
-        export class Params {
-          /** 客户端标志 */
-          clientKey: string;
-          /** 用户id */
-          userId: string;
-        }
-
-        export type Response = Array<string>;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-
-      /**
-       * 用户资源列表（树形）
-       * /resource/user/list/data
-       */
-      export namespace listUserResourceData {
-        export class Params {
-          /** 客户端标志 */
-          clientKey: string;
-          /** 角色id */
-          roleId?: string;
-          /** 用户id */
-          userId?: string;
-        }
-
-        export type Response = Array<defs.authorization.ResourceTreeObject>;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-
-      /**
-       * 获取apiUrl列表
-       * /resource/user/listApiUrl
-       */
-      export namespace listApiUrl {
-        export class Params {
-          /** 客户端标志 */
-          clientKey: string;
-          /** 用户id */
-          userId: string;
-        }
-
-        export type Response = Array<string>;
-
-        export const init: Response;
-
-        export function fetch(params: Params): Promise<Response>;
-      }
-    }
-
-    /**
-     * Role Controller
-     */
-    export namespace role {
+    export namespace dataRole {
       /**
        * 数据角色绑定用户
        * /role/data/add/user
        */
       export namespace addForUser {
         export class Params {
-          /** userId */
-          userId?: number;
           /** roleId */
           roleId?: number;
+          /** userId */
+          userId?: number;
         }
 
         export type Response = any;
@@ -1249,10 +1047,10 @@ declare namespace API {
        */
       export namespace deleteUser {
         export class Params {
-          /** userId */
-          userId?: number;
           /** roleId */
           roleId?: number;
+          /** userId */
+          userId?: number;
         }
 
         export type Response = any;
@@ -1277,7 +1075,375 @@ declare namespace API {
           bodyParams: defs.authorization.DataRoleInputDTO,
         ): Promise<Response>;
       }
+    }
 
+    /**
+     * 部署权限控制中心接口
+     */
+    export namespace deploymentAuthz {
+      /**
+       * 获取角色访问businessValue列表
+       * /deployment/authz/getBusinessValueListByRole
+       */
+      export namespace getBusinessValueListByRole {
+        export class Params {
+          /** roleId */
+          roleId?: number;
+        }
+
+        export type Response = Array<string>;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 获取此数据权限的用户列表
+       * /deployment/authz/getDataAccessUserList
+       */
+      export namespace getDataAccessUserList {
+        export class Params {
+          /** businessValue */
+          businessValue?: string;
+          /** ruleKeyId */
+          ruleKeyId?: number;
+        }
+
+        export type Response = Array<number>;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 获取能访问businessValue的RoleId
+       * /deployment/authz/getRoleIdToBusinessValue
+       */
+      export namespace getRoleIdToBusinessValue {
+        export class Params {
+          /** businessValue */
+          businessValue?: string;
+          /** ruleKeyId */
+          ruleKeyId?: number;
+        }
+
+        export type Response = number;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 获取拥有此角色的所有用户id
+       * /deployment/authz/getUserIdsByRoleId
+       */
+      export namespace getUserIdsByRoleId {
+        export class Params {
+          /** roleId */
+          roleId?: number;
+        }
+
+        export type Response = Array<number>;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 获取用户所有的数据角色Id
+       * /deployment/authz/getUserRoleIdList
+       */
+      export namespace getUserRoleIdList {
+        export class Params {
+          /** userId */
+          userId?: number;
+        }
+
+        export type Response = Array<number>;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+    }
+
+    /**
+     * 资源管理
+     */
+    export namespace resource {
+      /**
+       * 删除资源
+       * /resource/delete
+       */
+      export namespace deleteResource {
+        export class Params {
+          /** id */
+          id: string;
+        }
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 查询ResourceDetails
+       * /resource/detail
+       */
+      export namespace detail {
+        export class Params {
+          /** 资源id */
+          id: number;
+        }
+
+        export type Response = defs.authorization.ResourceDetails;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 校验用户是否拥有权限
+       * /resource/getPermissionByUrl
+       */
+      export namespace getPermissionByUrl {
+        export class Params {
+          /** apiUrl */
+          apiUrl: string;
+          /** 拓展业务字段 */
+          businessValue: string;
+          /** 客户端标志 */
+          clientKey: string;
+          /** 用户id */
+          userId: string;
+        }
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 列表
+       * /resource/list
+       */
+      export namespace listResource {
+        export class Params {
+          /** 客户端标志 */
+          clientKey: string;
+          /** 角色id */
+          roleId?: string;
+        }
+
+        export type Response = Array<defs.authorization.ResourceObject>;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 查询资源列表
+       * /resource/listPagination
+       */
+      export namespace listPagination {
+        export class Params {
+          /** 客户端标识 */
+          clientKey: string;
+          /** 分页参数 */
+          page: number;
+          /** 分页参数 */
+          pageSize: number;
+          /** 资源标识 */
+          resourceKey?: string;
+          /** 类型 */
+          type?: number;
+        }
+
+        export type Response = defs.authorization.PagingEntity<
+          defs.authorization.ResourceObject
+        >;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 全部资源列表（树形）
+       * /resource/listTree
+       */
+      export namespace listTree {
+        export class Params {
+          /** 拓展业务字段 */
+          businessValue?: string;
+          /** 客户端标识 */
+          clientKey: string;
+        }
+
+        export type Response = Array<defs.authorization.ResourceTreeObject>;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 获取角色对应的菜单树
+       * /resource/role/getMenuTree
+       */
+      export namespace getMenuTreeByRole {
+        export class Params {
+          /** 客户端标志 */
+          clientKey: string;
+          /** 角色id */
+          roleId: string;
+        }
+
+        export type Response = Array<defs.authorization.ResourceTreeObject>;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 保存资源-这个接口仍然可以使用，但建议使用新的资源管理接口中/auth/resource/save
+       * /resource/save
+       */
+      export namespace newResource {
+        export class Params {
+          /** api url */
+          apiUrl: string;
+          /** 客户端标志 */
+          clientKey: string;
+          /** 备注 */
+          comment: string;
+          /** 创建时间 */
+          createdAt?: string;
+          /** 描述 */
+          description: string;
+          /** 图标 */
+          icon?: string;
+          /** id */
+          id?: number;
+          /** isDeleted */
+          isDeleted?: number;
+          /** 是否默认可见 */
+          isVisible?: number;
+          /** 资源顺位 */
+          orderValue?: number;
+          /** 父级菜单id */
+          parentId?: number;
+          /** 资源码 */
+          permissionCode?: string;
+          /** 资源拓展字段 */
+          resourceBusinessValue?: string;
+          /** 资源标志 */
+          resourceKey: string;
+          /** 类型 */
+          type?: number;
+          /** 更新时间 */
+          updatedAt?: string;
+        }
+
+        export type Response = number;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 保存资源（批量）-这个接口仍然可以使用，但建议使用新的资源管理接口中/auth/resource/saveList
+       * /resource/saveList
+       */
+      export namespace postSaveList {
+        export class Params {
+          /** permissionResourceList */
+          permissionResourceList?: Array<defs.authorization.ResourceObject>;
+        }
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 用户资源列表
+       * /resource/user/list
+       */
+      export namespace listUserResource {
+        export class Params {
+          /** 客户端标志 */
+          clientKey: string;
+          /** 用户id */
+          userId: string;
+        }
+
+        export type Response = Array<string>;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 用户资源列表（树形）
+       * /resource/user/list/data
+       */
+      export namespace listUserResourceData {
+        export class Params {
+          /** 客户端标志 */
+          clientKey: string;
+          /** 角色id */
+          roleId?: string;
+          /** 用户id */
+          userId?: string;
+        }
+
+        export type Response = Array<defs.authorization.ResourceTreeObject>;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 获取apiUrl列表
+       * /resource/user/listApiUrl
+       */
+      export namespace listApiUrl {
+        export class Params {
+          /** 客户端标志 */
+          clientKey: string;
+          /** 用户id */
+          userId: string;
+        }
+
+        export type Response = Array<string>;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+    }
+
+    /**
+     * ResourceRole管理
+     */
+    export namespace resourceRole {
       /**
        * 清除用户所有角色
        * /role/resource/clearUserRole
@@ -1298,7 +1464,7 @@ declare namespace API {
       }
 
       /**
-       * 拷贝角色资源新建橘色
+       * 拷贝角色资源新建角色
        * /role/resource/copyRole
        */
       export namespace copyRole {
@@ -1307,12 +1473,12 @@ declare namespace API {
           businessValue?: string;
           /** 客户端标志 */
           clientKey: string;
+          /** 角色名称 */
+          role: string;
           /** 源角色id */
           sourceRoleId: string;
           /** 用户id */
           userId: string;
-          /** 角色名称 */
-          role: string;
         }
 
         export type Response = number;
@@ -1328,10 +1494,29 @@ declare namespace API {
        */
       export namespace resourceDelete {
         export class Params {
-          /** 角色id */
-          id: number;
           /** 客户端标志 */
           clientKey: string;
+          /** 角色id */
+          id: number;
+        }
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(params: Params): Promise<Response>;
+      }
+
+      /**
+       * 删除没有用户使用的角色
+       * /role/resource/deleteUnusedRole
+       */
+      export namespace deleteUnusedRole {
+        export class Params {
+          /** 客户端标志 */
+          clientKey: string;
+          /** 角色id */
+          id: number;
         }
 
         export type Response = any;
@@ -1436,20 +1621,20 @@ declare namespace API {
        */
       export namespace listByBusinessValues {
         export class Params {
-          /** status */
-          status?: number;
-          /** 客户端标志 */
-          clientKey: string;
-          /** 角色名称 */
-          roleName?: string;
           /** 拓展字段 */
           businessValue?: string;
           /** 拓展字段列表 */
           businessValueList?: string;
+          /** 客户端标志 */
+          clientKey: string;
           /** 分页参数 */
           page: number;
           /** 分页参数 */
           pageSize: number;
+          /** 角色名称 */
+          roleName?: string;
+          /** status */
+          status?: number;
         }
 
         export type Response = defs.authorization.PagingEntity<
@@ -1502,18 +1687,18 @@ declare namespace API {
        */
       export namespace listPagination {
         export class Params {
-          /** status */
-          status?: number;
-          /** 客户端标志 */
-          clientKey: string;
-          /** 角色名称 */
-          roleName?: string;
           /** 拓展字段 */
           businessValue?: string;
+          /** 客户端标志 */
+          clientKey: string;
           /** 分页参数 */
           page: number;
           /** 分页参数 */
           pageSize: number;
+          /** 角色名称 */
+          roleName?: string;
+          /** status */
+          status?: number;
         }
 
         export type Response = defs.authorization.PagingEntity<
@@ -1582,7 +1767,7 @@ declare namespace API {
        * 用户绑定ResourceRole（批量）
        * /role/resource/user/addList
        */
-      export namespace postResourceUserAddList {
+      export namespace postUserAddList {
         export class Params {}
 
         export type Response = any;
@@ -1616,10 +1801,10 @@ declare namespace API {
        */
       export namespace validateRoleName {
         export class Params {
-          /** 角色名称 */
-          roleName?: string;
           /** 客户端标志 */
           clientKey: string;
+          /** 角色名称 */
+          roleName?: string;
         }
 
         export type Response = Array<number>;
@@ -1649,9 +1834,14 @@ declare namespace API {
 
         export function fetch(params: Params): Promise<Response>;
       }
+    }
 
+    /**
+     * 角色管理
+     */
+    export namespace role {
       /**
-       * 保存ResourceRole并绑定用户角色
+       * 更新ResourceRole基本信息
        * /role/update
        */
       export namespace update {

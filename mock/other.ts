@@ -3,7 +3,7 @@ export default {
     code: 20000,
     success: true,
     data: {
-      accessToken: '123'
+      accessToken: '123',
     },
   },
   '/detail': {
@@ -47,11 +47,4 @@ export default {
     message: '成功',
     success: true,
   },
-  '/banner/insert': (req, res) => {
-    res.status(500).send({
-      success: false,
-      message: 'error',
-      code: 50000,
-    })
-  }
 };

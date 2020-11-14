@@ -4,10 +4,11 @@
  * @作者: 陈杰
  * @Date: 2020-05-20 09:57:13
  * @LastEditors: 廖军
- * @LastEditTime: 2020-06-30 17:22:34
+ * @LastEditTime: 2020-10-14 18:16:40
  */
 import { useMemo, useState } from 'react';
 import { useModel } from 'umi';
+import { LOGIN_CONFIG } from '@/constant';
 
 export default function useAuth() {
   const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
@@ -24,7 +25,7 @@ export default function useAuth() {
   };
 
   return {
-    isLogin,
+    isLogin: LOGIN_CONFIG.isSSO || isLogin,
     accessToken,
     saveToken: (token: string) => {
       setAccessToken(token);

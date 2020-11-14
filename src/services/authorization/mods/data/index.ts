@@ -1,5 +1,5 @@
 /**
- * @description Data Controller
+ * @description 数据管理
  */
 import * as getDataScope from './getDataScope';
 import * as getMockData from './getMockData';

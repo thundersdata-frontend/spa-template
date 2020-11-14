@@ -2,12 +2,15 @@
   "outDir": "./src/services",
   "templatePath": "./pontTemplate",
   "usingMultipleOrigins": true,
-  "origins": [{
-    "name": "recruitment",
-    "originUrl": "http://recruitment.test.thundersdata.com/v2/api-docs"
+  "mocks": {
+    "enable": true,
+    "wrapper": "{\"code\": 20000, \"success\": true, \"data\": {response}, \"message\": \"\"}",
+    "containDataSources": []
   },
-  {
-    "name": "authorization",
-    "originUrl": "http://authorization.dev.thundersdata.com/v2/api-docs"
-  }]
+  "origins": [
+    {
+      "name": "authorization",
+      "originUrl": "http://authorization.dev.thundersdata.com/v2/api-docs"
+    }
+  ]
 }

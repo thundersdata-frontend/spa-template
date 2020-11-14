@@ -252,6 +252,9 @@ export default class MyGenerator extends CodeGenerator {
         methodTemp = 'post';
         contentType = 'application/x-www-form-urlencoded';
         break;
+      case 'PUT:JSON':
+        methodTemp = 'put';
+        break;
       case 'POST:JSON':
         methodTemp = 'post';
         break;

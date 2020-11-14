@@ -1,7 +1,7 @@
 module.exports = {
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
   rules: {
-    complexity: ['warn', { max: 5 }],
+    complexity: ['off', { max: 5 }],
     '@typescript-eslint/camelcase': 0,
     '@typescript-eslint/class-name-casing': 0,
     '@typescript-eslint/no-unused-expressions': 0,

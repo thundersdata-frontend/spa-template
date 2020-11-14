@@ -7,19 +7,25 @@ export const initialPagination = {
 };
 
 /**
- * 图片格式的类型
- */
-export const IMAGE_TYPES = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'webp'];
-
-// 后端返回的code
-export enum LoginFailure {
-  登录过期 = 50400,
-  不允许登录 = 50402,
-}
-
-/**
  * 文件服务地址
  */
 export const UPLOAD_URL = 'http://object-service.dev.thundersdata.com';
 
 export const THROTTLE_INTERVAL = 500;
+
+/**
+ * 认证中心
+ */
+export const AUTH_API_URL = 'http://api.dev.thundersdata.com';
+
+/**
+ * 登录配置
+ */
+export const LOGIN_CONFIG = Object.freeze({
+  /** 应用ID */
+  clientId: '',
+  /** 是否是单点登录 */
+  isSSO: true,
+  /** 密钥 */
+  secret: '',
+});

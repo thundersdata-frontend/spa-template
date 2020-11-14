@@ -1,6 +1,6 @@
 import { extend, ResponseError } from 'umi-request';
 import { history } from 'umi';
-import { LoginFailure } from './constant';
+import { LoginFailure } from './enums';
 
 let controller = new AbortController();
 const codeMessage: { [key: number]: string } = {

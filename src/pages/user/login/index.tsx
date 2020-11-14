@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, Checkbox } from 'antd';
-import { useRequest, Link, history, useModel } from 'umi';
+import { Link, history, useModel } from 'umi';
+import request from 'umi-request';
 import LoginForm from '@/components/LoginForm';
-import { StateType, fakeAccountLogin, LoginParamsType } from '@/components/LoginForm/service';
+import { LoginParamsType } from '@/components/LoginForm/service';
 import useAuth from '@/hooks/useAuth';
+import { AUTH_API_URL, LOGIN_CONFIG } from '@/constant';
+import { useRequest } from 'ahooks';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginForm;
 
@@ -33,11 +36,68 @@ export default function Login() {
     clearToken();
   }, []);
 
-  const { loading, data, run: submit } = useRequest<{ data: StateType }>(fakeAccountLogin, {
+  /**
+   * 密码登录
+   * @param values
+   */
+  const accountLogin = async (values: LoginParamsType) => {
+    const result = await request(`${AUTH_API_URL}/authz/oauth/token`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      params: {
+        username: values.userName,
+        password: values.password,
+        scope: 'read',
+        client_id: LOGIN_CONFIG.clientId,
+        client_secret: LOGIN_CONFIG.secret,
+        grant_type: 'password',
+        appVersion: '1.0.0',
+      },
+    });
+    if (!result.success) {
+      result.message = result.msg;
+      throw new Error(JSON.stringify(result));
+    }
+    return result.result;
+  };
+
+  /**
+   * 短信登录
+   * @param values
+   */
+  const smsLogin = async (values: LoginParamsType) => {
+    const result = await request(`${AUTH_API_URL}/authz/users/smsLogin`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      params: {
+        phone: values.mobile,
+        code: values.captcha,
+        scope: 'read',
+        client_id: LOGIN_CONFIG.clientId,
+        client_secret: LOGIN_CONFIG.secret,
+        grant_type: 'sms',
+        appVersion: '1.0.0',
+      },
+    });
+    if (!result.success) {
+      result.message = result.msg;
+      throw new Error(JSON.stringify(result));
+    }
+    return result.result;
+  };
+
+  const loginSubmit = (values: LoginParamsType) =>
+    type === 'account' ? accountLogin(values) : smsLogin(values);
+
+  // 本地新建项目跳过登录可使用 fakeAccountLogin
+  const { loading, data, run: submit } = useRequest(loginSubmit, {
     manual: true,
-    formatResult: result => result?.data,
-    onSuccess: () => {
-      saveToken('123');
+    onSuccess: data => {
+      saveToken(data.access_token!);
       refresh();
       history.replace('/homepage');
     },
@@ -114,13 +174,9 @@ export default function Login() {
           <Checkbox checked={autoLogin} onChange={e => setAutoLogin(e.target.checked)}>
             自动登录
           </Checkbox>
-          <a
-            style={{
-              float: 'right',
-            }}
-          >
+          <Link style={{ float: 'right' }} to="/user/forgetPassword">
             忘记密码
-          </a>
+          </Link>
         </div>
         <Submit loading={loading}>登录</Submit>
       </LoginForm>

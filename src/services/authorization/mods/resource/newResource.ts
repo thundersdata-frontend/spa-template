@@ -1,5 +1,5 @@
 /**
- * @description 保存资源
+ * @description 保存资源-这个接口仍然可以使用，但建议使用新的资源管理接口中/auth/resource/save
  */
 
 import serverConfig from '../../../../../server.config';

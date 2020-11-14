@@ -33,4 +33,5 @@
     }
   },
   "include": ["./src/services/api.d.ts", "./src/**/*", "./typings.d.ts"],
+  "exclude": ["./mock/*"]
 }

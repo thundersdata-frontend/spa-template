@@ -17,7 +17,6 @@ import classNames from 'classnames';
 import { LoginParamsType } from './service';
 import styles from './index.less';
 
-
 export interface LoginProps {
   activeKey?: string;
   onTabChange?: (key: string) => void;
@@ -65,14 +64,14 @@ const LoginForm: LoginType = ({ className, activeKey, onTabChange, form, onSubmi
     <LoginContext.Provider
       value={{
         tabUtil: {
-          addTab: (id) => {
+          addTab: id => {
             setTabs([...tabs, id]);
           },
-          removeTab: (id) => {
-            setTabs(tabs.filter((currentId) => currentId !== id));
+          removeTab: id => {
+            setTabs(tabs.filter(currentId => currentId !== id));
           },
         },
-        updateActive: (activeItem) => {
+        updateActive: activeItem => {
           if (active && type) {
             if (active[type]) {
               active[type].push(activeItem);
@@ -87,7 +86,7 @@ const LoginForm: LoginType = ({ className, activeKey, onTabChange, form, onSubmi
       <div className={classNames(className, styles.login)}>
         <Form
           form={form}
-          onFinish={(values) => {
+          onFinish={values => {
             onSubmit && onSubmit(values as LoginParamsType);
           }}
         >
@@ -97,7 +96,7 @@ const LoginForm: LoginType = ({ className, activeKey, onTabChange, form, onSubmi
                 className={styles.tabs}
                 animated={false}
                 activeKey={type}
-                onChange={(activeKey) => {
+                onChange={activeKey => {
                   setType(activeKey);
                   onTabChange && onTabChange(activeKey);
                 }}
@@ -113,7 +112,7 @@ const LoginForm: LoginType = ({ className, activeKey, onTabChange, form, onSubmi
       </div>
     </LoginContext.Provider>
   );
-}
+};
 
 LoginForm.Tab = LoginTab;
 LoginForm.Submit = LoginSubmit;

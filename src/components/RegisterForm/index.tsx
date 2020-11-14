@@ -3,15 +3,16 @@
  * @公司: thundersdata
  * @作者: 陈杰
  * @Date: 2020-04-26 16:31:35
- * @LastEditors: 陈杰
- * @LastEditTime: 2020-04-27 14:01:21
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2020-10-21 09:52:50
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Col, Input, Row, Select, message } from 'antd';
 import { Store } from 'antd/es/form/interface';
-import { Link, useRequest, history } from 'umi';
+import { Link, history } from 'umi';
 import { fakeRegister, StateType } from './service';
 import styles from './index.less';
+import { useRequest } from 'ahooks';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -42,7 +43,7 @@ export default function RegisterForm() {
     }, 1000);
   };
 
-  const { loading: submitting, run: register } = useRequest<{ data: StateType }>(fakeRegister, {
+  const { loading: submitting, run: register } = useRequest<StateType>(fakeRegister, {
     manual: true,
     onSuccess: (data, params) => {
       if (data.status === 'ok') {
@@ -91,8 +92,8 @@ export default function RegisterForm() {
             styles.password
           }
           rules={[
-            {required: true, message: '请输入密码'},
-            {min: 6, message: '密码最少为6位'},
+            { required: true, message: '请输入密码' },
+            { min: 6, message: '密码最少为6位' },
           ]}
         >
           <Input

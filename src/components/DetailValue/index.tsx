@@ -7,9 +7,8 @@ import { FileDTO } from '@/interfaces/common';
 import { Row, Col, Modal } from 'antd';
 import { useToggle } from 'ahooks';
 import { EyeOutlined, DownloadOutlined } from '@ant-design/icons';
-import { IMAGE_TYPES } from '@/constant';
 import styles from './index.module.less';
-import { getDownloadUrlWithId } from '@/utils/upload';
+import { FILE_TYPE_MAP, getDownloadUrlWithId } from '@/utils/upload';
 
 type DetailValueType = 'default' | 'file';
 
@@ -117,7 +116,7 @@ function separateFiles(files: FileDTO[]) {
   files.forEach(file => {
     const index = file.fileName.lastIndexOf('.');
     const ext = file.fileName.substring(index + 1);
-    if (IMAGE_TYPES.includes(ext)) {
+    if (FILE_TYPE_MAP['图片'].includes(ext)) {
       images.push(file);
     } else {
       otherTypeFiles.push(file);

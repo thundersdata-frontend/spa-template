@@ -6,5 +6,5 @@ export default function Register() {
     <div style={{ width: '75%', backgroundColor: 'white', padding: 40 }}>
       <RegisterForm />
     </div>
-  )
+  );
 }

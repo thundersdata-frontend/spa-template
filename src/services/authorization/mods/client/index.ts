@@ -1,5 +1,5 @@
 /**
- * @description Client Controller
+ * @description 客户端管理
  */
 import * as remove from './remove';
 import * as log from './log';

@@ -1,5 +1,5 @@
 /**
- * @description 保存ResourceRole并绑定用户角色
+ * @description 更新ResourceRole基本信息
  */
 
 import serverConfig from '../../../../../server.config';

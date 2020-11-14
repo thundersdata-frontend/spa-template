@@ -63,7 +63,7 @@ class DataModule {
   id = undefined;
 
   /** isDeleted */
-  isDeleted = '';
+  isDeleted = undefined;
 
   /** moduleName */
   moduleName = '';
@@ -346,7 +346,7 @@ class ResourceDetails {
   id = undefined;
 
   /** isDeleted */
-  isDeleted = '';
+  isDeleted = undefined;
 
   /** 是否默认可见 */
   isVisible = undefined;
@@ -399,7 +399,7 @@ class ResourceObject {
   id = undefined;
 
   /** isDeleted */
-  isDeleted = '';
+  isDeleted = undefined;
 
   /** 是否默认可见 */
   isVisible = undefined;
@@ -445,6 +445,9 @@ class ResourceRole {
   /** isDeleted */
   isDeleted = false;
 
+  /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+  operationRange = undefined;
+
   /** 角色名称 */
   role = '';
 
@@ -453,9 +456,6 @@ class ResourceRole {
 
   /** 更新时间 */
   updatedAt = '';
-
-  /** userId */
-  userId = undefined;
 }
 
 class ResourceRolePageObject {
@@ -476,6 +476,9 @@ class ResourceRolePageObject {
 
   /** isDeleted */
   isDeleted = false;
+
+  /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+  operationRange = undefined;
 
   /** ResourceObject列表 */
   resourceVOList = [];
@@ -552,6 +555,9 @@ class RoleDTO {
 
   /** isDeleted */
   isDeleted = false;
+
+  /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+  operationRange = undefined;
 
   /** 资源id列表 */
   resourceIds = [];
