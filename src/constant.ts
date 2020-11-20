@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-11-19 14:00:30
  * @LastEditors: 廖军
- * @LastEditTime: 2020-11-20 14:25:02
+ * @LastEditTime: 2020-11-20 14:43:05
  */
 /**
  * 初始化分页数据
@@ -37,8 +37,3 @@ export const LOGIN_CONFIG = Object.freeze({
   /** 密钥 */
   secret: '',
 });
-
-/**
- * 图片格式的类型
- */
-export const IMAGE_TYPES = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'webp'];
