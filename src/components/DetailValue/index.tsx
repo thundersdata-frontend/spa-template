@@ -2,25 +2,25 @@
  * 详情展示项。可以根据type渲染不同的展示
  * type目前支持：default(默认)/file(文件，包括图片)
  */
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { FileDTO } from '@/interfaces/common';
 import { Row, Col, Modal } from 'antd';
 import { useToggle } from 'ahooks';
 import { EyeOutlined, DownloadOutlined } from '@ant-design/icons';
+import { IMAGE_TYPES } from '@/constant';
 import styles from './index.module.less';
-import { FILE_TYPE_MAP, getDownloadUrlWithId } from '@/utils/upload';
+import { getDownloadUrlWithId } from '@/utils/upload';
 
 type DetailValueType = 'default' | 'file';
 
-export default ({
-  value,
-  type = 'default',
-  generateUrl,
-}: {
-  value?: number | string | FileDTO[];
-  type?: DetailValueType;
-  generateUrl?: (file: FileDTO) => string;
-}) => {
+export default forwardRef<
+  HTMLDivElement,
+  {
+    value?: number | string | FileDTO[];
+    type?: DetailValueType;
+    generateUrl?: (file: FileDTO) => string;
+  }
+>(({ value, type = 'default', generateUrl }, ref) => {
   const [visible, toggle] = useToggle(false);
   const [url, setUrl] = useState<string>();
 
@@ -37,22 +37,33 @@ export default ({
   }
   if (type === 'file') {
     const files = (value as FileDTO[]) || [];
-    const [images, otherTypeFiles] = separateFiles(files.filter(item => item.fileName));
+    const [images, otherTypeFiles] = separateFiles(
+      files.filter(item => item.fileName),
+    );
 
     return (
-      <>
+      <div ref={ref}>
         <Row gutter={[16, 16]}>
           {images.map(file => {
             const { fileUrl, fileId } = file;
-            const filePreviewUrl = (generateUrl && generateUrl(file)) || fileUrl;
+            const filePreviewUrl =
+              (generateUrl && generateUrl(file)) || fileUrl;
             return (
               <Col key={fileId}>
                 <div className={styles['file-item-image-card']}>
                   <div className={styles['file-item-image-info']}>
-                    <img src={filePreviewUrl} alt="图片不存在" style={{ width: '100%' }} />
+                    <img
+                      src={filePreviewUrl}
+                      alt="图片不存在"
+                      style={{ width: '100%' }}
+                    />
                   </div>
                   <span className={styles['file-item-image-actions']}>
-                    <a rel="noopener noreferrer" title="预览图片" style={{ marginRight: 16 }}>
+                    <a
+                      rel="noopener noreferrer"
+                      title="预览图片"
+                      style={{ marginRight: 16 }}
+                    >
                       <EyeOutlined
                         style={{ fontSize: 20, color: 'white' }}
                         onClick={() => {
@@ -83,7 +94,9 @@ export default ({
               padding: 4,
             }}
           >
-            <a href={(generateUrl && generateUrl(file)) || file.fileUrl}>{file.fileName}</a>
+            <a href={(generateUrl && generateUrl(file)) || file.fileUrl}>
+              {file.fileName}
+            </a>
           </div>
         ))}
         <Modal
@@ -99,11 +112,11 @@ export default ({
         >
           <img src={url} alt="图片无法访问" style={{ width: '100%' }} />
         </Modal>
-      </>
+      </div>
     );
   }
   return null;
-};
+});
 
 /**
  * 把图片和其他类型的文件区分开
@@ -116,7 +129,7 @@ function separateFiles(files: FileDTO[]) {
   files.forEach(file => {
     const index = file.fileName.lastIndexOf('.');
     const ext = file.fileName.substring(index + 1);
-    if (FILE_TYPE_MAP['图片'].includes(ext)) {
+    if (IMAGE_TYPES.includes(ext)) {
       images.push(file);
     } else {
       otherTypeFiles.push(file);

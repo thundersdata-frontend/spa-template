@@ -24,13 +24,14 @@ export default function BasicLayout(props: IRouteComponentProps) {
       value={{
         /** 全局请求的默认配置 */
         onError: (error: Error) => {
-          try {
-            if (error) {
+          console.error(error);
+          if (error) {
+            try {
               const errorJSON = JSON.parse(error.message);
               message.error(errorJSON.message);
+            } catch (err) {
+              message.error(err.message);
             }
-          } catch (err) {
-            console.error(err.message);
           }
         },
         throttleInterval: THROTTLE_INTERVAL,

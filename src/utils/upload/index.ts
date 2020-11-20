@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-05-25 16:07:51
- * @LastEditors: 阮旭松
- * @LastEditTime: 2020-08-08 14:33:21
+ * @LastEditors: 廖军
+ * @LastEditTime: 2020-11-20 14:18:07
  */
 import { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
@@ -18,11 +18,11 @@ export const UPLOAD_URL = 'http://object-service.dev.thundersdata.com';
 /** 文件校验类型 传入 true 时使用默认值,不传或 false 禁用 */
 export interface FileValidatorsProps {
   /** 限制文件大小,单位为 M,默认 10 M */
-  maxSize?: number | boolean;
+  maxSize?: number;
   /** 限制文件后缀,为可选后缀列表(支持string),默认为图片 */
-  accept?: string[] | string | boolean;
+  accept?: string[] | string;
   /** 限制文件个数,默认为 10 个 */
-  maxCount?: number | boolean;
+  maxCount?: number;
 }
 
 // 文件校验类型函数映射
