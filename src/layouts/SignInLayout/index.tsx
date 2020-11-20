@@ -15,8 +15,12 @@ export default function SignInLayout(props: IRouteComponentProps) {
         onError: (error: Error) => {
           console.error(error);
           if (error) {
-            const errorJSON = JSON.parse(error.message);
-            message.error(errorJSON.message);
+            try {
+              const errorJSON = JSON.parse(error.message);
+              message.error(errorJSON.message);
+            } catch (err) {
+              message.error(err.message);
+            }
           }
         },
         throttleInterval: THROTTLE_INTERVAL,
