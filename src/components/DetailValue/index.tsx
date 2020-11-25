@@ -127,7 +127,7 @@ function separateFiles(files: FileDTO[]) {
 
   files.forEach(file => {
     const index = file.fileName.lastIndexOf('.');
-    const ext = file.fileName.substring(index + 1);
+    const ext = file.fileName.substring(index);
     if (FILE_TYPE_MAP.图片.includes(ext)) {
       images.push(file);
     } else {
