@@ -4,9 +4,9 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 廖军
- * @LastEditTime: 2020-11-20 14:21:06
+ * @LastEditTime: 2020-11-25 17:53:23
  */
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Form, Button, Upload, Tooltip } from 'antd';
 import {
   getFileValidators,
@@ -54,6 +54,29 @@ export interface UploadFormItemProps {
   /** 上传中根据状态切换 loading 状态 */
   setLoading?: (status: boolean) => void;
 }
+
+/**
+ * 直接在自定义组件里面检测参数变化
+ * @param param0
+ */
+interface CustomUpload extends UploadProps {
+  maxCount: number;
+}
+const CustomUpload: React.FC<CustomUpload> = forwardRef<Upload, CustomUpload>(
+  ({ fileList = [], children, maxCount, ...rest }, ref) => {
+    const uploadDisabled = fileList?.length >= maxCount;
+    return (
+      <Upload
+        ref={ref}
+        {...getPublicUploadProps()}
+        fileList={fileList}
+        {...rest}
+      >
+        {!uploadDisabled && (children || <Button>上传</Button>)}
+      </Upload>
+    );
+  },
+);
 
 const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
   const {
@@ -121,28 +144,6 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
       <span>{label}</span>
     );
 
-  /**
-   * 直接在自定义组件里面检测参数变化
-   * @param param0
-   */
-  function CustomUpload({ fileList = [] }: UploadProps) {
-    const uploadDisabled = fileList?.length >= maxCount;
-    return (
-      <Upload
-        {...getPublicUploadProps()}
-        accept={formattedAccept}
-        disabled={disabled}
-        multiple={multiple}
-        onChange={handleChange}
-        beforeUpload={getBeforeUpload(validatorObj)}
-        fileList={fileList}
-        {...uploadProps}
-      >
-        {!uploadDisabled && (children || <Button>上传</Button>)}
-      </Upload>
-    );
-  }
-
   return (
     <Form.Item
       label={renderLabel()}
@@ -150,14 +151,27 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
       className={styles.uploadItemWrap}
       valuePropName="fileList"
       required={required}
-      rules={[{ required, message: requiredMessage }, ...getFileValidators(validatorObj)]}
+      rules={[
+        { required, message: requiredMessage },
+        ...getFileValidators(validatorObj),
+      ]}
       getValueFromEvent={handleUpload}
       getValueProps={value => {
         return { fileList: value };
       }}
       {...formItemProps}
     >
-      <CustomUpload />
+      <CustomUpload
+        accept={formattedAccept}
+        disabled={disabled}
+        multiple={multiple}
+        onChange={handleChange}
+        beforeUpload={getBeforeUpload(validatorObj)}
+        maxCount={maxCount}
+        {...uploadProps}
+      >
+        {children}
+      </CustomUpload>
     </Form.Item>
   );
 };
