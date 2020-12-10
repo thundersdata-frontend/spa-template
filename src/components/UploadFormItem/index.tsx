@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
- * @LastEditors: 廖军
- * @LastEditTime: 2020-11-25 17:53:23
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2020-12-10 18:02:41
  */
 import React, { forwardRef } from 'react';
 import { Form, Button, Upload, Tooltip } from 'antd';
@@ -14,9 +14,10 @@ import {
   ATTACHMENT_MAX_FILE_COUNT,
   handleUpload,
   getFileSizeName,
-  getBeforeUpload,
   ATTACHMENT_MAX_FILE_SIZE,
+  FileValidatorsProps,
 } from '@/utils/upload';
+import { RcFile } from 'antd/lib/upload/interface';
 import { InternalFieldProps } from 'rc-field-form/es/Field';
 import { UploadProps, UploadChangeParam } from 'antd/lib/upload';
 import { FormItemLabelProps } from 'antd/lib/form/FormItemLabel';
@@ -108,13 +109,10 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
 
   /** 改变上传文件调用 */
   const handleChange = async (info: UploadChangeParam) => {
-    onChange && onChange(info);
-    if (setLoading) {
-      setLoading(true);
+    onChange?.(info);
 
-      if (!info.fileList.find(item => item.status === 'uploading')) {
-        setLoading(false);
-      }
+    if (!info.fileList.find(item => item.status === 'uploading')) {
+      setLoading?.(false);
     }
   };
 
@@ -143,6 +141,26 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     ) : (
       <span>{label}</span>
     );
+
+  /** 判断是否可以上传 */
+  const getBeforeUpload = (validatorObj: FileValidatorsProps) => (
+    file: RcFile,
+  ) => {
+    const errorMessageList: string[] = [];
+    /** 若不符合要求阻断上传 */
+    getFileValidators(validatorObj).forEach(item => {
+      item.validator('', [file], (error?: string) => {
+        if (error) {
+          errorMessageList.push(error);
+        }
+      });
+    });
+    const result = errorMessageList.length === 0;
+    if (result) {
+      setLoading?.(true);
+    }
+    return result;
+  };
 
   return (
     <Form.Item
