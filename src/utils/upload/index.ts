@@ -3,14 +3,13 @@
  * @公司: thundersdata
  * @作者: 廖军
  * @Date: 2020-05-25 16:07:51
- * @LastEditors: 廖军
- * @LastEditTime: 2020-11-20 14:18:07
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2020-12-10 18:02:55
  */
 import { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
-import { UploadFile, RcFile } from 'antd/lib/upload/interface';
+import { UploadFile } from 'antd/lib/upload/interface';
 import { FileDTO } from '@/interfaces/common';
-import { message } from 'antd';
 
 // 文件服务开发环境地址
 export const UPLOAD_URL = 'http://object-service.dev.thundersdata.com';
@@ -75,7 +74,10 @@ export const getDownloadUrlWithId = (fileId: number | string) => {
 };
 
 export const onPreview = (file: UploadFile) => {
-  window.open(file.url || getDownloadUrlWithId(file.response.data.fileId), '_blank');
+  window.open(
+    file.url || getDownloadUrlWithId(file.response.data.fileId),
+    '_blank',
+  );
 };
 
 // 判断是否符合文件格式，不传默认校验type
@@ -150,12 +152,20 @@ export const getFileSizeName = (size: number | boolean): string => {
  * @param params maxSize (KB)
  * @param {object} 返回验证rule对象
  */
-export function validatorFileListSizeRule(params = { maxSize: ATTACHMENT_MAX_FILE_SIZE }) {
+export function validatorFileListSizeRule(
+  params = { maxSize: ATTACHMENT_MAX_FILE_SIZE },
+) {
   const { maxSize } = params;
   return {
-    validator: (_rule: unknown, values: UploadFile[], callback: (error?: string) => void) => {
+    validator: (
+      _rule: unknown,
+      values: UploadFile[],
+      callback: (error?: string) => void,
+    ) => {
       if (values && values.length) {
-        const validationFailedList = values.filter(file => file.size / BASE_BYTE > maxSize);
+        const validationFailedList = values.filter(
+          file => file.size / BASE_BYTE > maxSize,
+        );
         if (validationFailedList.length) {
           const names = validationFailedList.map(file => file.name).join(',');
           callback(
@@ -185,13 +195,19 @@ export function validatorFileListSuffixRule(
 ) {
   const { accept } = params;
   return {
-    validator: (_: unknown, values: UploadFile[], callback: (error?: string) => void) => {
+    validator: (
+      _: unknown,
+      values: UploadFile[],
+      callback: (error?: string) => void,
+    ) => {
       if (values && values.length) {
         const typeValidationFailedList = values.filter(
           (file: UploadFile) => !isPermitFile(file, accept),
         );
         if (typeValidationFailedList.length) {
-          const names = typeValidationFailedList.map((file: UploadFile) => file.name).join(',');
+          const names = typeValidationFailedList
+            .map((file: UploadFile) => file.name)
+            .join(',');
           callback(`${names}，文件类型不符合要求`);
         } else {
           callback();
@@ -215,7 +231,11 @@ export function validatorFileListCount(
 ) {
   const { maxCount } = params;
   return {
-    validator: (_: unknown, values: UploadFile[], callback: (error?: string) => void) => {
+    validator: (
+      _: unknown,
+      values: UploadFile[],
+      callback: (error?: string) => void,
+    ) => {
       if (values && values.length) {
         if (values.length > maxCount) {
           callback(`文件个数超过 ${maxCount} 个!`);
@@ -236,28 +256,10 @@ export function validatorFileListCount(
 export const getFileValidators = (params: FileValidatorsProps) => {
   const validatorList = Object.keys(params).filter(item => !!params[item]);
   return validatorList.map(item =>
-    params[item] === true ? VALIDATOR_MAP[item]() : VALIDATOR_MAP[item]({ [item]: params[item] }),
+    params[item] === true
+      ? VALIDATOR_MAP[item]()
+      : VALIDATOR_MAP[item]({ [item]: params[item] }),
   );
-};
-
-/**
- * 传入校验数组获得 beforeUpload 函数(如果有单独的 Upload 需要类型、大小校验可以用这个函数)
- * maxCount 最好不要在 beforeUpload 中处理，因为拿到的 fileList 只是改变的文件列表而不包含原来的
- */
-export const getBeforeUpload = (validatorObj: FileValidatorsProps, showMessage?: boolean) => (
-  file: RcFile,
-) => {
-  const errorMessageList: string[] = [];
-  /** 若不符合要求阻断上传 */
-  getFileValidators(validatorObj).forEach(item => {
-    item.validator('', [file], (error?: string) => {
-      if (error) {
-        errorMessageList.push(error);
-        showMessage && message.error(error);
-      }
-    });
-  });
-  return errorMessageList.length === 0;
 };
 
 /**
@@ -309,4 +311,5 @@ export function transformFile(files?: UploadFile[]): FileDTO[] {
  * @param fileId
  * 图片地址
  */
-export const getImgPreviewUrl = (fileId: string) => `${UPLOAD_URL}/file/preview?fileId=${fileId}`;
+export const getImgPreviewUrl = (fileId: string) =>
+  `${UPLOAD_URL}/file/preview?fileId=${fileId}`;
