@@ -1,11 +1,10 @@
 import { useContext } from 'react';
 import { Redirect } from 'umi';
 import type { IRouteComponentProps } from 'umi';
-import { AuthService } from '../useAuthService';
+import { AuthContext } from '../useAuthService';
 
 export default (props: IRouteComponentProps) => {
-  const authService = useContext(AuthService);
-  console.log(666);
+  const authService = useContext(AuthContext);
   if (authService.token) {
     return props.children;
   }

@@ -42,3 +42,4 @@ screenshot
 /models/**
 
 .mocks/
+.jest

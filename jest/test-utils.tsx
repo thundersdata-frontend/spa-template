@@ -1,14 +1,11 @@
-import React from 'react';
-import type { IRouteComponentProps } from 'umi';
+import { render } from '@testing-library/react';
 import { UseRequestProvider } from 'ahooks';
 import { message, ConfigProvider, Empty } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 
-import { THROTTLE_INTERVAL } from '@/constant';
-import useAuthService, { AuthContext } from '@/pages/Auth/useAuthService';
-import { validateMessages } from './validateMessages';
+import useAuthService, { AuthContext } from '../src/pages/Auth/useAuthService';
 
-export default (props: IRouteComponentProps) => {
+const AllTheProviders = ({ children }) => {
   const authService = useAuthService();
 
   return (
@@ -26,7 +23,6 @@ export default (props: IRouteComponentProps) => {
             }
           }
         },
-        throttleInterval: THROTTLE_INTERVAL,
       }}
     >
       <ConfigProvider
@@ -35,10 +31,17 @@ export default (props: IRouteComponentProps) => {
           <Empty image={require('@/assets/pic_empty.png')} description="暂无数据" />
         )}
         getPopupContainer={(trigger) => trigger.parentElement || document.body}
-        form={{ validateMessages }}
       >
-        <AuthContext.Provider value={authService}>{props.children}</AuthContext.Provider>
+        <AuthContext.Provider value={authService}>{children}</AuthContext.Provider>
       </ConfigProvider>
     </UseRequestProvider>
   );
 };
+
+const customRender = (ui, options) => render(ui, { wrapper: AllTheProviders, ...options });
+
+// re-export everything
+export * from '@testing-library/react';
+
+// override render method
+export { customRender as render };
