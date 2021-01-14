@@ -3,4 +3,4 @@
 _scripts
 /lambda/mock/**
 _test_
-services/
+api/

@@ -323,7 +323,168 @@ class PersonListDTO {
   userId = undefined;
 }
 
-class ResourceDetails {
+class ResourceObjects {
+  /** api url */
+  apiUrl = '';
+
+  /** 客户端标志 */
+  clientKey = '';
+
+  /** 备注 */
+  comment = '';
+
+  /** 创建时间 */
+  createdAt = '';
+
+  /** 描述 */
+  description = '';
+
+  /** 图标 */
+  icon = '';
+
+  /** id */
+  id = undefined;
+
+  /** isDeleted */
+  isDeleted = undefined;
+
+  /** 是否默认可见 */
+  isVisible = undefined;
+
+  /** 资源顺位 */
+  orderValue = undefined;
+
+  /** 父级菜单id */
+  parentId = undefined;
+
+  /** 资源码 */
+  permissionCode = '';
+
+  /** 资源拓展字段 */
+  resourceBusinessValue = '';
+
+  /** 资源标志 */
+  resourceKey = '';
+
+  /** 类型 */
+  type = undefined;
+
+  /** 更新时间 */
+  updatedAt = '';
+}
+
+class ResourcePageObject {
+  /** 拓展字段值 */
+  businessValue = '';
+
+  /** 客户端标志 */
+  clientKey = '';
+
+  /** 备注 */
+  comment = '';
+
+  /** 创建时间 */
+  createdAt = '';
+
+  /** id */
+  id = undefined;
+
+  /** isDeleted */
+  isDeleted = false;
+
+  /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+  operationRange = undefined;
+
+  /** ResourceObjects列表 */
+  resourceVOList = [];
+
+  /** 角色名称 */
+  role = '';
+
+  /** 角色状态 */
+  status = undefined;
+
+  /** 更新时间 */
+  updatedAt = '';
+
+  /** 用户id列表 */
+  userIdList = [];
+}
+
+class ResourceRole {
+  /** 拓展字段值 */
+  businessValue = '';
+
+  /** 客户端标志 */
+  clientKey = '';
+
+  /** 备注 */
+  comment = '';
+
+  /** 创建时间 */
+  createdAt = '';
+
+  /** id */
+  id = undefined;
+
+  /** isDeleted */
+  isDeleted = false;
+
+  /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+  operationRange = undefined;
+
+  /** 角色名称 */
+  role = '';
+
+  /** 角色状态 */
+  status = undefined;
+
+  /** 更新时间 */
+  updatedAt = '';
+}
+
+class ResourceTreeObject {
+  /** api url */
+  apiUrl = '';
+
+  /** 子节点 */
+  children = [];
+
+  /** 备注 */
+  comment = '';
+
+  /** 描述 */
+  description = '';
+
+  /** 图标 */
+  icon = '';
+
+  /** id */
+  id = undefined;
+
+  /** 是否默认可见 */
+  isVisible = undefined;
+
+  /** 资源顺位 */
+  orderValue = undefined;
+
+  /** 父级id */
+  parentId = undefined;
+
+  /** 页面子元素 */
+  privilegeList = [];
+
+  /** 拓展字段 */
+  resourceBusinessValue = '';
+
+  /** 资源标志 */
+  resourceKey = '';
+
+  /** 类型 */
+  type = undefined;
+}
+
+class ResourcesForDetails {
   /** api url */
   apiUrl = '';
 
@@ -374,167 +535,6 @@ class ResourceDetails {
 
   /** 更新时间 */
   updatedAt = '';
-}
-
-class ResourceObject {
-  /** api url */
-  apiUrl = '';
-
-  /** 客户端标志 */
-  clientKey = '';
-
-  /** 备注 */
-  comment = '';
-
-  /** 创建时间 */
-  createdAt = '';
-
-  /** 描述 */
-  description = '';
-
-  /** 图标 */
-  icon = '';
-
-  /** id */
-  id = undefined;
-
-  /** isDeleted */
-  isDeleted = undefined;
-
-  /** 是否默认可见 */
-  isVisible = undefined;
-
-  /** 资源顺位 */
-  orderValue = undefined;
-
-  /** 父级菜单id */
-  parentId = undefined;
-
-  /** 资源码 */
-  permissionCode = '';
-
-  /** 资源拓展字段 */
-  resourceBusinessValue = '';
-
-  /** 资源标志 */
-  resourceKey = '';
-
-  /** 类型 */
-  type = undefined;
-
-  /** 更新时间 */
-  updatedAt = '';
-}
-
-class ResourceRole {
-  /** 拓展字段值 */
-  businessValue = '';
-
-  /** 客户端标志 */
-  clientKey = '';
-
-  /** 备注 */
-  comment = '';
-
-  /** 创建时间 */
-  createdAt = '';
-
-  /** id */
-  id = undefined;
-
-  /** isDeleted */
-  isDeleted = false;
-
-  /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
-  operationRange = undefined;
-
-  /** 角色名称 */
-  role = '';
-
-  /** 角色状态 */
-  status = undefined;
-
-  /** 更新时间 */
-  updatedAt = '';
-}
-
-class ResourceRolePageObject {
-  /** 拓展字段值 */
-  businessValue = '';
-
-  /** 客户端标志 */
-  clientKey = '';
-
-  /** 备注 */
-  comment = '';
-
-  /** 创建时间 */
-  createdAt = '';
-
-  /** id */
-  id = undefined;
-
-  /** isDeleted */
-  isDeleted = false;
-
-  /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
-  operationRange = undefined;
-
-  /** ResourceObject列表 */
-  resourceVOList = [];
-
-  /** 角色名称 */
-  role = '';
-
-  /** 角色状态 */
-  status = undefined;
-
-  /** 更新时间 */
-  updatedAt = '';
-
-  /** 用户id列表 */
-  userIdList = [];
-}
-
-class ResourceTreeObject {
-  /** api url */
-  apiUrl = '';
-
-  /** 子节点 */
-  children = [];
-
-  /** 备注 */
-  comment = '';
-
-  /** 描述 */
-  description = '';
-
-  /** 图标 */
-  icon = '';
-
-  /** id */
-  id = undefined;
-
-  /** 是否默认可见 */
-  isVisible = undefined;
-
-  /** 资源顺位 */
-  orderValue = undefined;
-
-  /** 父级id */
-  parentId = undefined;
-
-  /** 页面子元素 */
-  privilegeList = [];
-
-  /** 拓展字段 */
-  resourceBusinessValue = '';
-
-  /** 资源标志 */
-  resourceKey = '';
-
-  /** 类型 */
-  type = undefined;
 }
 
 class RoleDTO {
@@ -606,11 +606,11 @@ export const authorization = {
   OrgTreeDTO,
   PagingEntity,
   PersonListDTO,
-  ResourceDetails,
-  ResourceObject,
+  ResourceObjects,
+  ResourcePageObject,
   ResourceRole,
-  ResourceRolePageObject,
   ResourceTreeObject,
+  ResourcesForDetails,
   RoleDTO,
   UserQueryDTO,
   UserReduceRoleDTO,

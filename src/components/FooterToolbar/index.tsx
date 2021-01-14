@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import type { CSSProperties } from 'react';
 import { RouteContext } from '@ant-design/pro-layout';
 import classNames from 'classnames';
-import styles from './index.less';
+import styles from './index.module.less';
 
 export interface FooterToolbarProps {
   extra?: React.ReactNode;

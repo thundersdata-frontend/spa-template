@@ -32,6 +32,6 @@
       "@@/*": ["src/.umi/*"]
     }
   },
-  "include": ["./src/services/api.d.ts", "./src/**/*", "./typings.d.ts"],
+  "include": ["./src/api/api.d.ts", "./src/**/*", "./global.d.ts"],
   "exclude": ["./mock/*"]
 }

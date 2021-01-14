@@ -336,7 +336,168 @@ declare namespace defs {
       userId?: number;
     }
 
-    export class ResourceDetails {
+    export class ResourceObjects {
+      /** api url */
+      apiUrl: string;
+
+      /** 客户端标志 */
+      clientKey: string;
+
+      /** 备注 */
+      comment: string;
+
+      /** 创建时间 */
+      createdAt?: string;
+
+      /** 描述 */
+      description: string;
+
+      /** 图标 */
+      icon?: string;
+
+      /** id */
+      id?: number;
+
+      /** isDeleted */
+      isDeleted?: number;
+
+      /** 是否默认可见 */
+      isVisible?: number;
+
+      /** 资源顺位 */
+      orderValue?: number;
+
+      /** 父级菜单id */
+      parentId?: number;
+
+      /** 资源码 */
+      permissionCode?: string;
+
+      /** 资源拓展字段 */
+      resourceBusinessValue?: string;
+
+      /** 资源标志 */
+      resourceKey: string;
+
+      /** 类型 */
+      type?: number;
+
+      /** 更新时间 */
+      updatedAt?: string;
+    }
+
+    export class ResourcePageObject {
+      /** 拓展字段值 */
+      businessValue?: string;
+
+      /** 客户端标志 */
+      clientKey: string;
+
+      /** 备注 */
+      comment?: string;
+
+      /** 创建时间 */
+      createdAt?: string;
+
+      /** id */
+      id?: number;
+
+      /** isDeleted */
+      isDeleted?: boolean;
+
+      /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+      operationRange?: number;
+
+      /** ResourceObjects列表 */
+      resourceVOList?: Array<defs.authorization.ResourceObjects>;
+
+      /** 角色名称 */
+      role: string;
+
+      /** 角色状态 */
+      status?: number;
+
+      /** 更新时间 */
+      updatedAt?: string;
+
+      /** 用户id列表 */
+      userIdList?: Array<number>;
+    }
+
+    export class ResourceRole {
+      /** 拓展字段值 */
+      businessValue?: string;
+
+      /** 客户端标志 */
+      clientKey: string;
+
+      /** 备注 */
+      comment?: string;
+
+      /** 创建时间 */
+      createdAt?: string;
+
+      /** id */
+      id?: number;
+
+      /** isDeleted */
+      isDeleted?: boolean;
+
+      /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+      operationRange?: number;
+
+      /** 角色名称 */
+      role: string;
+
+      /** 角色状态 */
+      status?: number;
+
+      /** 更新时间 */
+      updatedAt?: string;
+    }
+
+    export class ResourceTreeObject {
+      /** api url */
+      apiUrl?: string;
+
+      /** 子节点 */
+      children?: Array<defs.authorization.ResourceTreeObject>;
+
+      /** 备注 */
+      comment?: string;
+
+      /** 描述 */
+      description: string;
+
+      /** 图标 */
+      icon?: string;
+
+      /** id */
+      id?: number;
+
+      /** 是否默认可见 */
+      isVisible?: number;
+
+      /** 资源顺位 */
+      orderValue?: number;
+
+      /** 父级id */
+      parentId?: number;
+
+      /** 页面子元素 */
+      privilegeList?: Array<defs.authorization.ResourceTreeObject>;
+
+      /** 拓展字段 */
+      resourceBusinessValue?: string;
+
+      /** 资源标志 */
+      resourceKey: string;
+
+      /** 类型 */
+      type?: number;
+    }
+
+    export class ResourcesForDetails {
       /** api url */
       apiUrl: string;
 
@@ -387,167 +548,6 @@ declare namespace defs {
 
       /** 更新时间 */
       updatedAt?: string;
-    }
-
-    export class ResourceObject {
-      /** api url */
-      apiUrl: string;
-
-      /** 客户端标志 */
-      clientKey: string;
-
-      /** 备注 */
-      comment: string;
-
-      /** 创建时间 */
-      createdAt?: string;
-
-      /** 描述 */
-      description: string;
-
-      /** 图标 */
-      icon?: string;
-
-      /** id */
-      id?: number;
-
-      /** isDeleted */
-      isDeleted?: number;
-
-      /** 是否默认可见 */
-      isVisible?: number;
-
-      /** 资源顺位 */
-      orderValue?: number;
-
-      /** 父级菜单id */
-      parentId?: number;
-
-      /** 资源码 */
-      permissionCode?: string;
-
-      /** 资源拓展字段 */
-      resourceBusinessValue?: string;
-
-      /** 资源标志 */
-      resourceKey: string;
-
-      /** 类型 */
-      type?: number;
-
-      /** 更新时间 */
-      updatedAt?: string;
-    }
-
-    export class ResourceRole {
-      /** 拓展字段值 */
-      businessValue?: string;
-
-      /** 客户端标志 */
-      clientKey: string;
-
-      /** 备注 */
-      comment?: string;
-
-      /** 创建时间 */
-      createdAt?: string;
-
-      /** id */
-      id?: number;
-
-      /** isDeleted */
-      isDeleted?: boolean;
-
-      /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
-      operationRange?: number;
-
-      /** 角色名称 */
-      role: string;
-
-      /** 角色状态 */
-      status?: number;
-
-      /** 更新时间 */
-      updatedAt?: string;
-    }
-
-    export class ResourceRolePageObject {
-      /** 拓展字段值 */
-      businessValue?: string;
-
-      /** 客户端标志 */
-      clientKey: string;
-
-      /** 备注 */
-      comment?: string;
-
-      /** 创建时间 */
-      createdAt?: string;
-
-      /** id */
-      id?: number;
-
-      /** isDeleted */
-      isDeleted?: boolean;
-
-      /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
-      operationRange?: number;
-
-      /** ResourceObject列表 */
-      resourceVOList?: Array<defs.authorization.ResourceObject>;
-
-      /** 角色名称 */
-      role: string;
-
-      /** 角色状态 */
-      status?: number;
-
-      /** 更新时间 */
-      updatedAt?: string;
-
-      /** 用户id列表 */
-      userIdList?: Array<number>;
-    }
-
-    export class ResourceTreeObject {
-      /** api url */
-      apiUrl?: string;
-
-      /** 子节点 */
-      children?: Array<defs.authorization.ResourceTreeObject>;
-
-      /** 备注 */
-      comment?: string;
-
-      /** 描述 */
-      description: string;
-
-      /** 图标 */
-      icon?: string;
-
-      /** id */
-      id?: number;
-
-      /** 是否默认可见 */
-      isVisible?: number;
-
-      /** 资源顺位 */
-      orderValue?: number;
-
-      /** 父级id */
-      parentId?: number;
-
-      /** 页面子元素 */
-      privilegeList?: Array<defs.authorization.ResourceTreeObject>;
-
-      /** 拓展字段 */
-      resourceBusinessValue?: string;
-
-      /** 资源标志 */
-      resourceKey: string;
-
-      /** 类型 */
-      type?: number;
     }
 
     export class RoleDTO {
@@ -624,7 +624,7 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(
-          bodyParams: defs.authorization.ResourceObject,
+          bodyParams: defs.authorization.ResourceObjects,
         ): Promise<Response>;
       }
 
@@ -640,7 +640,7 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(
-          bodyParams: Array<defs.authorization.ResourceObject>,
+          bodyParams: Array<defs.authorization.ResourceObjects>,
         ): Promise<Response>;
       }
     }
@@ -1193,7 +1193,7 @@ declare namespace API {
       }
 
       /**
-       * 查询ResourceDetails
+       * 查询ResourcesForDetails
        * /resource/detail
        */
       export namespace detail {
@@ -1202,7 +1202,7 @@ declare namespace API {
           id: number;
         }
 
-        export type Response = defs.authorization.ResourceDetails;
+        export type Response = defs.authorization.ResourcesForDetails;
 
         export const init: Response;
 
@@ -1244,7 +1244,7 @@ declare namespace API {
           roleId?: string;
         }
 
-        export type Response = Array<defs.authorization.ResourceObject>;
+        export type Response = Array<defs.authorization.ResourceObjects>;
 
         export const init: Response;
 
@@ -1270,7 +1270,7 @@ declare namespace API {
         }
 
         export type Response = defs.authorization.PagingEntity<
-          defs.authorization.ResourceObject
+          defs.authorization.ResourceObjects
         >;
 
         export const init: Response;
@@ -1370,7 +1370,7 @@ declare namespace API {
       export namespace postSaveList {
         export class Params {
           /** permissionResourceList */
-          permissionResourceList?: Array<defs.authorization.ResourceObject>;
+          permissionResourceList?: Array<defs.authorization.ResourceObjects>;
         }
 
         export type Response = any;
@@ -1538,7 +1538,7 @@ declare namespace API {
           roleId: number;
         }
 
-        export type Response = defs.authorization.ResourceRolePageObject;
+        export type Response = defs.authorization.ResourcePageObject;
 
         export const init: Response;
 
@@ -1557,7 +1557,7 @@ declare namespace API {
           roleId: number;
         }
 
-        export type Response = defs.authorization.ResourceRolePageObject;
+        export type Response = defs.authorization.ResourcePageObject;
 
         export const init: Response;
 

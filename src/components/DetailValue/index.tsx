@@ -7,8 +7,9 @@ import type { FileDTO } from '@/interfaces/common';
 import { Row, Col, Modal } from 'antd';
 import { useToggle } from 'ahooks';
 import { EyeOutlined, DownloadOutlined } from '@ant-design/icons';
-import styles from './index.module.less';
 import { FILE_TYPE_MAP, getDownloadUrlWithId } from '@/utils/upload';
+
+import styles from './index.module.less';
 
 type DetailValueType = 'default' | 'file';
 

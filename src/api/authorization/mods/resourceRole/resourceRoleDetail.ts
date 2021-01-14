@@ -1,5 +1,5 @@
 /**
- * @description 获取ResourceRole详情包含对应用户
+ * @description 获取ResourceRole详情
  */
 import * as defs from '../../baseClass';
 import serverConfig from '../../../../../server.config';
@@ -7,11 +7,11 @@ import { initRequest } from '@/common';
 
 const backEndUrl = serverConfig()['authorization'];
 
-export const init = new defs.authorization.ResourceRolePageObject();
+export const init = new defs.authorization.ResourcePageObject();
 
 export async function fetch(params = {}) {
   const request = await initRequest();
-  const result = await request.get(backEndUrl + '/role/resource/detail/user', {
+  const result = await request.get(backEndUrl + '/role/resource/detail', {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -21,7 +21,7 @@ export async function fetch(params = {}) {
     if (!result.success) {
       throw new Error(JSON.stringify(result));
     } else {
-      return result.data || new defs.authorization.ResourceRolePageObject();
+      return result.data || new defs.authorization.ResourcePageObject();
     }
   } else {
     throw new Error(JSON.stringify({ message: '接口未响应' }));

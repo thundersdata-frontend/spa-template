@@ -22,6 +22,7 @@ import type { UploadProps, UploadChangeParam } from 'antd/lib/upload';
 import type { FormItemLabelProps } from 'antd/lib/form/FormItemLabel';
 import type { FormItemInputProps } from 'antd/lib/form/FormItemInput';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+
 import styles from './index.module.less';
 
 export interface UploadFormItemProps {

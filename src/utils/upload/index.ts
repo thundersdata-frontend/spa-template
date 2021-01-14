@@ -121,7 +121,7 @@ export function uploadValidator(
   callback: (error?: string) => void,
 ) {
   try {
-      value?.some(file => {
+      value.some(file => {
         if (file.response && !file.response.success) {
           throw new Error(`上传文件失败: ${  file.response.message}`);
         }
