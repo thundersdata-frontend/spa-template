@@ -4,7 +4,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "sourceMap": true,
     "baseUrl": "./",
@@ -30,8 +30,9 @@
     "paths": {
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types/", "./global.d.ts", "./typings.d.ts"],
   },
-  "include": ["./src/api/api.d.ts", "./src/**/*", "./global.d.ts"],
+  "include": ["./src/api/api.d.ts", "./src/**/*", "global.d.ts", "typings.d.ts"],
   "exclude": ["./mock/*"]
 }

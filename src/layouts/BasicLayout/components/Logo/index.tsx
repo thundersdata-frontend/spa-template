@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default () => (
   <img
     src={require('../../../../assets/logo.png')}

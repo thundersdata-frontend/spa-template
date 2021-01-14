@@ -9,7 +9,6 @@
 import type { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
 import type { UploadFile, RcFile } from 'antd/lib/upload/interface';
-import type { FileDTO } from '@/interfaces/common';
 import { message } from 'antd';
 
 // 文件服务开发环境地址
@@ -63,7 +62,7 @@ export const FILE_TYPE_MAP = {
 export const getDownloadUrlWithId = (fileId: number | string) => {
   const regs = /^[0-9]+$/;
   // 判断是否加密,若为已加密
-  if (!regs.test(`${  fileId}`)) {
+  if (!regs.test(`${fileId}`)) {
     return `${UPLOAD_URL}/download/direct?fileId=${fileId}&access_token=${localStorage.getItem(
       'accessToken',
     )}`;
@@ -84,7 +83,7 @@ export const isPermitFile = (
   allowFileList: string[] | string = FILE_TYPE_MAP['图片'],
 ) => {
   // 文件后缀
-  const fileSuffix = `.${  string.getLastSubstring(file.name, '.')}`;
+  const fileSuffix = `.${string.getLastSubstring(file.name, '.')}`;
   const formatedAllowFileList = Array.isArray(allowFileList)
     ? allowFileList
     : allowFileList.split(',');
@@ -121,12 +120,12 @@ export function uploadValidator(
   callback: (error?: string) => void,
 ) {
   try {
-      value.some(file => {
-        if (file.response && !file.response.success) {
-          throw new Error(`上传文件失败: ${  file.response.message}`);
-        }
-        return file;
-      });
+    value.some((file) => {
+      if (file.response && !file.response.success) {
+        throw new Error(`上传文件失败: ${file.response.message}`);
+      }
+      return file;
+    });
     callback();
   } catch (error) {
     callback(error);
@@ -154,9 +153,9 @@ export function validatorFileListSizeRule(params = { maxSize: ATTACHMENT_MAX_FIL
   return {
     validator: (_rule: unknown, values: UploadFile[], callback: (error?: string) => void) => {
       if (values && values.length) {
-        const validationFailedList = values.filter(file => file.size / BASE_BYTE > maxSize);
+        const validationFailedList = values.filter((file) => file.size / BASE_BYTE > maxSize);
         if (validationFailedList.length) {
-          const names = validationFailedList.map(file => file.name).join(',');
+          const names = validationFailedList.map((file) => file.name).join(',');
           callback(
             `${names}，文件大小超过${
               maxSize > BASE_BYTE ? `${maxSize / 1024} M` : `${maxSize} KB`
@@ -233,8 +232,8 @@ export function validatorFileListCount(
  * @param params
  */
 export const getFileValidators = (params: FileValidatorsProps) => {
-  const validatorList = Object.keys(params).filter(item => !!params[item]);
-  return validatorList.map(item =>
+  const validatorList = Object.keys(params).filter((item) => !!params[item]);
+  return validatorList.map((item) =>
     params[item] === true ? VALIDATOR_MAP[item]() : VALIDATOR_MAP[item]({ [item]: params[item] }),
   );
 };
@@ -248,7 +247,7 @@ export const getBeforeUpload = (validatorObj: FileValidatorsProps, showMessage?:
 ) => {
   const errorMessageList: string[] = [];
   /** 若不符合要求阻断上传 */
-  getFileValidators(validatorObj).forEach(item => {
+  getFileValidators(validatorObj).forEach((item) => {
     item.validator('', [file], (error?: string) => {
       if (error) {
         errorMessageList.push(error);
@@ -293,7 +292,7 @@ export function fileTransform(files?: FileDTO[]): UploadFile[] {
  */
 export function transformFile(files?: UploadFile[]): FileDTO[] {
   return files && files.length > 0
-    ? files.map(file => {
+    ? files.map((file) => {
         const { fileId, fileName, url } = file.response.data;
         return {
           fileId,

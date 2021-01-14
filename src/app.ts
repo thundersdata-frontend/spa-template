@@ -10,8 +10,6 @@ import { request } from 'umi';
 import type { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils from '@/utils/array';
 import { isEmpty } from 'lodash-es';
-import type { PrivilegeResource } from './interfaces/common';
-import { showGlobalLoading } from './components/GlobalLoading';
 import { LOGIN_CONFIG } from './constant';
 
 /** 初始化数据 */
@@ -23,8 +21,6 @@ export async function getInitialState() {
   const accessToken = localStorage.getItem('accessToken');
   if (LOGIN_CONFIG.isSSO || accessToken) {
     try {
-      /** 将会在 components/LoadingPage 中调用 hideGlobalLoading */
-      showGlobalLoading();
       const result = await request('/resource');
       const { code, success, data = [] } = result;
       if (code === 20000 && success) {
@@ -35,7 +31,7 @@ export async function getInitialState() {
           type: 'asc',
         });
         const flatRoutes = arrayUtils.deepFlatten(routes);
-        flatRoutes.forEach(route => {
+        flatRoutes.forEach((route) => {
           if (route.privilegeList) {
             privileges.push(...route.privilegeList);
           }
@@ -59,7 +55,7 @@ export async function getInitialState() {
  * @param resources
  */
 function convertResourceToMenu(list: PrivilegeResource[]): MenuDataItem[] {
-  return list.map(item => {
+  return list.map((item) => {
     if (!isEmpty(item.children)) {
       return {
         name: item.description,

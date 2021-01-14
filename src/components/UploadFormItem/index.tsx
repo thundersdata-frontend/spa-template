@@ -68,19 +68,14 @@ const CustomUpload = forwardRef<UploadProps, CustomUploadProps>(
   ({ fileList = [], children, maxCount, ...rest }, ref) => {
     const uploadDisabled = fileList?.length >= maxCount;
     return (
-      <Upload
-        ref={ref}
-        {...getPublicUploadProps()}
-        fileList={fileList}
-        {...rest}
-      >
+      <Upload ref={ref} {...getPublicUploadProps()} fileList={fileList} {...rest}>
         {!uploadDisabled && (children || <Button>上传</Button>)}
       </Upload>
     );
   },
 );
 
-const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
+const UploadFormItem: React.FC<UploadFormItemProps> = (uploadItemProps) => {
   const {
     name = '',
     label = '',
@@ -114,7 +109,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
     if (setLoading) {
       setLoading(true);
 
-      if (!info.fileList.find(item => item.status === 'uploading')) {
+      if (!info.fileList.find((item) => item.status === 'uploading')) {
         setLoading(false);
       }
     }
@@ -153,12 +148,9 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
       className={styles.uploadItemWrap}
       valuePropName="fileList"
       required={required}
-      rules={[
-        { required, message: requiredMessage },
-        ...getFileValidators(validatorObj),
-      ]}
+      rules={[{ required, message: requiredMessage }, ...getFileValidators(validatorObj)]}
       getValueFromEvent={handleUpload}
-      getValueProps={value => {
+      getValueProps={(value) => {
         return { fileList: value };
       }}
       {...formItemProps}

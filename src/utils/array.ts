@@ -6,7 +6,7 @@
  * @LastEditors: 陈杰
  * @LastEditTime: 2020-05-18 14:24:42
  */
-import {orderBy} from 'lodash-es';
+import { orderBy } from 'lodash-es';
 
 export type OrderType = 'desc' | 'asc';
 

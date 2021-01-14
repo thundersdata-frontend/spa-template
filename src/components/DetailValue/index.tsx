@@ -3,7 +3,6 @@
  * type目前支持：default(默认)/file(文件，包括图片)
  */
 import React, { forwardRef, useState } from 'react';
-import type { FileDTO } from '@/interfaces/common';
 import { Row, Col, Modal } from 'antd';
 import { useToggle } from 'ahooks';
 import { EyeOutlined, DownloadOutlined } from '@ant-design/icons';
@@ -37,33 +36,22 @@ export default forwardRef<
   }
   if (type === 'file') {
     const files = (value as FileDTO[]) || [];
-    const [images, otherTypeFiles] = separateFiles(
-      files.filter(item => item.fileName),
-    );
+    const [images, otherTypeFiles] = separateFiles(files.filter((item) => item.fileName));
 
     return (
       <div ref={ref}>
         <Row gutter={[16, 16]}>
-          {images.map(file => {
+          {images.map((file) => {
             const { fileUrl, fileId } = file;
-            const filePreviewUrl =
-              (generateUrl && generateUrl(file)) || fileUrl;
+            const filePreviewUrl = (generateUrl && generateUrl(file)) || fileUrl;
             return (
               <Col key={fileId}>
                 <div className={styles['file-item-image-card']}>
                   <div className={styles['file-item-image-info']}>
-                    <img
-                      src={filePreviewUrl}
-                      alt="图片不存在"
-                      style={{ width: '100%' }}
-                    />
+                    <img src={filePreviewUrl} alt="图片不存在" style={{ width: '100%' }} />
                   </div>
                   <span className={styles['file-item-image-actions']}>
-                    <a
-                      rel="noopener noreferrer"
-                      title="预览图片"
-                      style={{ marginRight: 16 }}
-                    >
+                    <a rel="noopener noreferrer" title="预览图片" style={{ marginRight: 16 }}>
                       <EyeOutlined
                         style={{ fontSize: 20, color: 'white' }}
                         onClick={() => {
@@ -84,7 +72,7 @@ export default forwardRef<
             );
           })}
         </Row>
-        {otherTypeFiles.map(file => (
+        {otherTypeFiles.map((file) => (
           <div
             key={file.fileId}
             style={{
@@ -94,9 +82,7 @@ export default forwardRef<
               padding: 4,
             }}
           >
-            <a href={(generateUrl && generateUrl(file)) || file.fileUrl}>
-              {file.fileName}
-            </a>
+            <a href={(generateUrl && generateUrl(file)) || file.fileUrl}>{file.fileName}</a>
           </div>
         ))}
         <Modal
@@ -126,7 +112,7 @@ function separateFiles(files: FileDTO[]) {
   const images: FileDTO[] = [];
   const otherTypeFiles: FileDTO[] = [];
 
-  files.forEach(file => {
+  files.forEach((file) => {
     const index = file.fileName.lastIndexOf('.');
     const ext = file.fileName.substring(index);
     if (FILE_TYPE_MAP.图片.includes(ext)) {

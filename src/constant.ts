@@ -33,7 +33,7 @@ export const LOGIN_CONFIG = Object.freeze({
   /** 应用ID */
   clientId: '',
   /** 是否是单点登录 */
-  isSSO: true,
+  isSSO: false,
   /** 密钥 */
   secret: '',
 });
