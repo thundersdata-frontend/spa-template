@@ -21,7 +21,8 @@
     "test": "jest --passWithNoTests",
     "tsc": "tsc -p ./tsconfig.json",
     "eslint:fix": "eslint --fix --ext .ts,.tsx src/",
-    "lint:fix": "prettier --check src/**/*.tsx --write"
+    "lint:fix": "prettier --check src/**/*.tsx --write",
+    "style:fix": "stylelint src/**/*.{css,less,scss} --fix"
   },
   "config": {
     "commitizen": {
@@ -35,7 +36,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run tsc && npm run eslint:fix && npm run lint:fix && lint-staged",
+      "pre-commit": "npm run tsc && npm run eslint:fix && npm run style:fix && npm run lint:fix && lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
