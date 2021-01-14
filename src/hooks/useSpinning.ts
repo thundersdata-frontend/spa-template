@@ -6,7 +6,7 @@ export default function useSpinning(state = false) {
 
   useEffect(() => {
     setSpinning(state);
-  }, [])
+  }, [state])
 
   return {
     spinning,

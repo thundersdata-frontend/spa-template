@@ -3,7 +3,7 @@
  * type目前支持：default(默认)/file(文件，包括图片)
  */
 import React, { forwardRef, useState } from 'react';
-import { FileDTO } from '@/interfaces/common';
+import type { FileDTO } from '@/interfaces/common';
 import { Row, Col, Modal } from 'antd';
 import { useToggle } from 'ahooks';
 import { EyeOutlined, DownloadOutlined } from '@ant-design/icons';

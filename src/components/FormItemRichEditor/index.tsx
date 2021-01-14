@@ -1,5 +1,6 @@
 import React, { useState, useEffect, forwardRef } from 'react';
-import BraftEditor, { EditorState } from 'braft-editor';
+import type { EditorState } from 'braft-editor';
+import BraftEditor from 'braft-editor';
 import 'braft-editor/dist/index.css';
 import 'braft-extensions/dist/table.css';
 import { UPLOAD_URL } from '@/constant';
@@ -24,7 +25,7 @@ const FormItemRichEditor = forwardRef<Ref, FormItemRichEditorProps>(
       if (value && !editorState) {
         setEditorState(BraftEditor.createEditorState(xss(value)));
       }
-    }, [value]);
+    }, [editorState, value]);
 
     useEffect(() => {
       // 拓展表格模块
@@ -33,7 +34,7 @@ const FormItemRichEditor = forwardRef<Ref, FormItemRichEditorProps>(
 
     const handleEditorChange = (editorState: EditorState) => {
       setEditorState(editorState);
-      onChange && onChange(xss(editorState.toHTML()));
+      onChange?.(xss(editorState.toHTML()));
     };
 
     return (

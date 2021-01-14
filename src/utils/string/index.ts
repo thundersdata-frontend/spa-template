@@ -1,4 +1,4 @@
-type ValueType = object | number | string;
+type ValueType = any;
 
 export default {
   /**
@@ -62,25 +62,25 @@ export default {
    * @param height
    */
   imgUrlToBase64(url: string, width: number, height: number) {
-    let canvas: HTMLCanvasElement | null = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
+    let canvas: HTMLCanvasElement | null = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
 
     return new Promise((resolve, reject) => {
       const img = new Image();
-      img.crossOrigin = "Anonymous";
+      img.crossOrigin = 'Anonymous';
       img.onload = () => {
         canvas!.width = width;
         canvas!.height = height;
         ctx!.drawImage(img, 0, 0, width, height);
 
-        const dataURL = canvas!.toDataURL("image/");
+        const dataURL = canvas!.toDataURL('image/');
         canvas = null;
         resolve(dataURL);
       };
       img.onerror = error => {
         reject(error);
-      }
+      };
       img.src = url;
-    })
-  }
+    });
+  },
 };

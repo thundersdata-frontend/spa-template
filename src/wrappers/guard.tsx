@@ -7,7 +7,8 @@
  * @LastEditTime: 2020-05-20 11:11:15
  */
 import React from 'react';
-import { IRouteComponentProps, Route } from 'umi';
+import type { IRouteComponentProps} from 'umi';
+import { Route } from 'umi';
 import arrayUtils from '@/utils/array';
 
 const Guard: React.FC<IRouteComponentProps> = props => {

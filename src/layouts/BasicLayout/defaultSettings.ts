@@ -6,7 +6,7 @@
  * @LastEditors: 陈杰
  * @LastEditTime: 2020-04-26 16:49:00
  */
-import { Settings } from '@ant-design/pro-layout';
+import type { Settings } from '@ant-design/pro-layout';
 
 const defaultSettings: Partial<Settings> = {
   navTheme: 'dark',

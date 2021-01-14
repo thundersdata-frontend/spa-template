@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, message } from 'antd';
 import { CopyrightOutlined } from '@ant-design/icons';
-import { IRouteComponentProps } from 'umi';
+import type { IRouteComponentProps } from 'umi';
 import { UseRequestProvider } from 'ahooks';
 import { THROTTLE_INTERVAL } from '@/constant';
 

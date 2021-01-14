@@ -13,7 +13,7 @@ import { history, Link } from 'umi';
 import LoginForm from '@/components/LoginForm';
 import { useRequest } from 'ahooks';
 import request from 'umi-request';
-import { Store, StoreValue } from 'antd/es/form/interface';
+import type { Store, StoreValue } from 'antd/es/form/interface';
 import { AUTH_API_URL, LOGIN_CONFIG } from '@/constant';
 import { SmsTypeEnum } from '@/enums';
 

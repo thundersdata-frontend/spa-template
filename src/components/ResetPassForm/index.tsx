@@ -8,7 +8,7 @@
  */
 import React from 'react';
 import { Form, Button, Input } from 'antd';
-import { Store } from 'antd/lib/form/interface';
+import type { Store } from 'antd/lib/form/interface';
 
 export default function ResetPassForm() {
   const handleFinish = (values: Store) => {

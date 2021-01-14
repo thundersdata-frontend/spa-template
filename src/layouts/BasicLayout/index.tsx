@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import ProLayout, { Settings, MenuDataItem, SettingDrawer } from '@ant-design/pro-layout';
-import { IRouteComponentProps, Link, useModel } from 'umi';
+import type { Settings, MenuDataItem} from '@ant-design/pro-layout';
+import ProLayout, { SettingDrawer } from '@ant-design/pro-layout';
+import type { IRouteComponentProps} from 'umi';
+import { Link, useModel } from 'umi';
 import Iconfont from '@/components/Iconfont';
 import { ConfigProvider, Empty, message } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';

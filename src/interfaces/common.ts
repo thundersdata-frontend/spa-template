@@ -7,7 +7,7 @@
  * @LastEditTime: 2020-05-20 11:27:15
  */
 
-import { MenuDataItem } from '@ant-design/pro-layout';
+import type { MenuDataItem } from '@ant-design/pro-layout';
 
 export interface CustomWindow extends Window {
   gMenus: MenuDataItem[];
@@ -26,14 +26,12 @@ export interface CustomWindow extends Window {
 }
 
 export interface CustomLocation extends Location {
-  query: {
-    [x: string]: string;
-  };
+  query: Record<string, string>;
 }
 
 export interface PageMatchModel {
   isExact: boolean;
-  params: object;
+  params: Record<string, any>;
   path: string;
   url: string;
 }

@@ -3,7 +3,7 @@ import { Alert, Checkbox } from 'antd';
 import { Link, history, useModel } from 'umi';
 import request from 'umi-request';
 import LoginForm from '@/components/LoginForm';
-import { LoginParamsType } from '@/components/LoginForm/service';
+import type { LoginParamsType } from '@/components/LoginForm/service';
 import useAuth from '@/hooks/useAuth';
 import { AUTH_API_URL, LOGIN_CONFIG } from '@/constant';
 import { useRequest } from 'ahooks';
@@ -34,7 +34,7 @@ export default function Login() {
    */
   useEffect(() => {
     clearToken();
-  }, []);
+  }, [clearToken]);
 
   /**
    * 密码登录

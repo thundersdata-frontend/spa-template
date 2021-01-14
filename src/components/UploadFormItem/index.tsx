@@ -17,10 +17,10 @@ import {
   getBeforeUpload,
   ATTACHMENT_MAX_FILE_SIZE,
 } from '@/utils/upload';
-import { InternalFieldProps } from 'rc-field-form/es/Field';
-import { UploadProps, UploadChangeParam } from 'antd/lib/upload';
-import { FormItemLabelProps } from 'antd/lib/form/FormItemLabel';
-import { FormItemInputProps } from 'antd/lib/form/FormItemInput';
+import type { InternalFieldProps } from 'rc-field-form/es/Field';
+import type { UploadProps, UploadChangeParam } from 'antd/lib/upload';
+import type { FormItemLabelProps } from 'antd/lib/form/FormItemLabel';
+import type { FormItemInputProps } from 'antd/lib/form/FormItemInput';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import styles from './index.module.less';
 
@@ -59,10 +59,11 @@ export interface UploadFormItemProps {
  * 直接在自定义组件里面检测参数变化
  * @param param0
  */
-interface CustomUpload extends UploadProps {
+interface CustomUploadProps extends UploadProps {
   maxCount: number;
+  children: React.ReactNode;
 }
-const CustomUpload: React.FC<CustomUpload> = forwardRef<Upload, CustomUpload>(
+const CustomUpload = forwardRef<UploadProps, CustomUploadProps>(
   ({ fileList = [], children, maxCount, ...rest }, ref) => {
     const uploadDisabled = fileList?.length >= maxCount;
     return (
@@ -108,7 +109,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = uploadItemProps => {
 
   /** 改变上传文件调用 */
   const handleChange = async (info: UploadChangeParam) => {
-    onChange && onChange(info);
+    onChange?.(info);
     if (setLoading) {
       setLoading(true);
 

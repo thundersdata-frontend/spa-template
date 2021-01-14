@@ -3,8 +3,8 @@
  * 代码来源：https://zhuanlan.zhihu.com/p/34868095
  */
 interface TimerIdMap {
-  timeout: object;
-  interval: object;
+  timeout: any;
+  interval: any;
 }
 
 export default class RAF {
@@ -31,18 +31,16 @@ export default class RAF {
           endTime = startTime;
         }
         cb();
-        type === 'timeout' && this.clearTimeout(timerSymbol);
+        if (type === 'timeout') {
+          this.clearTimeout(timerSymbol);
+        }
       }
     };
     this.setIdMap(timerSymbol, type, loop);
     return timerSymbol;
   }
 
-  private setIdMap(
-    timerSymbol: symbol,
-    type: string,
-    loop: (time: number) => void,
-  ) {
+  private setIdMap(timerSymbol: symbol, type: string, loop: (time: number) => void) {
     const id = requestAnimationFrame(loop);
     this.timerIdMap[type][timerSymbol] = id;
   }

@@ -61,7 +61,7 @@ export default ({ buttons, maxNumber = 3, className, style }: HandleButtonsProps
             if (selectItem?.path) {
               history.push(selectItem?.path);
             } else {
-              selectItem?.onClick && selectItem?.onClick();
+              selectItem?.onClick?.();
             }
           }}
           menus={restButtons}

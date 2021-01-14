@@ -6,10 +6,10 @@
  * @LastEditors: 廖军
  * @LastEditTime: 2020-11-20 14:18:07
  */
-import { UploadProps } from 'antd/lib/upload';
+import type { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
-import { UploadFile, RcFile } from 'antd/lib/upload/interface';
-import { FileDTO } from '@/interfaces/common';
+import type { UploadFile, RcFile } from 'antd/lib/upload/interface';
+import type { FileDTO } from '@/interfaces/common';
 import { message } from 'antd';
 
 // 文件服务开发环境地址
@@ -63,7 +63,7 @@ export const FILE_TYPE_MAP = {
 export const getDownloadUrlWithId = (fileId: number | string) => {
   const regs = /^[0-9]+$/;
   // 判断是否加密,若为已加密
-  if (!regs.test('' + fileId)) {
+  if (!regs.test(`${  fileId}`)) {
     return `${UPLOAD_URL}/download/direct?fileId=${fileId}&access_token=${localStorage.getItem(
       'accessToken',
     )}`;
@@ -84,7 +84,7 @@ export const isPermitFile = (
   allowFileList: string[] | string = FILE_TYPE_MAP['图片'],
 ) => {
   // 文件后缀
-  const fileSuffix = '.' + string.getLastSubstring(file.name, '.');
+  const fileSuffix = `.${  string.getLastSubstring(file.name, '.')}`;
   const formatedAllowFileList = Array.isArray(allowFileList)
     ? allowFileList
     : allowFileList.split(',');
@@ -121,10 +121,9 @@ export function uploadValidator(
   callback: (error?: string) => void,
 ) {
   try {
-    value &&
-      value.some(file => {
+      value?.some(file => {
         if (file.response && !file.response.success) {
-          throw new Error('上传文件失败: ' + file.response.message);
+          throw new Error(`上传文件失败: ${  file.response.message}`);
         }
         return file;
       });
@@ -253,7 +252,9 @@ export const getBeforeUpload = (validatorObj: FileValidatorsProps, showMessage?:
     item.validator('', [file], (error?: string) => {
       if (error) {
         errorMessageList.push(error);
-        showMessage && message.error(error);
+        if (showMessage) {
+          message.error(error);
+        }
       }
     });
   });

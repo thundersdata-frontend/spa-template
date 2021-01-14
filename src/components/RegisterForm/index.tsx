@@ -8,9 +8,10 @@
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Col, Input, Row, Select, message } from 'antd';
-import { Store } from 'antd/es/form/interface';
+import type { Store } from 'antd/es/form/interface';
 import { Link, history } from 'umi';
-import { fakeRegister, StateType } from './service';
+import type { StateType } from './service';
+import { fakeRegister } from './service';
 import styles from './index.less';
 import { useRequest } from 'ahooks';
 
@@ -28,7 +29,7 @@ export default function RegisterForm() {
     () => () => {
       clearInterval(interval);
     },
-    [],
+    [interval],
   );
 
   const onGetCaptcha = () => {

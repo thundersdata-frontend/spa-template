@@ -7,10 +7,10 @@
  * @LastEditTime: 2020-10-28 20:51:08
  */
 import { request } from 'umi';
-import { MenuDataItem } from '@ant-design/pro-layout';
+import type { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils from '@/utils/array';
 import { isEmpty } from 'lodash-es';
-import { PrivilegeResource } from './interfaces/common';
+import type { PrivilegeResource } from './interfaces/common';
 import { showGlobalLoading } from './components/GlobalLoading';
 import { LOGIN_CONFIG } from './constant';
 
@@ -36,7 +36,9 @@ export async function getInitialState() {
         });
         const flatRoutes = arrayUtils.deepFlatten(routes);
         flatRoutes.forEach(route => {
-          route.privilegeList && privileges.push(...route.privilegeList);
+          if (route.privilegeList) {
+            privileges.push(...route.privilegeList);
+          }
         });
         menus = convertResourceToMenu(routes);
         // TODO：这里请求userInfo的数据

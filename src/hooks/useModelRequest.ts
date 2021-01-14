@@ -9,8 +9,8 @@
  * @LastEditTime: 2020-07-01 17:45:14
  */
 import { useRequest } from 'ahooks';
-import { BaseOptions, PaginatedParams } from 'ahooks/lib/useAntdTable';
-import { BaseResult, CombineService } from '@ahooksjs/use-request/lib/types';
+import type { BaseOptions, PaginatedParams } from 'ahooks/lib/useAntdTable';
+import type { BaseResult, CombineService } from '@ahooksjs/use-request/lib/types';
 import { useModel } from 'umi';
 
 export default function useModelRequest<T>(

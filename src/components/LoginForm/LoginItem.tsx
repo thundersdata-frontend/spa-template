@@ -1,15 +1,16 @@
 import { Button, Col, Input, Row, Form, message } from 'antd';
 import React, { useState, useCallback, useEffect } from 'react';
 import omit from 'omit.js';
-import { FormItemProps } from 'antd/es/form/FormItem';
+import type { FormItemProps } from 'antd/es/form/FormItem';
 import ItemMap from './map';
-import LoginContext, { LoginContextProps } from './LoginContext';
+import type { LoginContextProps } from './LoginContext';
+import LoginContext from './LoginContext';
 import styles from './index.less';
 import { AUTH_API_URL, LOGIN_CONFIG } from '@/constant';
 import { SmsTypeEnum } from '@/enums';
 import { useRequest } from 'ahooks';
 import request from 'umi-request';
-import { Store } from 'antd/es/form/interface';
+import type { Store } from 'antd/es/form/interface';
 
 export type WrappedLoginItemProps = LoginItemProps;
 export type LoginItemKeyType = keyof typeof ItemMap;
@@ -31,7 +32,7 @@ export interface LoginItemProps extends Partial<FormItemProps> {
   updateActive?: LoginContextProps['updateActive'];
   type?: string;
   defaultValue?: string;
-  customProps?: { [key: string]: unknown };
+  customProps?: Record<string, unknown>;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   tabUtil?: LoginContextProps['tabUtil'];
   smsType?: number;
@@ -125,7 +126,7 @@ const LoginItem: React.FC<LoginItemProps> = props => {
       mobilePhone,
       type: smsType,
     });
-  }, []);
+  }, [sendVerificationCode, smsType]);
 
   useEffect(() => {
     let interval: number = 0;
@@ -144,7 +145,7 @@ const LoginItem: React.FC<LoginItemProps> = props => {
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [timing]);
+  }, [props, timing]);
   if (!name) {
     return null;
   }

@@ -7,14 +7,15 @@
  * @LastEditTime: 2020-04-26 20:50:14
  */
 import React, { useState, useEffect } from 'react';
-import { FormInstance } from 'antd/es/form';
+import type { FormInstance } from 'antd/es/form';
 import LoginContext from './LoginContext';
-import LoginItem, { LoginItemProps } from './LoginItem';
+import type { LoginItemProps } from './LoginItem';
+import LoginItem from './LoginItem';
 import LoginSubmit from './LoginSubmit';
 import LoginTab from './LoginTab';
 import { Form, Tabs } from 'antd';
 import classNames from 'classnames';
-import { LoginParamsType } from './service';
+import type { LoginParamsType } from './service';
 import styles from './index.less';
 
 export interface LoginProps {
@@ -38,7 +39,7 @@ interface LoginType extends React.FC<LoginProps> {
 
 const LoginForm: LoginType = ({ className, activeKey, onTabChange, form, onSubmit, children }) => {
   const [tabs, setTabs] = useState<string[]>([]);
-  const [active, setActive] = useState<{ [key: string]: (string | { [key: string]: string })[] }>();
+  const [active, setActive] = useState<Record<string, (string | Record<string, string>)[]>>();
   const [type, setType] = useState<string>();
 
   useEffect(() => {
@@ -87,7 +88,7 @@ const LoginForm: LoginType = ({ className, activeKey, onTabChange, form, onSubmi
         <Form
           form={form}
           onFinish={values => {
-            onSubmit && onSubmit(values as LoginParamsType);
+            onSubmit?.(values as LoginParamsType);
           }}
         >
           {tabs.length ? (
@@ -98,7 +99,7 @@ const LoginForm: LoginType = ({ className, activeKey, onTabChange, form, onSubmi
                 activeKey={type}
                 onChange={activeKey => {
                   setType(activeKey);
-                  onTabChange && onTabChange(activeKey);
+                  onTabChange?.(activeKey);
                 }}
               >
                 {TabChildren}
