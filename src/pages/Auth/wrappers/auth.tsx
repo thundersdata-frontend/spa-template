@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'umi';
 import type { IRouteComponentProps } from 'umi';
 import { AuthContext } from '../useAuthService';

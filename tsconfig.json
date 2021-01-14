@@ -4,10 +4,9 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
-    "baseUrl": "./",
     "allowJs": true,
     "lib": ["esnext", "dom"],
     "noEmit": true,
@@ -27,9 +26,11 @@
     "resolveJsonModule": true,
     "strictPropertyInitialization": true,
     "skipLibCheck": true,
+    "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
-      "@@/*": ["src/.umi/*"]
+      "@@/*": ["src/.umi/*"],
+      "test-utils": ["jest/test-utils"]
     },
     "typeRoots": ["./node_modules/@types/", "./global.d.ts", "./typings.d.ts"],
   },
