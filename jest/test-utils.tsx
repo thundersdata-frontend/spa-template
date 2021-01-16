@@ -10,7 +10,7 @@ const AllTheProviders = ({ children }: { children?: React.ReactNode }) => {
   return <AuthContext.Provider value={authService}>{children}</AuthContext.Provider>;
 };
 
-const customRender = (ui: React.ReactElement, options: any) =>
+const customRender = (ui: React.ReactElement, options?: any) =>
   render(ui, { wrapper: AllTheProviders, ...options });
 
 // re-export everything

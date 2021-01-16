@@ -3,7 +3,6 @@ import { extend } from 'umi-request';
 import { history } from 'umi';
 import { LoginFailure } from './enums';
 
-let controller = new AbortController();
 const codeMessage: Record<number, string> = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -40,7 +39,7 @@ export function errorHandler(error: ResponseError) {
 }
 
 const getToken = () =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     setTimeout(() => {
       const token = localStorage.getItem('accessToken');
       resolve(token);
@@ -58,17 +57,14 @@ export const initRequest = async () => {
       accessToken: token! as string,
     },
     errorHandler,
-    signal: controller.signal,
   });
 
-  request.interceptors.response.use(response => {
+  request.interceptors.response.use((response) => {
     response
       .clone()
       .json()
-      .then(res => {
+      .then((res) => {
         if ([LoginFailure['不允许登录'], LoginFailure['登录过期']].includes(res.code)) {
-          controller.abort();
-          controller = new AbortController();
           history.replace('/user/login');
         }
       });

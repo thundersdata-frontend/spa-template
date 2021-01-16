@@ -9,7 +9,7 @@ export const AuthContext = getContextService(useAuthService);
  *
  */
 export default function useAuthService() {
-  const [token, setToken] = useLocalStorageState('token', '');
+  const [token, setToken] = useLocalStorageState('token', '1111');
   const [userInfo, setUserInfo] = useLocalStorageState('userInfo', {
     name: '',
   });

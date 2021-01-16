@@ -24,6 +24,8 @@ export default [
         wrappers: ['@/pages/Auth/wrappers/auth'],
         routes: [
           { path: '/homepage', component: './Homepage', title: '首页' },
+          { path: '/hotel/hotel', component: './Hotel/Hotel', title: '酒店' },
+          { path: '/hotel/order', component: './Hotel/Order', title: '酒店' },
           { path: '/', redirect: '/homepage' },
         ],
       },
