@@ -5,7 +5,7 @@ import { message, ConfigProvider, Empty } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 
 import { THROTTLE_INTERVAL } from '@/constant';
-import useAuthService, { AuthContext } from '@/pages/Auth/useAuthService';
+import useAuthService, { AuthContext } from '@/pages/auth/useAuthService';
 import { validateMessages } from './validateMessages';
 
 export default (props: IRouteComponentProps) => {
