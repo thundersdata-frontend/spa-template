@@ -9,12 +9,12 @@ export default function SignInLayout(props: IRouteComponentProps) {
   return (
     <Layout
       style={{
-        backgroundImage: `url(${require('../../assets/login_bg.png')})`,
+        backgroundImage: `url(${require('./assets/login_bg.png')})`,
       }}
     >
       <Header style={{ height: 100, paddingLeft: 320, paddingRight: 320 }}>
         <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-          <img src={require('../../assets/sign_logo.png')} alt="雷数科技" />
+          <img src={require('./assets/sign_logo.png')} alt="雷数科技" />
         </div>
       </Header>
       <Content
@@ -26,7 +26,7 @@ export default function SignInLayout(props: IRouteComponentProps) {
         }}
       >
         <div style={{ flex: 1 }}>
-          <img src={require('../../assets/login_left.png')} alt="" style={{ width: '100%' }} />
+          <img src={require('./assets/login_left.png')} alt="" style={{ width: '100%' }} />
         </div>
         <div
           style={{

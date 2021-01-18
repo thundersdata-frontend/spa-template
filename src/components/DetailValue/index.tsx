@@ -6,7 +6,7 @@ import React, { forwardRef, useState } from 'react';
 import { Row, Col, Modal } from 'antd';
 import { useToggle } from 'ahooks';
 import { EyeOutlined, DownloadOutlined } from '@ant-design/icons';
-import { FILE_TYPE_MAP, getDownloadUrlWithId } from '@/utils/upload';
+import { FILE_TYPE_MAP, getDownloadUrlWithId } from '../UploadFormItem/utils/upload';
 
 import styles from './index.module.less';
 

@@ -16,7 +16,7 @@ import {
   getFileSizeName,
   getBeforeUpload,
   ATTACHMENT_MAX_FILE_SIZE,
-} from '@/utils/upload';
+} from './utils/upload';
 import type { InternalFieldProps } from 'rc-field-form/es/Field';
 import type { UploadProps, UploadChangeParam } from 'antd/lib/upload';
 import type { FormItemLabelProps } from 'antd/lib/form/FormItemLabel';
