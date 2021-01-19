@@ -16,7 +16,7 @@ export default () => {
   return (
     <div
       style={{
-        backgroundImage: `url(${require('@/assets/loading-bg.jpg')})`,
+        backgroundImage: `url(${require('./assets/loading-bg.jpg')})`,
         backgroundSize: '100% 100%',
         width: '100vw',
         height: '100vh',
@@ -26,7 +26,7 @@ export default () => {
       }}
     >
       <div style={{ textAlign: 'center' }}>
-        <img src={require('@/assets/sign_logo.png')} alt="LOGO" />
+        <img src={require('./assets/sign_logo.png')} alt="LOGO" />
         <div
           style={{
             fontSize: 40,
@@ -35,7 +35,7 @@ export default () => {
             marginBottom: 16,
           }}
         />
-        <img src={require('@/assets/loading.gif')} alt="loading" />
+        <img src={require('./assets/loading.gif')} alt="loading" />
       </div>
     </div>
   );

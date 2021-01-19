@@ -4,7 +4,7 @@ export default [
   {
     path: '/',
     component: '@/layouts',
-    wrappers: ['@/pages/Auth/wrappers/guard'],
+    wrappers: ['@/pages/auth/wrappers/guard'],
     routes: [
       ...(LOGIN_CONFIG.isSSO
         ? []
@@ -13,15 +13,15 @@ export default [
               path: '/auth',
               component: '@/layouts/SignInLayout',
               routes: [
-                { path: '/auth/login', component: './Auth/login', title: '登录' },
-                { path: '/auth/register', component: './Auth/register', title: '注册' },
+                { path: '/auth/login', component: './auth/login', title: '登录' },
+                { path: '/auth/register', component: './auth/register', title: '注册' },
               ],
             },
           ]),
       {
         path: '/',
         component: '@/layouts/BasicLayout',
-        wrappers: ['@/pages/Auth/wrappers/auth'],
+        wrappers: ['@/pages/auth/wrappers/auth'],
         routes: [
           { path: '/homepage', component: './Homepage', title: '首页' },
           { path: '/hotel/hotel', component: './Hotel/Hotel', title: '酒店' },

@@ -2,7 +2,7 @@ import * as React from 'react';
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 
-import useAuthService, { AuthContext } from '../src/pages/Auth/useAuthService';
+import useAuthService, { AuthContext } from '../src/pages/auth/useAuthService';
 
 const AllTheProviders = ({ children }: { children?: React.ReactNode }) => {
   const authService = useAuthService();

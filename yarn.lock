@@ -17327,6 +17327,13 @@ swr@^0.3.6:
   dependencies:
     dequal "2.0.2"
 
+swr@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/swr/-/swr-0.4.0.tgz#e76da9f981fe6dee0e133289e9b582fc80d9c41d"
+  integrity sha512-70qd1FHYHwIdYXW0jTpm5ktitzvPBCtyKz8ZzynWlY/rMqe4drYPgcl/H9Ipuh+Xv6ZW5viNx13ro8EKIWZcoQ==
+  dependencies:
+    dequal "2.0.2"
+
 sylvanas@^0.4.0:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/sylvanas/-/sylvanas-0.4.4.tgz#27819537420eddfaebfbf0f74081a492402f6827"
