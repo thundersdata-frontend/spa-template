@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import type { MenuDataItem } from '@ant-design/pro-layout';
 import ProLayout from '@ant-design/pro-layout';
 import type { IRouteComponentProps } from 'umi';
 import { Link, useModel } from 'umi';
@@ -12,7 +11,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
   const [collapsed, handleMenuCollapse] = useState<boolean>(false);
   const { initialState } = useModel('@@initialState');
 
-  const { menus = [] } = initialState as { menus: MenuDataItem[] };
+  const { menus = [] } = initialState!;
   const menuDataRender = () => menus;
 
   return (
