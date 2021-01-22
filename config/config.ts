@@ -12,7 +12,7 @@ import routeConfig from './routeConfig';
 
 export default defineConfig({
   dynamicImport: {
-    loading: '@/components/LoadingPage',
+    loading: '@/components/LoadingPage/index',
   },
   hash: true,
   outputPath: 'build',

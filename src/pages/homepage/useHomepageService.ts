@@ -5,8 +5,11 @@ export default function useHomepageService() {
 
   const increment = useCallback(() => setStep((step) => step + 1), []);
 
+  const decrement = useCallback(() => setStep((step) => step - 1), []);
+
   return {
     step,
     increment,
+    decrement,
   };
 }

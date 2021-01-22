@@ -23,9 +23,9 @@ export default [
         component: '@/layouts/BasicLayout',
         wrappers: ['@/pages/auth/wrappers/auth'],
         routes: [
-          { path: '/homepage', component: './Homepage', title: '首页' },
-          { path: '/hotel/hotel', component: './Hotel/Hotel', title: '酒店' },
-          { path: '/hotel/order', component: './Hotel/Order', title: '酒店' },
+          { path: '/homepage', component: './homepage', title: '首页' },
+          { path: '/hotel/hotel', component: './hotel/hotel', title: '酒店' },
+          { path: '/hotel/order', component: './hotel/order', title: '订单' },
           { path: '/', redirect: '/homepage' },
         ],
       },

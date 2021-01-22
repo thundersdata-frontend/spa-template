@@ -9,7 +9,6 @@ const Guard: React.FC<IRouteComponentProps> = (props) => {
     route: { routes = [] },
   } = props;
 
-  console.log('123');
   const flattenRoutes = arrayUtils.deepFlatten(routes, 'routes');
   if (flattenRoutes.find((item) => item.path === pathname)) {
     return <>{props.children}</>;

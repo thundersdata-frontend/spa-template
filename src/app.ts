@@ -73,33 +73,3 @@ function convertResourceToMenu(list: PrivilegeResource[]): MenuDataItem[] {
     };
   });
 }
-
-/**
- * 将后台返回的权限资源，转换成应用的路由配置
- * @param list
- */
-// function convertResourceToRoute(list: PrivilegeResource[]): Route[] {
-//   return list.map(item => {
-//     if (!isEmpty(item.children)) {
-//       return {
-//         path: item.apiUrl,
-//         routes: convertResourceToRoute(item.children),
-//       };
-//     }
-//     const DynamicComponent = dynamic({
-//       loader: async () => {
-//         // 这里的注释 webpackChunkName 可以指导 webpack 将该组件 HugeA 以这个名字单独拆出去
-//         const { default: Component } = await import(
-//           /* webpackChunkName: "[request]" */ `./pages${item.apiUrl}`
-//         );
-//         return Component;
-//       },
-//     });
-
-//     return {
-//       path: item.apiUrl,
-//       component: DynamicComponent,
-//       title: item.description,
-//     };
-//   });
-// }

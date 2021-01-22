@@ -8,11 +8,12 @@
  */
 import { defineConfig } from 'umi';
 import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
+import SentryWebpackPlugin from '@sentry/webpack-plugin';
 import routeConfig from './routeConfig';
 
 export default defineConfig({
   dynamicImport: {
-    loading: '@/components/LoadingPage',
+    loading: '@/components/LoadingPage/index',
   },
   hash: true,
   outputPath: 'build',
@@ -47,31 +48,34 @@ export default defineConfig({
       href: '//at.alicdn.com/t/font_1509107_vaarx0n4zz.css',
     },
   ],
-  chunks: ['antd', 'vendors', 'umi'],
+  inlineLimit: 10,
+  chunks: ['vendors', 'umi'],
   chainWebpack(config) {
     config.plugin('dayjs').use(AntdDayjsWebpackPlugin);
+    config.plugin('sentry').use(
+      new SentryWebpackPlugin({
+        url: 'http://60.12.241.84:29177/',
+        authToken: '2e322b834f5945989d35cd4065c9c2d651b25f5d9ae84911b125487f6575a36e',
+        org: 'leishu',
+        project: 'spa-template',
+        include: '.',
+        ignore: ['node_modules'],
+      }),
+    );
     config.merge({
       optimization: {
-        minimize: true,
         splitChunks: {
           chunks: 'all',
-          minSize: 30000,
-          minChunks: 3,
           automaticNameDelimiter: '.',
+          name: true,
+          minSize: 30000,
+          minChunks: 1,
           cacheGroups: {
-            antd: {
-              name: 'antd',
-              test({ resource }) {
-                return /[\\/]node_modules[\\/](@ant-design|antd)[\\/]/.test(resource);
-              },
-              priority: -9,
-            },
-            vendor: {
+            vendors: {
               name: 'vendors',
-              test({ resource }) {
-                return /[\\/]node_modules[\\/]/.test(resource);
-              },
-              priority: -10,
+              chunks: 'all',
+              test: /[\\/]node_modules[\\/]/,
+              priority: -12,
             },
           },
         },
