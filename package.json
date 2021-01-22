@@ -16,7 +16,7 @@
     "nc-u": "npx npm-check --registry=http://npm.taobao.org/ -u",
     "commit": "git-cz",
     "start": "cross-env UMI_UI=1 umi dev",
-    "analyze": "cross-env ANALYZE=1 umi build",
+    "analyze": "cross-env UMI_ENV=prod ANALYZE=1 umi build",
     "build": "cross-env UMI_ENV=prod MOCK=none umi build",
     "test": "jest --passWithNoTests --detectOpenHandles --watch",
     "tsc": "tsc -p ./tsconfig.json",

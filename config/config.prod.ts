@@ -23,6 +23,14 @@ export default defineConfig({
     { name: 'msapplication-TileColor', content: '#da532c' },
     { name: 'theme-color', content: '#ffffff' },
   ],
+  externals: {
+    react: 'window.React',
+    'react-dom': 'window.ReactDOM',
+  },
+  scripts: [
+    'https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.production.min.js',
+    'https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.production.min.js',
+  ],
   links: [
     {
       rel: 'apple-touch-icon',
