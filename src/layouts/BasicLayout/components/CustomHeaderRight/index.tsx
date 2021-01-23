@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Avatar, Dropdown, Menu, Spin } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import useSWR from 'swr';
 import useHeaderService from './useHeaderService';
-import { AuthContext } from '@/pages/auth/useAuthService';
 
 export default function CustomHeaderRight(/** props: HeaderViewProps */) {
-  const authService = useContext(AuthContext);
-  const { data, isValidating } = useSWR(['/user/fetch', authService.token]);
+  const { data, isValidating } = useSWR('/user/fetch');
   const { dropdownClick } = useHeaderService();
 
   return (
