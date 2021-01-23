@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout } from 'antd';
 import { CopyrightOutlined } from '@ant-design/icons';
 import type { IRouteComponentProps } from 'umi';
+import styles from './index.module.less';
 
 const { Header, Content, Footer } = Layout;
 
@@ -12,19 +13,12 @@ export default function SignInLayout(props: IRouteComponentProps) {
         backgroundImage: `url(${require('./assets/login_bg.png')})`,
       }}
     >
-      <Header style={{ height: 100, paddingLeft: 320, paddingRight: 320 }}>
+      <Header className={styles.header}>
         <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
           <img src={require('./assets/sign_logo.png')} alt="雷数科技" />
         </div>
       </Header>
-      <Content
-        style={{
-          paddingLeft: 220,
-          paddingRight: 250,
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
+      <Content className={styles.content}>
         <div style={{ flex: 1 }}>
           <img src={require('./assets/login_left.png')} alt="" style={{ width: '100%' }} />
         </div>
@@ -45,7 +39,6 @@ export default function SignInLayout(props: IRouteComponentProps) {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            color: 'white',
           }}
         >
           Copyright&nbsp;

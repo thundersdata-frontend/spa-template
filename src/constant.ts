@@ -19,8 +19,6 @@ export const initialPagination = {
  */
 export const UPLOAD_URL = 'http://object-service.dev.thundersdata.com';
 
-export const THROTTLE_INTERVAL = 500;
-
 /**
  * 认证中心
  */

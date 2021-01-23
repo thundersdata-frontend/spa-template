@@ -6,6 +6,7 @@ import Iconfont from '@/components/Iconfont';
 import CustomHeaderRight from './components/CustomHeaderRight';
 import Logo from './components/Logo';
 import defaultSettings from './defaultSettings';
+import styles from './index.module.less';
 
 export default function BasicLayout(props: IRouteComponentProps) {
   const [collapsed, handleMenuCollapse] = useState<boolean>(false);
@@ -16,6 +17,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
 
   return (
     <ProLayout
+      className={styles['basic-layout']}
       logo={<Logo />}
       collapsed={collapsed}
       onCollapse={handleMenuCollapse}

@@ -26,6 +26,7 @@ export default [
           { path: '/homepage', component: './homepage', title: '首页' },
           { path: '/hotel/hotel', component: './hotel/hotel', title: '酒店' },
           { path: '/hotel/order', component: './hotel/order', title: '订单' },
+          { path: '/swr/user', component: './swr/user', title: '用户' },
           { path: '/', redirect: '/homepage' },
         ],
       },
