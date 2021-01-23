@@ -25,59 +25,12 @@ body {
     box-shadow: inset 0 0 0 1000px #fff;
   }
 
-  .ant-layout {
-    height: 100%;
-
-    .ant-pro-sider-fixed {
-      position: fixed;
-    }
-
-    > div {
-      width: calc(100% - 18px);
-    }
-    .ant-layout-content {
-      width: calc(100% - 50px);
-      min-height: calc(100vh - 64px - 32px);
-      margin: 16px;
-
-      > div {
-        height: 100%;
-
-        .ant-pro-grid-content {
-          overflow-y: auto;
-        }
-      }
-    }
-    &-footer {
-      background: transparent;
-    }
-  }
-
   .ant-menu-inline-collapsed .ant-pro-sider-menu {
     .ant-menu-submenu .ant-menu-submenu-title .iconfont + span,
     .ant-menu-item span:last-child {
       display: inline-block;
       max-width: 0;
       opacity: 0;
-    }
-  }
-}
-
-.ant-modal {
-  .ant-form {
-    padding-right: 10px;
-
-    &-item {
-      margin-bottom: 20px;
-    }
-    > .ant-row:last-child {
-      margin-bottom: 0;
-    }
-  }
-  .modal-detail-content {
-    > .ant-row .ant-form-item,
-    > .ant-form-item {
-      margin-bottom: 5px;
     }
   }
 }

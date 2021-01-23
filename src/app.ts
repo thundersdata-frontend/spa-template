@@ -6,7 +6,7 @@
  * @LastEditors: 廖军
  * @LastEditTime: 2020-10-28 20:51:08
  */
-import { request } from 'umi';
+import request from 'umi-request';
 import type { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils from '@/utils/array';
 import { isEmpty } from 'lodash-es';
@@ -21,7 +21,7 @@ export async function getInitialState() {
   const accessToken = localStorage.getItem('accessToken');
   if (LOGIN_CONFIG.isSSO || accessToken) {
     try {
-      const result = await request('/resource');
+      const result = await request.get('/resource');
       const { code, success, data = [] } = result;
       if (code === 20000 && success) {
         const routes: PrivilegeResource[] = arrayUtils.deepOrder({
@@ -37,7 +37,6 @@ export async function getInitialState() {
           }
         });
         menus = convertResourceToMenu(routes);
-        // TODO：这里请求userInfo的数据
       }
     } catch (error) {
       console.error(error);
