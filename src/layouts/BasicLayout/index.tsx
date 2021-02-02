@@ -55,7 +55,6 @@ export default function BasicLayout(props: IRouteComponentProps) {
       rightContentRender={(/** props: HeaderViewProps */) => <CustomHeaderRight />}
       onMenuHeaderClick={() => props.history.push('/')}
       menuDataRender={menuDataRender}
-      disableMobile
       {...defaultSettings}
     >
       {props.children}

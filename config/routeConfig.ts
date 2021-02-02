@@ -12,10 +12,7 @@ export default [
             {
               path: '/auth',
               component: '@/layouts/SignInLayout',
-              routes: [
-                { path: '/auth/login', component: './auth/login', title: '登录' },
-                { path: '/auth/register', component: './auth/register', title: '注册' },
-              ],
+              routes: [{ path: '/auth/login', component: './auth/login', title: '登录' }],
             },
           ]),
       {
@@ -23,11 +20,26 @@ export default [
         component: '@/layouts/BasicLayout',
         wrappers: ['@/pages/auth/wrappers/auth'],
         routes: [
-          { path: '/homepage', component: './homepage', title: '首页' },
-          { path: '/hotel/hotel', component: './hotel/hotel', title: '酒店' },
-          { path: '/hotel/order', component: './hotel/order', title: '订单' },
-          { path: '/swr/user', component: './swr/user', title: '用户' },
           { path: '/', redirect: '/homepage' },
+          { path: '/homepage', component: './homepage', title: '首页' },
+          {
+            path: '/hotel',
+            component: './hotel',
+            routes: [
+              { path: '/hotel/hotelInfo', component: './hotel/HotelInfo', title: '酒店基本信息' },
+              {
+                path: '/hotel/hotelOtherInfo',
+                component: './hotel/HotelOtherInfo',
+                title: '酒店其他信息',
+              },
+            ],
+          },
+          {
+            path: '/order',
+            component: './order',
+            routes: [{ path: '/order/order', component: './order/Order', title: '订单' }],
+          },
+          { path: '/swr/user', component: './swr/user', title: '用户' },
         ],
       },
       { path: '*', component: './404' },

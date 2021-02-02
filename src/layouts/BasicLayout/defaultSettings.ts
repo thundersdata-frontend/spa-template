@@ -8,7 +8,7 @@
  */
 import type { Settings } from '@ant-design/pro-layout';
 
-const defaultSettings: Partial<Settings> = {
+const defaultSettings: Partial<Settings> & { disableMobile?: boolean } = {
   navTheme: 'dark',
   primaryColor: '#1890ff',
   layout: 'side',
@@ -20,7 +20,8 @@ const defaultSettings: Partial<Settings> = {
     locale: false,
     defaultOpenAll: false,
   },
-  title: '中台模板'
+  disableMobile: false,
+  title: '中台模板',
 };
 
 export default defaultSettings;

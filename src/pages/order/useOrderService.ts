@@ -1,3 +1,4 @@
+import getContextService from '@/utils/getContextService';
 import { useRequest } from 'ahooks';
 
 export class OrderInfo {
@@ -24,3 +25,5 @@ export default function useOrderService() {
     orderLoading,
   };
 }
+
+export const OrderContext = getContextService(useOrderService);

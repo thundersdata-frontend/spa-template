@@ -1,6 +1,6 @@
 import React from 'react';
-import useOrderService from './useOrderService';
-import type { OrderInfo } from './useOrderService';
+import useOrderService from '../useOrderService';
+import type { OrderInfo } from '../useOrderService';
 import { Spin } from 'antd';
 
 export default function Order() {
@@ -8,7 +8,7 @@ export default function Order() {
 
   return (
     <div>
-      <div>酒店订单</div>
+      <div>订单</div>
       {orderService.orderLoading ? (
         <Spin />
       ) : (

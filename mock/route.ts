@@ -8,13 +8,25 @@ export default {
         description: '首页',
       },
       {
-        name: 'hotelInfo',
-        apiUrl: '/hotel/hotel',
-        description: '酒店信息',
+        name: 'hotel',
+        apiUrl: '/hotel',
+        description: '酒店',
+        children: [
+          {
+            name: 'hotelInfo',
+            apiUrl: '/hotel/hotelInfo',
+            description: '酒店基本信息',
+          },
+          {
+            name: 'hotelOtherInfo',
+            apiUrl: '/hotel/hotelOtherInfo',
+            description: '酒店其他信息',
+          },
+        ],
       },
       {
         name: 'hotelOrder',
-        apiUrl: '/hotel/order',
+        apiUrl: '/order/order',
         description: '酒店订单',
       },
     ],
