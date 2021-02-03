@@ -4,7 +4,7 @@ import type { IRouteComponentProps } from 'umi';
 import useOrderService, { OrderContext } from './useOrderService';
 
 export default function Order(props: IRouteComponentProps) {
-  const OrderService = useOrderService();
+  const orderService = useOrderService();
 
-  return <OrderContext.Provider value={OrderService}>{props.children}</OrderContext.Provider>;
+  return <OrderContext.Provider value={orderService}>{props.children}</OrderContext.Provider>;
 }

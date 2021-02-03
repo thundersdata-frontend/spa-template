@@ -6,7 +6,7 @@ import styles from './index.module.less';
 
 const { Content, Footer } = Layout;
 
-export default function SignInLayout(props: IRouteComponentProps) {
+function SignInLayout(props: IRouteComponentProps) {
   return (
     <Layout>
       <Content className={styles.content}>
@@ -39,3 +39,4 @@ export default function SignInLayout(props: IRouteComponentProps) {
     </Layout>
   );
 }
+export default React.memo(SignInLayout);

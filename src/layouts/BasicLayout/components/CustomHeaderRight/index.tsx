@@ -4,7 +4,7 @@ import { UserOutlined } from '@ant-design/icons';
 import useSWR from 'swr';
 import useHeaderService from './useHeaderService';
 
-export default function CustomHeaderRight(/** props: HeaderViewProps */) {
+function CustomHeaderRight(/** props: HeaderViewProps */) {
   const { data, isValidating } = useSWR('/user/fetch');
   const { dropdownClick } = useHeaderService();
 
@@ -32,3 +32,4 @@ export default function CustomHeaderRight(/** props: HeaderViewProps */) {
     </div>
   );
 }
+export default React.memo(CustomHeaderRight);
