@@ -1,10 +1,10 @@
-import React from 'react';
-import useOrderService from '../useOrderService';
+import React, { useContext } from 'react';
 import type { OrderInfo } from '../useOrderService';
-import { Spin } from 'antd';
+import { Button, Spin } from 'antd';
+import { RootContext } from '@/pages/root';
 
 export default function Order() {
-  const orderService = useOrderService();
+  const { orderService } = useContext(RootContext);
 
   return (
     <div>
@@ -16,6 +16,7 @@ export default function Order() {
           {orderService.orderList.map((order) => (
             <OrderItem key={order.orderId} {...order} />
           ))}
+          <Button onClick={() => orderService.createOrder()}>执行Hotel里的setValue</Button>
         </div>
       )}
     </div>

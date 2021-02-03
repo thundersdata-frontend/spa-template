@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import type { IRouteComponentProps } from 'umi';
+import { RootContext } from '../root';
 
-import useOrderService, { OrderContext } from './useOrderService';
+import { OrderContext } from './useOrderService';
 
 export default function Order(props: IRouteComponentProps) {
-  const orderService = useOrderService();
+  const { orderService } = useContext(RootContext);
 
   return <OrderContext.Provider value={orderService}>{props.children}</OrderContext.Provider>;
 }

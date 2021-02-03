@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import type { IRouteComponentProps } from 'umi';
+import { RootContext } from '../root';
 
-import useHotelService, { HotelContext } from './useHotelService';
+import { HotelContext } from './useHotelService';
 
 export default function Hotel(props: IRouteComponentProps) {
-  const hotelService = useHotelService();
+  const { hotelService } = useContext(RootContext);
 
   return <HotelContext.Provider value={hotelService}>{props.children}</HotelContext.Provider>;
 }

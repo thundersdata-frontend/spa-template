@@ -1,5 +1,6 @@
 import getContextService from '@/utils/getContextService';
 import { useRequest } from 'ahooks';
+import { useCallback } from 'react';
 
 export class OrderInfo {
   orderId = 0;
@@ -17,12 +18,17 @@ function fetchOrder(): Promise<OrderInfo[]> {
   });
 }
 
-export default function useOrderService() {
+export default function useOrderService(hotelService: any) {
   const { data: orderList = [], loading: orderLoading } = useRequest(fetchOrder);
+
+  const createOrder = useCallback(() => {
+    hotelService.setValue(555);
+  }, [hotelService]);
 
   return {
     orderList,
     orderLoading,
+    createOrder,
   };
 }
 

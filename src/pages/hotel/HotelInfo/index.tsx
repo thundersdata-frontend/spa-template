@@ -1,9 +1,9 @@
+import { RootContext } from '@/pages/root';
 import { Button, Spin } from 'antd';
 import React, { useContext } from 'react';
-import { HotelContext } from '../useHotelService';
 
 export default function HotelInfo() {
-  const hotelService = useContext(HotelContext);
+  const { hotelService } = useContext(RootContext);
 
   return (
     <div>
