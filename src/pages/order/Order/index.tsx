@@ -1,39 +1,48 @@
-import React, { useContext } from 'react';
-import type { OrderInfo } from '../useOrderService';
+import React, { createContext, useContext, useState } from 'react';
 import { Button, Spin } from 'antd';
 import { RootContext } from '@/pages/root';
 
+import OrderItem from './OrderItem';
+import TestItem from './TestItem';
+
+export interface Action {
+  data: number;
+  key: number;
+}
+export const StateContext = createContext<any>({});
 export default function Order() {
   const { orderService } = useContext(RootContext);
 
-  return (
-    <div>
-      <div>订单</div>
-      {orderService.orderLoading ? (
-        <Spin />
-      ) : (
-        <div>
-          {orderService.orderList.map((order) => (
-            <OrderItem key={order.orderId} {...order} />
-          ))}
-          <Button onClick={() => orderService.createOrder()}>执行Hotel里的setValue</Button>
-        </div>
-      )}
-    </div>
-  );
-}
+  const [value, setValue] = useState<Action[]>([
+    { data: 0, key: 0 },
+    { data: 1, key: 1 },
+    { data: 2, key: 2 },
+    { data: 3, key: 3 },
+    { data: 4, key: 4 },
+  ]);
 
-function OrderItem(order: OrderInfo) {
+  console.log(value);
+
   return (
-    <div>
+    <StateContext.Provider value={setValue}>
       <div>
-        <span>订单ID：</span>
-        <span>{order.orderId}</span>
+        <div>订单</div>
+        {orderService.orderLoading ? (
+          <Spin />
+        ) : (
+          <div>
+            {orderService.orderList.map((order) => (
+              <OrderItem key={order.orderId} {...order} />
+            ))}
+            <Button onClick={() => orderService.createOrder()}>执行Hotel里的setValue</Button>
+            <div>
+              {value.map((item) => (
+                <TestItem key={item.key} index={item.key} data={item.data} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-      <div>
-        <span>订单编号：</span>
-        <span>{order.orderNo}</span>
-      </div>
-    </div>
+    </StateContext.Provider>
   );
 }
