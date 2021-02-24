@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 
 export default function HotelInfo() {
   const { hotelService } = useContext(RootContext);
-
+  console.log('123');
   return (
     <div>
       <div>酒店基本信息</div>
