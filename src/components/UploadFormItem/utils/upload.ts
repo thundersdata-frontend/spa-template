@@ -1,11 +1,3 @@
-/*
- * @文件描述:
- * @公司: thundersdata
- * @作者: 廖军
- * @Date: 2020-05-25 16:07:51
- * @LastEditors: 廖军
- * @LastEditTime: 2020-11-20 14:18:07
- */
 import type { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
 import type { UploadFile, RcFile } from 'antd/lib/upload/interface';

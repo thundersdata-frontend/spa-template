@@ -1,13 +1,4 @@
 /* eslint-disable no-template-curly-in-string */
-/*
- * @文件描述:
- * @公司: thundersdata
- * @作者: 陈杰
- * @Date: 2020-05-13 18:52:03
- * @LastEditors: 陈杰
- * @LastEditTime: 2020-05-13 19:15:58
- */
-
 const typeTemplate = "'${label}' 不是一个合法的 ${type}";
 
 export const validateMessages = {
@@ -56,4 +47,4 @@ export const validateMessages = {
   pattern: {
     mismatch: "'${label}' 不能匹配正则表达式 ${pattern}",
   },
-}
+};

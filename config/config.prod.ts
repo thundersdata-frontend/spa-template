@@ -1,11 +1,3 @@
-/*
- * @文件描述:
- * @公司: thundersdata
- * @作者: 陈杰
- * @Date: 2020-04-26 10:26:49
- * @LastEditors: 廖军
- * @LastEditTime: 2020-07-24 16:15:33
- */
 import { defineConfig } from 'umi';
 import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 import SentryWebpackPlugin from '@sentry/webpack-plugin';
@@ -19,6 +11,7 @@ export default defineConfig({
   outputPath: 'build',
   routes: routeConfig,
   esbuild: {},
+  layout: false,
   metas: [
     { name: 'msapplication-TileColor', content: '#da532c' },
     { name: 'theme-color', content: '#ffffff' },

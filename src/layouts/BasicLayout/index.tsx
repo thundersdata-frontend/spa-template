@@ -8,7 +8,7 @@ import Logo from './components/Logo';
 import defaultSettings from './defaultSettings';
 import styles from './index.module.less';
 
-function BasicLayout(props: IRouteComponentProps) {
+export default function BasicLayout(props: IRouteComponentProps) {
   const [collapsed, handleMenuCollapse] = useState<boolean>(false);
   const { initialState } = useModel('@@initialState');
 
@@ -61,4 +61,3 @@ function BasicLayout(props: IRouteComponentProps) {
     </ProLayout>
   );
 }
-export default React.memo(BasicLayout);

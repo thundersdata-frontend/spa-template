@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { Button, Spin } from 'antd';
-import { RootContext } from '@/pages/root';
 
 import OrderItem from './OrderItem';
 import TestItem from './TestItem';
 import useOrderService, { StateContext } from './useOrderService';
+import { OrderContext } from '../useOrderService';
 
 const StateProvider: React.FC = ({ children }) => {
   const orderService = useOrderService();
@@ -13,7 +13,7 @@ const StateProvider: React.FC = ({ children }) => {
 
 const Order = () => {
   const { value } = useContext(StateContext);
-  const { orderService } = useContext(RootContext);
+  const orderService = useContext(OrderContext);
 
   return (
     <div>

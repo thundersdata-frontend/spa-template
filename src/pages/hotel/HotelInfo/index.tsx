@@ -1,28 +1,21 @@
-import { RootContext } from '@/pages/root';
-import { Button, Spin } from 'antd';
-import React, { useContext } from 'react';
+import { Button } from 'antd';
+import React, { memo, useContext } from 'react';
+import HotelOtherInfo from '../HotelOtherInfo';
+import { HotelContext } from '../useHotelService';
 
-export default function HotelInfo() {
-  const { hotelService } = useContext(RootContext);
-  console.log('123');
+const HotelInfo = () => {
+  const hotelService = useContext(HotelContext);
+
+  const handleClick = () => {
+    hotelService.setValue((val) => val + 1);
+  };
+
   return (
     <div>
       <div>酒店基本信息</div>
-      {hotelService.hotelLoading ? (
-        <Spin />
-      ) : (
-        <>
-          <div>
-            <span>酒店名称：</span>
-            <span>{hotelService.hotelInfo}</span>
-          </div>
-          <div>
-            <span>酒店地址：</span>
-            {/* <span>{hotelService.hotelInfo.address}</span> */}
-          </div>
-          <Button onClick={() => hotelService.setValue(123)}>修改value</Button>
-        </>
-      )}
+      <Button onClick={handleClick}>修改value</Button>
+      <HotelOtherInfo />
     </div>
   );
-}
+};
+export default memo(HotelInfo);

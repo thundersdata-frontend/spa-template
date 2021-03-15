@@ -6,11 +6,9 @@ import { SWRConfig } from 'swr';
 
 import useAuthService, { AuthContext } from '@/pages/auth/useAuthService';
 import { validateMessages } from './validateMessages';
-import useRoot, { RootContext } from '@/pages/root';
 
 export default (props: IRouteComponentProps) => {
   const authService = useAuthService();
-  const root = useRoot();
 
   return (
     <ConfigProvider
@@ -66,9 +64,7 @@ export default (props: IRouteComponentProps) => {
           // isPaused()
         }}
       >
-        <AuthContext.Provider value={authService}>
-          <RootContext.Provider value={root}>{props.children}</RootContext.Provider>
-        </AuthContext.Provider>
+        <AuthContext.Provider value={authService}>{props.children}</AuthContext.Provider>
       </SWRConfig>
     </ConfigProvider>
   );
