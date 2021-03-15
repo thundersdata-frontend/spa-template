@@ -9,8 +9,7 @@ import { createContext } from 'react';
  * @returns
  */
 export default function getContextService<T>(
-  _: (...args: any) => T,
   initialData: T | undefined = undefined,
 ) {
-  return createContext(initialData as T);
+  return createContext<T>(initialData as T);
 }

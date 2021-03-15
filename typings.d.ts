@@ -20,3 +20,10 @@ interface FileDTO {
   fileName: string;
   fileUrl?: string;
 }
+
+type IsX<T, X> = {
+  [k in keyof T]: T[k] extends X ? k : never;
+}[keyof T];
+
+type DispatchContext<T> = Pick<T, IsX<T, React.Dispatch<any>>>;
+type StateContext<T> = Omit<T, IsX<T, React.Dispatch<any>>>;

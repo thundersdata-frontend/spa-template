@@ -1,9 +1,10 @@
-import React, { memo, useContext } from 'react';
-import { HotelContext } from '../useHotelService';
+import React, { useContext, useMemo } from 'react';
+import { HotelStateContext } from '../useHotelService';
 
-const HotelOtherInfo = () => {
-  const hotelService = useContext(HotelContext);
-  return <div>其他信息：{hotelService.value}</div>;
+export default function HotelOtherInfo() {
+  const {value} = useContext(HotelStateContext);
+
+  console.log('333')
+  return useMemo(() => (<div>value：{value}</div>), [value]);
 };
 
-export default memo(HotelOtherInfo);

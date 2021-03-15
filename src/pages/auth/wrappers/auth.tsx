@@ -5,7 +5,7 @@ import { AuthContext } from '../useAuthService';
 
 export default (props: IRouteComponentProps) => {
   const authService = useContext(AuthContext);
-  if (authService.token) {
+  if (authService.getToken()) {
     return props.children;
   }
   return <Redirect to="/auth/login" />;

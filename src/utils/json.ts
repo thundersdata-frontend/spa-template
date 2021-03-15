@@ -5,7 +5,7 @@ export default {
    */
   reverseObj(obj: Record<string, string | number>) {
     const reversedObj: Record<string, string | number> = {};
-    Object.keys(obj).forEach(key => {
+    Object.keys(obj).forEach((key) => {
       const value = obj[key];
       reversedObj[value] = key;
     });
@@ -18,7 +18,7 @@ export default {
    */
   removeEmpty(obj: any) {
     const newObj = {};
-    Object.keys(obj).forEach(key => {
+    Object.keys(obj).forEach((key) => {
       if (!['', null, undefined].includes(obj[key])) {
         newObj[key] = obj[key];
       }

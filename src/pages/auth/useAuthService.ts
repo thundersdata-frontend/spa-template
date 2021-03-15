@@ -1,15 +1,14 @@
 import getContextService from '@/utils/getContextService';
-import { useCallback } from 'react';
-
-// 这个服务将被注册至全局
-export const AuthContext = getContextService(useAuthService);
+import { useCallback, useMemo } from 'react';
 
 /**
  * 权限验证服务
  *
  */
 export default function useAuthService() {
-  const token = window.localStorage.getItem('accessToken');
+  const getToken = useCallback(() => {
+    return window.localStorage.getItem('accessToken');
+  }, []);
 
   const saveToken = useCallback((token: string) => {
     window.localStorage.setItem('accessToken', token);
@@ -20,9 +19,12 @@ export default function useAuthService() {
     window.localStorage.setItem('accessToken', '');
   }, []);
 
-  return {
-    token,
+  return useMemo(() => ({
+    getToken,
     saveToken,
     logout,
-  };
+  }), []);
 }
+
+// 这个服务将被注册至全局
+export const AuthContext = getContextService(useAuthService);

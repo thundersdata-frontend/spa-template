@@ -1,24 +1,30 @@
 import { Button } from 'antd';
 import { Link } from 'umi';
-import React, { memo, useContext } from 'react';
+import React, { useContext } from 'react';
+import { HotelDispatchContext } from '../useHotelService';
 import HotelOtherInfo from '../HotelOtherInfo';
-import { HotelContext } from '../useHotelService';
+import HotelMetaInfo from '../HotelMetaInfo';
 
-const HotelInfo = () => {
-  const hotelService = useContext(HotelContext);
+export default function HotelInfo() {
+  const {setValue, setName} = useContext(HotelDispatchContext);
 
-  const handleClick = () => {
-    hotelService.setValue((val) => val + 1);
+  const changeValue = () => {
+    setValue(Math.random() * 100);
   };
 
-  console.log('222');
+  const changeName = () => {
+    setName((Math.random() * 100).toFixed(2));
+  };
+
+  console.log('222')
   return (
     <div>
       <div>酒店基本信息</div>
-      <Button onClick={handleClick}>修改value</Button>
-      <HotelOtherInfo />
+      <Button onClick={changeValue}>修改value</Button>
+      <Button onClick={changeName}>修改name</Button>
       <Link to="/homepage">homepage</Link>
+      <HotelOtherInfo />
+      <HotelMetaInfo />
     </div>
   );
 };
-export default memo(HotelInfo);
