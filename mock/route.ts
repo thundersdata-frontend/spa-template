@@ -17,17 +17,7 @@ export default {
             apiUrl: '/hotel/hotelInfo',
             description: '酒店基本信息',
           },
-          {
-            name: 'hotelOtherInfo',
-            apiUrl: '/hotel/hotelOtherInfo',
-            description: '酒店其他信息',
-          },
         ],
-      },
-      {
-        name: 'hotelOrder',
-        apiUrl: '/order/order',
-        description: '酒店订单',
       },
     ],
     code: 20000,

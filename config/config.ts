@@ -3,9 +3,7 @@ import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 import routeConfig from './routeConfig';
 
 export default defineConfig({
-  dynamicImport: {
-    loading: '@/components/LoadingPage/index',
-  },
+  dynamicImportSyntax: {},
   hash: true,
   outputPath: 'build',
   routes: routeConfig,

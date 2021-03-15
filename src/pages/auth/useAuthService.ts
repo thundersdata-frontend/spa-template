@@ -1,4 +1,3 @@
-import { useLocalStorageState } from 'ahooks';
 import getContextService from '@/utils/getContextService';
 import { useCallback } from 'react';
 
@@ -10,16 +9,20 @@ export const AuthContext = getContextService(useAuthService);
  *
  */
 export default function useAuthService() {
-  const [token, setToken] = useLocalStorageState('token', '');
+  const token = window.localStorage.getItem('accessToken');
+
+  const saveToken = useCallback((token: string) => {
+    window.localStorage.setItem('accessToken', token);
+  }, []);
 
   /** 退出登录 */
   const logout = useCallback(() => {
-    setToken('');
-  }, [setToken]);
+    window.localStorage.setItem('accessToken', '');
+  }, []);
 
   return {
     token,
-    setToken,
+    saveToken,
     logout,
   };
 }

@@ -27,19 +27,8 @@ export default [
             component: './hotel',
             routes: [
               { path: '/hotel/hotelInfo', component: './hotel/HotelInfo', title: '酒店基本信息' },
-              {
-                path: '/hotel/hotelOtherInfo',
-                component: './hotel/HotelOtherInfo',
-                title: '酒店其他信息',
-              },
             ],
           },
-          {
-            path: '/order',
-            component: './order',
-            routes: [{ path: '/order/order', component: './order/Order', title: '订单' }],
-          },
-          { path: '/swr/user', component: './swr/user', title: '用户' },
         ],
       },
       { path: '*', component: './404' },

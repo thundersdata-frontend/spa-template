@@ -1,7 +1,6 @@
 import { useCallback, useContext, useState } from 'react';
 import request from 'umi-request';
 import type { Store } from 'rc-field-form/es/interface';
-import * as Sentry from '@sentry/react';
 
 import useToast from '@/hooks/useToast';
 import { AuthContext } from '../useAuthService';
@@ -25,18 +24,13 @@ export default function useLoginService() {
         });
         if (success && code === 20000) {
           toastSuccess(message ?? '登录成功');
-          authService.setToken(data.accessToken);
+          authService.saveToken(data.accessToken);
           await refresh();
           history.replace('/homepage');
         } else {
           toastFailure(message);
         }
       } catch (error) {
-        Sentry.withScope((scope) => {
-          scope.setTag('type', 'login');
-          scope.setExtras(values);
-          Sentry.captureException(error);
-        });
         toastFailure(error.message);
       } finally {
         setLoading(false);

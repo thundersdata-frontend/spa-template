@@ -1,12 +1,12 @@
 import { defineConfig } from 'umi';
 import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
-import SentryWebpackPlugin from '@sentry/webpack-plugin';
 import routeConfig from './routeConfig';
 
 export default defineConfig({
   dynamicImport: {
     loading: '@/components/LoadingPage/index',
   },
+  dynamicImportSyntax: {},
   hash: true,
   outputPath: 'build',
   routes: routeConfig,
@@ -53,16 +53,6 @@ export default defineConfig({
   chunks: ['vendors', 'umi'],
   chainWebpack(config) {
     config.plugin('dayjs').use(AntdDayjsWebpackPlugin);
-    config.plugin('sentry').use(
-      new SentryWebpackPlugin({
-        url: 'http://60.12.241.84:29177/',
-        authToken: '2e322b834f5945989d35cd4065c9c2d651b25f5d9ae84911b125487f6575a36e',
-        org: 'leishu',
-        project: 'spa-template',
-        include: '.',
-        ignore: ['node_modules'],
-      }),
-    );
     config.merge({
       optimization: {
         splitChunks: {

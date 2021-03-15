@@ -1,4 +1,4 @@
-import { orderBy } from 'lodash-es';
+import { orderBy } from 'lodash';
 
 export type OrderType = 'desc' | 'asc';
 

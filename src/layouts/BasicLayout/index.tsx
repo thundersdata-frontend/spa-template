@@ -42,7 +42,7 @@ export default function BasicLayout(props: IRouteComponentProps) {
           </Link>
         );
       }}
-      subMenuItemRender={(menuItemProps, defaultDom) => {
+      subMenuItemRender={(menuItemProps: any, defaultDom: any) => {
         return (
           <span>
             {menuItemProps.customIcon && (

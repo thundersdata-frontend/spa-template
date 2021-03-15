@@ -9,7 +9,6 @@
 import request from 'umi-request';
 import type { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils from '@/utils/array';
-import { isEmpty } from 'lodash-es';
 import { LOGIN_CONFIG } from './constant';
 
 /** 初始化数据 */
@@ -55,7 +54,7 @@ export async function getInitialState() {
  */
 function convertResourceToMenu(list: PrivilegeResource[]): MenuDataItem[] {
   return list.map((item) => {
-    if (!isEmpty(item.children)) {
+    if (item.children && item.children.length > 0) {
       return {
         name: item.description,
         key: `${item.apiUrl}`,
