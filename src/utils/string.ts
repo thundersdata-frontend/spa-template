@@ -77,7 +77,7 @@ export default {
         canvas = null;
         resolve(dataURL);
       };
-      img.onerror = (error) => {
+      img.onerror = error => {
         reject(error);
       };
       img.src = url;

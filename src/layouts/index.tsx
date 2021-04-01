@@ -14,9 +14,8 @@ export default (props: IRouteComponentProps) => {
     <ConfigProvider
       locale={zhCN}
       renderEmpty={() => <Empty image={require('@/assets/pic_empty.png')} description="暂无数据" />}
-      getPopupContainer={(trigger) => trigger.parentElement || document.body}
-      form={{ validateMessages }}
-    >
+      getPopupContainer={trigger => trigger.parentElement || document.body}
+      form={{ validateMessages }}>
       <SWRConfig
         value={{
           /** 是否开启suspense模式，默认值false */
@@ -53,7 +52,7 @@ export default (props: IRouteComponentProps) => {
           /** 请求成功完成时的回调函数 */
           // onSuccess(data, key, config)
           /** 请求返回错误时的回调函数 */
-          onError: (err) => {
+          onError: err => {
             message.error(err.message);
           },
           /** 错误重试的处理函数 */
@@ -62,8 +61,7 @@ export default (props: IRouteComponentProps) => {
           // compare(a, b)
           /** 用于检测是否暂停重新验证的函数，当返回 true 时将忽略所请求的数据和错误。默认返回 false */
           // isPaused()
-        }}
-      >
+        }}>
         <AuthContext.Provider value={authService}>{props.children}</AuthContext.Provider>
       </SWRConfig>
     </ConfigProvider>
