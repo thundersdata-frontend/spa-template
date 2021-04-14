@@ -3,12 +3,12 @@ import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 import routeConfig from './routeConfig';
 
 export default defineConfig({
+  antd: {},
+  esbuild: {},
   dynamicImportSyntax: {},
   hash: true,
   outputPath: 'build',
   routes: routeConfig,
-  esbuild: {},
-  layout: false,
   metas: [
     { name: 'msapplication-TileColor', content: '#da532c' },
     { name: 'theme-color', content: '#ffffff' },

@@ -6,12 +6,12 @@ export default defineConfig({
   dynamicImport: {
     loading: '@/components/LoadingPage/index',
   },
+  outputPath: 'build',
+  antd: {},
+  esbuild: {},
   dynamicImportSyntax: {},
   hash: true,
-  outputPath: 'build',
   routes: routeConfig,
-  esbuild: {},
-  layout: false,
   metas: [
     { name: 'msapplication-TileColor', content: '#da532c' },
     { name: 'theme-color', content: '#ffffff' },
