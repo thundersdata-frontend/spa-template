@@ -1,5 +1,5 @@
+import { useCallback } from 'react';
 import getContextService from '@/utils/getContextService';
-import { useCallback, useMemo } from 'react';
 
 /**
  * 权限验证服务
@@ -19,11 +19,11 @@ export default function useAuthService() {
     window.localStorage.setItem('accessToken', '');
   }, []);
 
-  return useMemo(() => ({
+  return {
     getToken,
     saveToken,
     logout,
-  }), []);
+  };
 }
 
 // 这个服务将被注册至全局

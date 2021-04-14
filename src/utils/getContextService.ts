@@ -5,9 +5,10 @@ import { createContext } from 'react';
  *
  * @export
  * @template T
+ * @param {(...args: any) => T}
  * @param {(T | undefined)} [initialData=undefined]
  * @returns
  */
-export default function getContextService<T>(initialData: T | undefined = undefined) {
+export default function getContextService<T>(_: (...args: any) => T, initialData: T | undefined = undefined) {
   return createContext<T>(initialData as T);
 }
