@@ -1,3 +1,4 @@
+
 .basic-layout {
   width: 100%;
 
@@ -6,6 +7,38 @@
       width: calc(100% - 50px);
       min-height: calc(100vh - 64px - 32px);
       margin: 16px;
+    }
+    .ant-menu .ant-menu-item {
+      padding: 0 16px !important;
+    }
+    .ant-menu-item .iconfont {
+      min-width: 14px;
+      margin-right: 10px;
+      font-size: 14px;
+      transition: font-size 0.15s cubic-bezier(0.215, 0.61, 0.355, 1), margin 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), color 0.3s
+    }
+    .ant-menu-item .iconfont + span {
+      opacity: 1;
+      transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), color 0.3s;
+    }
+
+    .ant-menu-dark .ant-menu-item .iconfont {
+      color: #fff;
+    }
+    .ant-menu-inline-collapsed .ant-menu-item .iconfont {
+      margin: 0;
+      font-size: 16px;
+      line-height: 40px;
+      display: inline-block;
+    }
+
+    .ant-menu-dark .ant-menu-item span.ant-pro-menu-item-title {
+      transition: none;
+    }
+    .ant-menu-inline-collapsed .ant-menu-item .iconfont + span.ant-pro-menu-item-title {
+      display: inline-block;
+      max-width: 0;
+      opacity: 0;
     }
   }
 }

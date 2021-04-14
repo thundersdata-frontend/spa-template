@@ -30,7 +30,7 @@ export async function getInitialState() {
           type: 'asc',
         });
         const flatRoutes = arrayUtils.deepFlatten(routes);
-        flatRoutes.forEach((route) => {
+        flatRoutes.forEach(route => {
           if (route.privilegeList) {
             privileges.push(...route.privilegeList);
           }
@@ -53,12 +53,12 @@ export async function getInitialState() {
  * @param resources
  */
 function convertResourceToMenu(list: PrivilegeResource[]): MenuDataItem[] {
-  return list.map((item) => {
+  return list.map(item => {
     if (item.children && item.children.length > 0) {
       return {
         name: item.description,
         key: `${item.apiUrl}`,
-        customIcon: item.icon,
+        icon: item.icon,
         path: item.apiUrl,
         children: convertResourceToMenu(item.children),
       };
@@ -66,7 +66,7 @@ function convertResourceToMenu(list: PrivilegeResource[]): MenuDataItem[] {
     return {
       name: item.description,
       key: `${item.apiUrl}`,
-      customIcon: item.icon,
+      icon: item.icon,
       path: item.apiUrl,
     };
   });

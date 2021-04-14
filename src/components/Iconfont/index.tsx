@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 interface IconfontProps {
   name: string;
   className?: string;
-  style?: any;
+  style?: CSSProperties;
 }
 /** 自定义图标 */
 const Iconfont: React.FC<IconfontProps> = (props: IconfontProps) => {

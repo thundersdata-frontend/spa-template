@@ -22,13 +22,7 @@ export default [
         routes: [
           { path: '/', redirect: '/homepage' },
           { path: '/homepage', component: './homepage', title: '首页' },
-          {
-            path: '/hotel',
-            component: './hotel',
-            routes: [
-              { path: '/hotel/hotelInfo', component: './hotel/HotelInfo', title: '酒店基本信息' },
-            ],
-          },
+          { path: '/hotel/hotelInfo', component: './hotel/hotelInfo', title: '酒店基本信息' },
         ],
       },
       { path: '*', component: './404' },
