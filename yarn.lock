@@ -863,6 +863,21 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@td-design/pont-engine@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@td-design/pont-engine/-/pont-engine-1.0.2.tgz#d875c3c249dbd3426faa591fb9d7b0bb0648e7da"
+  integrity sha512-c7wNIjeD8JstZ2wODmeikoPkA510/hNhjGQpb8MUM51WF7vbXbxZLdPMgYCMsNVWZ+Kb3X+U4VeAclvx3I1aHw==
+  dependencies:
+    chalk "^2.3.0"
+    commander "^2.19.0"
+    fs-extra "^5.0.0"
+    inquirer "^7.1.0"
+    lodash "^4.17.5"
+    node-fetch "^1.7.3"
+    prettier "^1.19.1"
+    translation.js "^0.7.5"
+    typescript "^3.9.10"
+
 "@testing-library/dom@^7.28.1":
   version "7.29.4"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.29.4.tgz#1647c2b478789621ead7a50614ad81ab5ae5b86c"
@@ -9024,6 +9039,11 @@ typescript@^3.5.3:
   version "3.9.7"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
   integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
+
+typescript@^3.9.10:
+  version "3.9.10"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
+  integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
 
 typescript@^4.2.3:
   version "4.2.3"

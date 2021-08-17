@@ -127,9 +127,7 @@ export default class MyGenerator extends CodeGenerator {
     const paramsCode = inter.getParamsCode();
     const bodyParamsCode = inter.getBodyParamsCode();
     const hasGetParams = !!inter.parameters.filter(param => param.in !== 'body').length;
-    let requestParams = bodyParamsCode
-      ? `bodyParams: ${bodyParamsCode}, params: Params`
-      : `params: Params`;
+    let requestParams = bodyParamsCode ? `bodyParams: ${bodyParamsCode}, params: Params` : `params: Params`;
 
     if (!hasGetParams) {
       requestParams = bodyParamsCode ? `bodyParams: ${bodyParamsCode}` : '';
@@ -141,6 +139,7 @@ export default class MyGenerator extends CodeGenerator {
       export type Response = ${inter.responseType}
 
       export const init: Response;
+      export const url: string;
 
       export function fetch(${requestParams}): Promise<Response>;
     `;
@@ -179,7 +178,10 @@ export default class MyGenerator extends CodeGenerator {
 
       const backEndUrl = serverConfig()['${this.dataSource.name}'];
 
+      // 初始值
       export const init = ${initValue};
+      // 接口地址
+      export const url = ${inter.path};
 
       export async function fetch(${requestParams}) {
         const request = await initRequest();
