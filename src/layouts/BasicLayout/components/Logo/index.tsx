@@ -1,7 +1,7 @@
 import React from 'react';
 
+import logo from '@/assets/logo.png';
+
 export default function Logo() {
-  return (
-    <img src={require('@/assets/logo.png')} alt="雷数科技" style={{ width: 32, height: 32 }} />
-  );
+  return <img src={logo} alt="雷数科技" style={{ width: 32, height: 32 }} />;
 }

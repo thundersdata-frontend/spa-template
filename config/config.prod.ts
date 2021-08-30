@@ -3,27 +3,32 @@ import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 import routeConfig from './routeConfig';
 
 export default defineConfig({
+  antd: {},
+  esbuild: {},
+  // 配置具体含义见：https://github.com/umijs/umi-webpack-bundle-analyzer#options-for-plugin
+  analyze: {
+    analyzerMode: 'server',
+    analyzerPort: 8888,
+    openAnalyzer: true,
+    // generate stats file while ANALYZE_DUMP exist
+    generateStatsFile: false,
+    statsFilename: 'stats.json',
+    logLevel: 'info',
+    defaultSizes: 'parsed', // stat  // gzip
+  },
   dynamicImport: {
     loading: '@/components/LoadingPage/index',
   },
-  outputPath: 'build',
-  antd: {},
-  esbuild: {},
-  dynamicImportSyntax: {},
-  hash: true,
-  routes: routeConfig,
-  metas: [
-    { name: 'msapplication-TileColor', content: '#da532c' },
-    { name: 'theme-color', content: '#ffffff' },
-  ],
   externals: {
     react: 'window.React',
     'react-dom': 'window.ReactDOM',
   },
-  scripts: [
-    'https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.production.min.js',
-    'https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.production.min.js',
-  ],
+  hash: true,
+  history: {
+    type: 'hash',
+  },
+  ignoreMomentLocale: true,
+  inlineLimit: 10,
   links: [
     {
       rel: 'apple-touch-icon',
@@ -49,28 +54,16 @@ export default defineConfig({
       href: '//at.alicdn.com/t/font_1905159_jylqduh3ufd.css',
     },
   ],
-  inlineLimit: 10,
-  chunks: ['vendors', 'umi'],
+  scripts: [
+    'https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.production.min.js',
+    'https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.production.min.js',
+  ],
+  outputPath: 'build',
+  routes: routeConfig,
+  theme: {},
+  title: 'PC端开发模板',
+  webpack5: {},
   chainWebpack(config) {
     config.plugin('dayjs').use(AntdDayjsWebpackPlugin);
-    config.merge({
-      optimization: {
-        splitChunks: {
-          chunks: 'all',
-          automaticNameDelimiter: '.',
-          name: true,
-          minSize: 30000,
-          minChunks: 1,
-          cacheGroups: {
-            vendors: {
-              name: 'vendors',
-              chunks: 'all',
-              test: /[\\/]node_modules[\\/]/,
-              priority: -12,
-            },
-          },
-        },
-      },
-    });
   },
 });

@@ -7,13 +7,15 @@ import { SWRConfig } from 'swr';
 import useAuthService, { AuthContext } from '@/pages/auth/useAuthService';
 import { validateMessages } from './validateMessages';
 
+import emptyImg from '@/assets/pic_empty.png';
+
 export default (props: IRouteComponentProps) => {
   const authService = useAuthService();
 
   return (
     <ConfigProvider
       locale={zhCN}
-      renderEmpty={() => <Empty image={require('@/assets/pic_empty.png')} description="暂无数据" />}
+      renderEmpty={() => <Empty image={emptyImg} description="暂无数据" />}
       form={{ validateMessages }}
     >
       <SWRConfig

@@ -1,5 +1,9 @@
 declare module '*.module.less';
-declare module 'png';
+declare module '*.png';
+declare module '*.jpg';
+declare module '*.jpeg';
+declare module '*.gif';
+declare module '*.webp';
 
 interface PrivilegeResource {
   apiUrl: string;

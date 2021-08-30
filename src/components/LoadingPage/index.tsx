@@ -2,6 +2,10 @@ import React from 'react';
 import Loading from '../Loading';
 import { hideGlobalLoading } from '../GlobalLoading';
 
+import loadingBg from './assets/loading-bg.jpg';
+import logo from './assets/sign_logo.png';
+import loadingGif from './assets/loading.gif';
+
 export default () => {
   /**
    * 分为3个阶段
@@ -16,7 +20,7 @@ export default () => {
   return (
     <div
       style={{
-        backgroundImage: `url(${require('./assets/loading-bg.jpg')})`,
+        backgroundImage: `url(${loadingBg})`,
         backgroundSize: '100% 100%',
         width: '100vw',
         height: '100vh',
@@ -26,7 +30,7 @@ export default () => {
       }}
     >
       <div style={{ textAlign: 'center' }}>
-        <img src={require('./assets/sign_logo.png')} alt="LOGO" />
+        <img src={logo} alt="LOGO" />
         <div
           style={{
             fontSize: 40,
@@ -35,7 +39,7 @@ export default () => {
             marginBottom: 16,
           }}
         />
-        <img src={require('./assets/loading.gif')} alt="loading" />
+        <img src={loadingGif} alt="loading" />
       </div>
     </div>
   );

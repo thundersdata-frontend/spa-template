@@ -3,16 +3,19 @@ import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 import routeConfig from './routeConfig';
 
 export default defineConfig({
-  antd: {},
+  antd: {
+    dark: false,
+    compact: false,
+  },
   esbuild: {},
   dynamicImportSyntax: {},
+  fastRefresh: {},
   hash: true,
-  outputPath: 'build',
-  routes: routeConfig,
-  metas: [
-    { name: 'msapplication-TileColor', content: '#da532c' },
-    { name: 'theme-color', content: '#ffffff' },
-  ],
+  history: {
+    type: 'hash',
+  },
+  ignoreMomentLocale: true,
+  mfsu: {},
   links: [
     {
       rel: 'apple-touch-icon',
@@ -38,6 +41,11 @@ export default defineConfig({
       href: '//at.alicdn.com/t/font_1905159_jylqduh3ufd.css',
     },
   ],
+  proxy: {},
+  routes: routeConfig,
+  theme: {},
+  title: 'PC端开发模板',
+  webpack5: {},
   chainWebpack(config) {
     config.plugin('dayjs').use(AntdDayjsWebpackPlugin);
   },

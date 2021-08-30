@@ -4,6 +4,8 @@ import { CopyrightOutlined } from '@ant-design/icons';
 import type { IRouteComponentProps } from 'umi';
 import styles from './index.module.less';
 
+import logo from '@/assets/logo.png';
+
 const { Content, Footer } = Layout;
 
 export default function SignInLayout(props: IRouteComponentProps) {
@@ -24,7 +26,7 @@ export default function SignInLayout(props: IRouteComponentProps) {
                 marginRight: 16,
               }}
               alt="logo"
-              src={require('@/assets/logo.png')}
+              src={logo}
             />
             雷数科技
           </h1>
