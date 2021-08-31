@@ -15,7 +15,8 @@ export default defineConfig({
     type: 'hash',
   },
   ignoreMomentLocale: true,
-  mfsu: {},
+  // 暂时关闭。原因：https://github.com/ant-design/pro-components/issues/3220#issuecomment-905097084
+  // mfsu: {},
   links: [
     {
       rel: 'apple-touch-icon',
